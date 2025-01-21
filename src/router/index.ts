@@ -1,11 +1,16 @@
-import {createRouter, createWebHashHistory} from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import EntryView from '@/views/EntryView.vue'
 
 const routes = [
     {
         path: '/',
+        name: 'Entry',
+        component: EntryView
+    },
+    {
+        path: '/home',
         name: 'Home',
-        component: HomeView
+        component: () => import('@/views/HomeView.vue')
     },
     // 无匹配页面则跳转到404
     {
