@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <div class="content">
-      <h1 class="title">首页</h1>
+      首页
     </div>
   </div>
 </template>
