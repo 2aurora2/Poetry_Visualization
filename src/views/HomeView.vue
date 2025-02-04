@@ -1,12 +1,13 @@
 <template>
   <div class="home-container">
     <div class="content">
-      首页
+      <relation-graph-comp source=""/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import RelationGraphComp from '@/components/RelationGraphComp.vue';
 </script>
 
 <style scoped lang="scss">

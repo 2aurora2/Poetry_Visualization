@@ -44,7 +44,7 @@ const props = defineProps({
 onMounted(() => {
     var chartDom = document.getElementById('relation-graph')!;  // 获取容器 DOM 实例
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
-    echarts.registerTheme('vintage', obj)   // 注册主题
+    echarts.registerTheme('vintage', themeObj)   // 注册主题
     var myChart = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
     var option: EChartsOption;
 
@@ -72,6 +72,7 @@ onMounted(() => {
                     position: 'right',
                     formatter: '{b}'
                 },
+                focusNodeAdjacency: true,   // 鼠标悬停时高亮相邻节点和边
                 labelLayout: {
                     hideOverlap: true
                 },
