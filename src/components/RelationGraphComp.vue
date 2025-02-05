@@ -1,5 +1,5 @@
 <template>
-    <div id="relation-graph" style="width: 1000px;height: 600px;"></div>
+    <div id="relation-graph" style="width: 800px;height: 600px;"></div>
 </template>
 
 <script setup lang='ts'>
@@ -11,6 +11,7 @@ import {
     TooltipComponent,
     type TooltipComponentOption,
     LegendComponent,
+    TitleComponent,
     type LegendComponentOption
 } from 'echarts/components';
 import { GraphChart, type GraphSeriesOption } from 'echarts/charts';
@@ -23,7 +24,8 @@ echarts.use([
     LegendComponent,
     GraphChart,
     CanvasRenderer,
-    LabelLayout
+    LabelLayout,
+    TitleComponent 
 ]);
 
 type EChartsOption = echarts.ComposeOption<
@@ -31,11 +33,9 @@ type EChartsOption = echarts.ComposeOption<
 >;
 
 import { onMounted } from "vue";
-import vintage from '../assets/theme/vintage.json'
+import vintage from '@/assets/theme/vintage.json'
 
-import type { GraphEdgeItemOption } from 'echarts/types/src/chart/graph/GraphSeries.js';
-
-// 获取传入的参数：nodes和links
+// 节点列表nodes、关系列表links、图注title
 const props = defineProps({
     nodes: {
         type: Array,
@@ -44,62 +44,57 @@ const props = defineProps({
     links: {
         type: Array,
         required: true,
-    },
-})
-const base_size = 15;
-const incre_size = 20;
+    }
+});
+
+const baseSize = 15;
+const increSize = 30;
 
 const processData = (nodes: Array<any>) => {
-    let new_nodes = [];
+    let newNodes = [];
     // 只筛选度数较高的节点
     const filteredNodes = [...nodes]
         .sort((a, b) => b.degree - a.degree)
-        .slice(0, 150);
+        .slice(0, 200);
     // 求出filteredNodes中degree的最大值
-    let max_degree = 0;
+    let maxDegree = 0;
     for (let idx = 0; idx < filteredNodes.length; idx++) {
-        if (filteredNodes[idx].degree > max_degree) {
-            max_degree = filteredNodes[idx].degree;
+        if (filteredNodes[idx].degree > maxDegree) {
+            maxDegree = filteredNodes[idx].degree;
         }
     }
     for (let idx = 0; idx < filteredNodes.length; idx++) {
         let new_node = {
             id: filteredNodes[idx].name,
             name: filteredNodes[idx].name,
-            // TODO: 后续利用社区发现算法进行分类，读取category字段
-            category: Math.floor(Math.random() * 5),
+            category: filteredNodes[idx].community,
             // 利用node的degree字段对节点大小进行缩放
-            symbolSize: base_size + filteredNodes[idx].degree * incre_size / max_degree
+            symbolSize: baseSize + filteredNodes[idx].degree * increSize / maxDegree
         }
-        new_nodes.push(new_node);
+        newNodes.push(new_node);
     }
-    return new_nodes;
+    return newNodes;
 }
 
 onMounted(() => {
     let nodes = processData(props.nodes);
-    // TODO: 后续利用社区发现算法进行分类后再修改
-    let categories = [{ name: '1' }, { name: '2' }, { name: '3' }, { name: '4' }, { name: '5' }];
+    let categories = [];
+    let categorySet = new Set<string>();
+    for (let idx = 0; idx < nodes.length; idx++) {
+        categorySet.add(nodes[idx].category);
+    }
+    for (const item of categorySet) {
+        categories.push({
+            name: item
+        });
+    }
 
     var chartDom = document.getElementById('relation-graph')!;  // 获取容器 DOM 实例
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     var myChart = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
 
-    // 边界渐变化
-    myChart.on('rendered', () => {
-        const canvas = myChart.getDom().querySelector('canvas');
-        canvas!.style.maskImage = `
-        linear-gradient(
-        to right,
-        transparent 10%,
-        white 20% 80%,
-        transparent 90%
-        )
-    `;
-    });
     var option: EChartsOption;
-
     option = {
         tooltip: {},
         toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
@@ -113,7 +108,10 @@ onMounted(() => {
                 restore: {
                     title: '重置'
                 }
-            }
+            },
+            orient: 'horizontal', 
+            left: 'right',       
+            top: 'top',          
         },
         series: [
             {
@@ -154,10 +152,14 @@ onMounted(() => {
                 },
                 tooltip: {
                     formatter: function (params) {
-                        // params.data 是当前节点的数据对象
-                        // TODO: 展示节点的相关信息
-                        // @ts-ignore
-                        return `${params.data.name}`;
+                        if (params.dataType === 'node') {
+                            // @ts-ignore
+                            return `${params.data.name}`;
+                        } else if (params.dataType === 'edge') {
+                            // @ts-ignore
+                            return `${params.data.source} → ${params.data.target}`;
+                        }
+                        return '';
                     }
                 }
             }
@@ -167,5 +169,4 @@ onMounted(() => {
 })
 </script>
 
-<style scope lang="scss">
-</style>
+<style scope lang="scss"></style>
