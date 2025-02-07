@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang='ts'>
+// @ts-nocheck
 // RelationGraphComp：关系图谱组件
 // 从官网直接复制按需引入组件
 import * as echarts from 'echarts/core';
@@ -25,7 +26,7 @@ echarts.use([
     GraphChart,
     CanvasRenderer,
     LabelLayout,
-    TitleComponent 
+    TitleComponent
 ]);
 
 type EChartsOption = echarts.ComposeOption<
@@ -44,18 +45,22 @@ const props = defineProps({
     links: {
         type: Array,
         required: true,
+    },
+    info: {
+        type: Object,
+        required: true,
     }
 });
 
 const baseSize = 15;
 const increSize = 30;
 
-const processData = (nodes: Array<any>) => {
+const processData = (nodes: Array<any>, info: Object) => {
     let newNodes = [];
     // 只筛选度数较高的节点
     const filteredNodes = [...nodes]
         .sort((a, b) => b.degree - a.degree)
-        .slice(0, 200);
+        .slice(0, 100);
     // 求出filteredNodes中degree的最大值
     let maxDegree = 0;
     for (let idx = 0; idx < filteredNodes.length; idx++) {
@@ -68,8 +73,11 @@ const processData = (nodes: Array<any>) => {
             id: filteredNodes[idx].name,
             name: filteredNodes[idx].name,
             category: filteredNodes[idx].community,
-            // 利用node的degree字段对节点大小进行缩放
-            symbolSize: baseSize + filteredNodes[idx].degree * increSize / maxDegree
+            symbolSize: baseSize + filteredNodes[idx].degree * increSize / maxDegree,
+            gender: info[filteredNodes[idx].name].Gender,
+            birth: info[filteredNodes[idx].name].YearBirth,
+            death: info[filteredNodes[idx].name].YearDeath,
+            address: info[filteredNodes[idx].name].Address,
         }
         newNodes.push(new_node);
     }
@@ -77,7 +85,7 @@ const processData = (nodes: Array<any>) => {
 }
 
 onMounted(() => {
-    let nodes = processData(props.nodes);
+    let nodes = processData(props.nodes, props.info);
     let categories = [];
     let categorySet = new Set<string>();
     for (let idx = 0; idx < nodes.length; idx++) {
@@ -109,9 +117,9 @@ onMounted(() => {
                     title: '重置'
                 }
             },
-            orient: 'horizontal', 
-            left: 'right',       
-            top: 'top',          
+            orient: 'horizontal',
+            left: 'right',
+            top: 'top',
         },
         series: [
             {
@@ -121,12 +129,12 @@ onMounted(() => {
                 circular: { // 环形布局配置
                     rotateLabel: true // 旋转标签
                 },
-                // force: { // 力引导布局配置
-                //     repulsion: 400, // 增大斥力减少重叠
-                //     edgeLength: [300, 600],
-                //     layoutAnimation: false, // 关闭布局动画
-                //     friction: 0.8,         // 增加摩擦系数加快稳定
-                // },
+                force: { // 力引导布局配置
+                    repulsion: 400, // 增大斥力减少重叠
+                    edgeLength: [300, 600],
+                    layoutAnimation: false, // 关闭布局动画
+                    friction: 0.8,         // 增加摩擦系数加快稳定
+                },
                 data: nodes,
                 // @ts-ignore
                 links: props.links,
@@ -154,7 +162,11 @@ onMounted(() => {
                     formatter: function (params) {
                         if (params.dataType === 'node') {
                             // @ts-ignore
-                            return `${params.data.name}`;
+                            return `<strong>姓名：</strong>${params.data.name}<br/>
+                                    <strong>性别：</strong>${params.data.gender}<br/>
+                                    <strong>出生年份：</strong>${params.data.birth}<br/>
+                                    <strong>死亡年份：</strong>${params.data.death}<br/>
+                                    <strong>常驻地：</strong>${params.data.address}`;
                         } else if (params.dataType === 'edge') {
                             // @ts-ignore
                             return `${params.data.source} → ${params.data.target}`;
