@@ -1,5 +1,5 @@
 <template>
-    <div id="relation-graph" style="width: 800px;height: 600px;"></div>
+    <div id="relation-graph"></div>
 </template>
 
 <script setup lang='ts'>
@@ -33,7 +33,7 @@ type EChartsOption = echarts.ComposeOption<
     TooltipComponentOption | LegendComponentOption | GraphSeriesOption
 >;
 
-import { onMounted } from "vue";
+import { onMounted, watch, shallowRef } from "vue";
 import vintage from '@/assets/theme/vintage.json'
 
 // 节点列表nodes、关系列表links、图注title
@@ -49,19 +49,26 @@ const props = defineProps({
     info: {
         type: Object,
         required: true,
+    },
+    width: {
+        type: Number,
+        required: true,
+    },
+    id: {
+        type: Number,
+        required: true,
     }
 });
+const graph = shallowRef();
 
 const baseSize = 15;
 const increSize = 30;
 
 const processData = (nodes: Array<any>, info: Object) => {
     let newNodes = [];
-    // 只筛选度数较高的节点
     const filteredNodes = [...nodes]
         .sort((a, b) => b.degree - a.degree)
         .slice(0, 100);
-    // 求出filteredNodes中degree的最大值
     let maxDegree = 0;
     for (let idx = 0; idx < filteredNodes.length; idx++) {
         if (filteredNodes[idx].degree > maxDegree) {
@@ -84,7 +91,17 @@ const processData = (nodes: Array<any>, info: Object) => {
     return newNodes;
 }
 
-onMounted(() => {
+const initEcharts = () => {
+    if (graph.value) {
+        graph.value.dispose();
+    }
+    var chartDom = document.getElementById('relation-graph')!;  // 获取容器 DOM 实例
+    chartDom.style.width = props.width + 'px';
+    chartDom.style.height = (props.width - 200) + 'px';
+    let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
+    echarts.registerTheme('vintage', themeObj)   // 注册主题
+    graph.value = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
+
     let nodes = processData(props.nodes, props.info);
     let categories = [];
     let categorySet = new Set<string>();
@@ -96,11 +113,6 @@ onMounted(() => {
             name: item
         });
     }
-
-    var chartDom = document.getElementById('relation-graph')!;  // 获取容器 DOM 实例
-    let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
-    echarts.registerTheme('vintage', themeObj)   // 注册主题
-    var myChart = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
 
     var option: EChartsOption;
     option = {
@@ -177,7 +189,15 @@ onMounted(() => {
             }
         ]
     };
-    option && myChart.setOption(option);
+    option && graph.value.setOption(option, { notMerge: true });
+}
+
+watch(() => props.id, () => {
+    initEcharts();
+})
+
+onMounted(() => {
+    initEcharts();
 })
 </script>
 
