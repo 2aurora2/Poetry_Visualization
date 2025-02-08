@@ -1,9 +1,12 @@
-import {defineStore} from "pinia";
-import {parse, stringify} from 'zipson'
+import { defineStore } from "pinia";
+import { parse, stringify } from 'zipson'
+import { type IMessage } from "../interface/llm";
 
 export const useChatStore = defineStore('chat', {
     state: () => {
-        return {}
+        return {
+            messages: [] as Array<IMessage>
+        }
     },
     getters: {},
     actions: {},
