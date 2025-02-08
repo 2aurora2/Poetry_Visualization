@@ -1,15 +1,17 @@
 <template>
   <div class="home-container">
     <div class="content">
-      首页
+      <WordCloudComp :words="wordData"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import WordCloudComp from "@/components/WordCloudComp.vue";
+import wordData from "@/assets/data/song/word_shuang.json";
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .home-container {
   height: 100vh;
   display: flex;
