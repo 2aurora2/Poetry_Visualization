@@ -12,6 +12,26 @@ const routes = [
         name: 'Home',
         component: () => import('@/views/HomeView.vue')
     },
+    {
+        path: '/feihua',
+        name: 'Feihua',
+        component: () => import('@/views/FeihuaView.vue')
+    },
+    {
+        path: '/network',
+        name: 'Network',
+        component: () => import('@/views/NetworkView.vue')
+    },
+    {
+        path: '/poetry',
+        name: 'Poetry',
+        component: () => import('@/views/PoetryView.vue')
+    },
+    {
+        path: '/poet',
+        name: 'Poet',
+        component: () => import('@/views/PoetView.vue')
+    },
     // 无匹配页面则跳转到404
     {
         path: '/:pathMatch(.*)*',
