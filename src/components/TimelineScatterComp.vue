@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang='ts'>
+// @ts-nocheck
 import * as echarts from 'echarts/core';
 import {
     TitleComponent,
@@ -57,12 +58,19 @@ onMounted(() => {
         }
         return acc;
     }, []);
+    
     // 关键时间节点
-    const keyPoints = [
-        [650, 718, 756, 793, 818],
-        [1126, 1185],
-        [1296, 1321]
-    ];
+    const keyPoints = Array.from([
+        Array.from([650, 718, 756, 793, 818]),
+        Array.from([1126, 1185]),
+        Array.from([1296, 1321])
+    ]);
+    const keyPointsSize = [1000, 200, 50]
+    keyPoints.forEach((points, index) => {
+        points.forEach((point) => {
+            data.push([index, point, keyPointsSize[index]]);
+        })
+    })
 
     const title = [];
     const singleAxis = [];
@@ -73,6 +81,7 @@ onMounted(() => {
             top: ((index + 0.5) * 100) / 3 + '%',
             text: dynasty
         });
+
         singleAxis.push({
             left: 70,
             type: 'value',
@@ -81,23 +90,35 @@ onMounted(() => {
             max: axisData[index][axisData[index].length - 1],
             top: (index * 100) / 3 + '%',
             height: 100 / 3 - 15 + '%',
-            axisLabel: {
-                interval: 20
+            axisTick: {
+                interval: 20,
             }
         });
+
         series.push({
             singleAxisIndex: index,
             coordinateSystem: 'singleAxis',
             type: 'scatter',
             data: [],
+            symbol: (value, params) => {
+                if (keyPoints[index].includes(value[0])) {
+                    return 'arrow';
+                }
+                else {
+                    return 'circle';
+                }
+            },
             symbolSize: function (val) {
                 return 6 + val[1] / maxCount[index] * 25;
             },
             tooltip: {
                 formatter: function (params) {
+                    if (keyPoints[index].includes(params.data[0])) {
+                        return `【KeyPoint】`
+                    }
                     return `年份：${params.data[0]}<br/>创作数量：${params.data[1]}`
                 }
-            },
+            }
         });
     })
     data.forEach((item) => {
@@ -111,7 +132,6 @@ onMounted(() => {
         singleAxis: singleAxis,
         series: series
     };
-    // TODO: 关键时间节点
     option && myChart.setOption(option);
 })
 </script>
