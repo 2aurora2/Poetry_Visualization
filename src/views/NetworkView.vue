@@ -11,8 +11,8 @@
                 :id="selectedDynasty" />
         </div>
         <div class="bar-tree">
-            <GeneralCateRelationComp :width="graphWidth"/>
-            <div>搜索</div>
+            <GeneralCateRelationComp :width="graphWidth" />
+            <SpecificCateTreemap :width="treeWidth" :data="selectedCates" :id="selectedDynasty"/>
         </div>
     </div>
 </template>
@@ -20,20 +20,25 @@
 <script setup lang='ts'>
 import RelationNetwork from '@/components/RelationGraphComp.vue'
 import GeneralCateRelationComp from '@/components/GeneralCateRelationComp.vue'
+import SpecificCateTreemap from '@/components/SpecificCateTreemap.vue'
 import tang_nodes from '@/assets/data/tang/nodes.json'
 import tang_links from '@/assets/data/tang/links.json'
 import tang_infos from '@/assets/data/tang/poet_basic_info.json'
+import tang_cates from '@/assets/data/tang/specific_cate.json'
 import song_nodes from '@/assets/data/song/nodes.json'
 import song_links from '@/assets/data/song/links.json'
 import song_infos from '@/assets/data/song/poet_basic_info.json'
+import song_cates from '@/assets/data/song/specific_cate.json'
 import yuan_nodes from '@/assets/data/yuan/nodes.json'
 import yuan_links from '@/assets/data/yuan/links.json'
 import yuan_infos from '@/assets/data/yuan/poet_basic_info.json'
+import yuan_cates from '@/assets/data/yuan/specific_cate.json'
 
 import { onMounted, ref } from 'vue'
 
 const graphWidth = ref(800);
 const barWidth = ref(400);
+const treeWidth = ref(400);
 
 const selectedDynasty = ref(0);
 const dynasties = ['唐', '宋', '元'];
@@ -41,6 +46,7 @@ const dynasties = ['唐', '宋', '元'];
 const selectedNodes = ref(tang_nodes);
 const selectedLinks = ref(tang_links);
 const selectedInfos = ref(tang_infos);
+const selectedCates = ref(tang_cates);
 
 const selectDynasty = (index: number) => {
     selectedDynasty.value = index;
@@ -49,16 +55,19 @@ const selectDynasty = (index: number) => {
             selectedNodes.value = tang_nodes;
             selectedLinks.value = tang_links;
             selectedInfos.value = tang_infos;
+            selectedCates.value = tang_cates;
             break;
         case 1:
             selectedNodes.value = song_nodes;
             selectedLinks.value = song_links;
             selectedInfos.value = song_infos;
+            selectedCates.value = song_cates;
             break;
         case 2:
             selectedNodes.value = yuan_nodes;
             selectedLinks.value = yuan_links;
             selectedInfos.value = yuan_infos;
+            selectedCates.value = yuan_cates;
             break;
     }
 }
@@ -68,6 +77,9 @@ onMounted(() => {
     const barTree = document.querySelector('.bar-tree') as HTMLElement;
     graphWidth.value = network.offsetWidth;
     barWidth.value = barTree.offsetWidth;
+    treeWidth.value = barTree.offsetWidth;
+    console.log(graphWidth.value, barWidth.value, treeWidth.value);
+    
 })
 </script>
 
@@ -119,6 +131,9 @@ onMounted(() => {
 
     .bar-tree {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 </style>

@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang='ts'>
+// @ts-nocheck
 import * as echarts from 'echarts/core';
 import {
     ToolboxComponent,
@@ -38,7 +39,7 @@ const props = defineProps({
 onMounted(() => {
     var chartDom = document.getElementById('general-cate-relation-bar');
     chartDom.style.width = (props.width * 0.8) + 'px';
-    chartDom.style.height = ((props.width * 0.7) / 2) + 'px';
+    chartDom.style.height = ((props.width * 0.6) / 2) + 'px';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     var myChart = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
