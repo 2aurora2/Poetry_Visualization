@@ -78,8 +78,6 @@ onMounted(() => {
     graphWidth.value = network.offsetWidth;
     barWidth.value = barTree.offsetWidth;
     treeWidth.value = barTree.offsetWidth;
-    console.log(graphWidth.value, barWidth.value, treeWidth.value);
-    
 })
 </script>
 
