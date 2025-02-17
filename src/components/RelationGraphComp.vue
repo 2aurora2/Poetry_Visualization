@@ -96,8 +96,8 @@ const initEcharts = () => {
         graph.value.dispose();
     }
     var chartDom = document.getElementById('relation-graph')!;  // 获取容器 DOM 实例
-    chartDom.style.width = props.width + 'px';
-    chartDom.style.height = (props.width - 200) + 'px';
+    chartDom.style.width = '100%';
+    chartDom.style.height = '100%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     graph.value = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称

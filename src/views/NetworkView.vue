@@ -1,25 +1,25 @@
 <template>
     <div class="network-container">
-        <div class="network">
-            <div class="dynasty-choose">
-                <button v-for="(dynasty, index) in dynasties" :key="index"
-                    :class="['dynasty-button', { active: selectedDynasty === index }]" @click="selectDynasty(index)">
-                    {{ dynasty }}
-                </button>
-            </div>
-            <RelationNetwork :nodes="selectedNodes" :links="selectedLinks" :info="selectedInfos" :width="graphWidth"
-                :id="selectedDynasty" />
+        <div class="dynasty-choose">
+            <button v-for="(dynasty, index) in dynasties" :key="index"
+                :class="['dynasty-button', { active: selectedDynasty === index }]" @click="selectDynasty(index)">
+                {{ dynasty }}
+            </button>
         </div>
-        <div class="bar-tree">
-            <GeneralCateRelationComp :width="graphWidth" />
-            <SpecificCateTreemap :width="treeWidth" :data="selectedCates" :id="selectedDynasty"/>
+        <div class="graph-tree">
+            <div class="network">
+                <RelationNetwork :nodes="selectedNodes" :links="selectedLinks" :info="selectedInfos" :width="graphWidth"
+                    :id="selectedDynasty" />
+            </div>
+            <div class="bar-tree">
+                <SpecificCateTreemap :width="treeWidth" :data="selectedCates" :id="selectedDynasty" />
+            </div>
         </div>
     </div>
 </template>
 
 <script setup lang='ts'>
 import RelationNetwork from '@/components/RelationGraphComp.vue'
-import GeneralCateRelationComp from '@/components/GeneralCateRelationComp.vue'
 import SpecificCateTreemap from '@/components/SpecificCateTreemap.vue'
 import tang_nodes from '@/assets/data/tang/nodes.json'
 import tang_links from '@/assets/data/tang/links.json'
@@ -34,7 +34,7 @@ import yuan_links from '@/assets/data/yuan/links.json'
 import yuan_infos from '@/assets/data/yuan/poet_basic_info.json'
 import yuan_cates from '@/assets/data/yuan/specific_cate.json'
 
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, nextTick } from 'vue'
 
 const graphWidth = ref(800);
 const barWidth = ref(400);
@@ -72,7 +72,8 @@ const selectDynasty = (index: number) => {
     }
 }
 
-onMounted(() => {
+onMounted(async () => {
+    await nextTick();
     const network = document.querySelector('.network') as HTMLElement;
     const barTree = document.querySelector('.bar-tree') as HTMLElement;
     graphWidth.value = network.offsetWidth;
@@ -84,54 +85,69 @@ onMounted(() => {
 <style scope lang="scss">
 .network-container {
     width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 
-    .network {
-        flex: 1;
+    .dynasty-choose {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
 
-        .dynasty-choose {
-            width: 100%;
+        .dynasty-button {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: rgba(60, 60, 60, 0.1);
+            border: 2px solid #ccc;
             display: flex;
-            gap: 10px;
-            display: flex;
-            flex-direction: row;
+            align-items: center;
             justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            transition: all 0.3s ease;
 
-            .dynasty-button {
-                width: 35px;
-                height: 35px;
-                border-radius: 50%;
-                background-color: rgba(60, 60, 60, 0.1);
-                border: 2px solid #ccc;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                font-size: 16px;
-                font-weight: bold;
-                color: #333;
-                transition: all 0.3s ease;
-
-                &:hover {
-                    background-color: rgba(60, 60, 60, 0.2);
-                }
+            &:hover {
+                background-color: rgba(60, 60, 60, 0.2);
             }
+        }
 
-            .active {
-                background-color: #4CAF50;
-                color: white;
-                border-color: #4CAF50;
-            }
+        .active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
         }
     }
 
-    .bar-tree {
-        flex: 1;
+    .graph-tree {
+        width: 90%;
+        height: 100%;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+
+        .network {
+            flex: 1;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bar-tree {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
+
+
 }
 </style>

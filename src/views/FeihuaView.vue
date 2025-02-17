@@ -85,10 +85,21 @@ watch(rollCount, () => {
                 role: 'user',
                 content: `意象抽取结果为【${imageries.value[targetIndex.value].name}】`
             });
-            const res = await chat(chatStore.messages);
-            chatStore.messages = res.data.data;
-            compId.value = 2;
-        }, 500);
+            try {
+                const timeoutPromise = new Promise((_, reject) => {
+                    setTimeout(() => {
+                        reject(new Error('Timeout Error')); 
+                    }, 1800);
+                });
+                const res = await Promise.race([chat(chatStore.messages), timeoutPromise]);
+                chatStore.messages = res.data.data;
+                compId.value = 2;
+            } catch (error) {
+                compId.value = 0;
+                ElMessage.error('请求失败，请稍后重试！');
+                chatStore.messages = [];
+            }
+        }, 300);
     }
 })
 

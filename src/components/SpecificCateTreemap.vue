@@ -39,8 +39,8 @@ const initEcharts = async () => {
         graph.value.dispose();
     }
     var chartDom = document.getElementById('specific-cate-treemap');
-    chartDom.style.width = (props.width * 0.8) + 'px';
-    chartDom.style.height = (props.width * 0.6) + 'px';
+    chartDom.style.width = '100%';
+    chartDom.style.height = '100%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     var myChart = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
@@ -148,7 +148,7 @@ const initEcharts = async () => {
                     show: true,
                     rotate: 'radial',
                     formatter: '{b}',
-                    minAngle: 30,
+                    minAngle: 5,
                 }
             }
         ]
