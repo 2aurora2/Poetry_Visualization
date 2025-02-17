@@ -8,9 +8,17 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ChatComp: typeof import('./src/components/ChatComp.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElCarousel: typeof import('element-plus/es')['ElCarousel']
+    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElIonput: typeof import('element-plus/es')['ElIonput']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     EmotionPieComp: typeof import('./src/components/EmotionPieComp.vue')['default']
     GeneralCateRelationComp: typeof import('./src/components/GeneralCateRelationComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
+    PoetCardComp: typeof import('./src/components/PoetCardComp.vue')['default']
     ReigonBarComp: typeof import('./src/components/ReigonBarComp.vue')['default']
     RelationGraphComp: typeof import('./src/components/RelationGraphComp.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

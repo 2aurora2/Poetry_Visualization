@@ -15,10 +15,6 @@ import { onMounted, shallowRef, watch, nextTick, onUnmounted } from 'vue';
 import vintage from '@/assets/theme/vintage.json'
 
 const props = defineProps({
-    width: {
-        type: Number,
-        required: true,
-    },
     data: {
         type: Array,
         required: true,
@@ -81,6 +77,10 @@ const initEcharts = async () => {
     }
 
     const commonOption = {
+        title: {
+            text: '诗人关系类别图',
+            left: 'center',
+        },
         tooltip: {
             trigger: 'item',
             formatter: function (params) {
@@ -163,7 +163,7 @@ const initEcharts = async () => {
     timerId = setInterval(function () {
         currentOption = currentOption === treemapOption ? sunburstOption : treemapOption;
         myChart.setOption(currentOption);
-    }, 10000);
+    }, 5000);
 }
 
 watch(() => props.id, async () => {

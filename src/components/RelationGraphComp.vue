@@ -50,10 +50,6 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-    width: {
-        type: Number,
-        required: true,
-    },
     id: {
         type: Number,
         required: true,
@@ -132,6 +128,10 @@ const initEcharts = () => {
             orient: 'horizontal',
             left: 'right',
             top: 'top',
+        },
+        title: {
+            text: '诗人关系网络图',
+            left: 'center',
         },
         series: [
             {

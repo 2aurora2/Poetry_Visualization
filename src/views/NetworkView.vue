@@ -34,11 +34,7 @@ import yuan_links from '@/assets/data/yuan/links.json'
 import yuan_infos from '@/assets/data/yuan/poet_basic_info.json'
 import yuan_cates from '@/assets/data/yuan/specific_cate.json'
 
-import { onMounted, ref, nextTick } from 'vue'
-
-const graphWidth = ref(800);
-const barWidth = ref(400);
-const treeWidth = ref(400);
+import { onMounted, ref } from 'vue'
 
 const selectedDynasty = ref(0);
 const dynasties = ['唐', '宋', '元'];
@@ -71,15 +67,6 @@ const selectDynasty = (index: number) => {
             break;
     }
 }
-
-onMounted(async () => {
-    await nextTick();
-    const network = document.querySelector('.network') as HTMLElement;
-    const barTree = document.querySelector('.bar-tree') as HTMLElement;
-    graphWidth.value = network.offsetWidth;
-    barWidth.value = barTree.offsetWidth;
-    treeWidth.value = barTree.offsetWidth;
-})
 </script>
 
 <style scope lang="scss">

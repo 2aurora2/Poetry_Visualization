@@ -5,11 +5,11 @@
 <script setup lang='ts'>
 // @ts-nocheck
 import * as echarts from 'echarts/core';
-import { GridComponent, TooltipComponent, DataZoomComponent } from 'echarts/components';
+import { GridComponent, TooltipComponent, DataZoomComponent, TitleComponent  } from 'echarts/components';
 import { BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 
-echarts.use([GridComponent, BarChart, CanvasRenderer, TooltipComponent, DataZoomComponent]);
+echarts.use([GridComponent, BarChart, CanvasRenderer, TooltipComponent, DataZoomComponent, TitleComponent]);
 
 import { onMounted, watch, shallowRef } from "vue";
 import vintage from '@/assets/theme/vintage.json'
@@ -30,11 +30,7 @@ const props = defineProps({
     regionValue: {
         type: Array,
         required: true,
-    },
-    width: {
-        type: Number,
-        required: true,
-    },
+    }
 })
 const graph = shallowRef();
 
@@ -43,8 +39,8 @@ const initEcharts = () => {
         graph.value.dispose();
     }
     var chartDom = document.getElementById('region-bar')!;  // 获取容器 DOM 实例
-    chartDom.style.width = props.width + 'px';
-    chartDom.style.height = (props.width - 200) + 'px';
+    chartDom.style.width = '100%';
+    chartDom.style.height = '40vh';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     graph.value = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
@@ -52,15 +48,19 @@ const initEcharts = () => {
     var option;
 
     option = {
+        title:{
+            text: '诗人籍贯地域分布',
+            left: 'center',
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: {
                 type: 'shadow'
             },
-            extraCssText: 'width: 160px; white-space: pre-wrap;',
+            extraCssText: 'width: 210px; white-space: pre-wrap;',
             formatter: (params: any) => {
                 const index = params[0].dataIndex;
-                return props.info[index];
+                return `<strong>${params[0].name}</strong>：${props.info[index]}`;
             }
         },
         xAxis: {
