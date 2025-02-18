@@ -1,6 +1,6 @@
 <template>
   <!-- 词云图容器 -->
-  <div id="word-cloud" style="width: 800px; height: 600px;"></div>
+  <div id="word-cloud" class="chart"></div>
 </template>
 
 <script setup lang="ts">
@@ -11,10 +11,8 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { onMounted, watch } from 'vue';
 import vintage from '@/assets/theme/vintage.json'; // 引入主题 JSON
 
-// 注册 ECharts 组件
 echarts.use([TitleComponent, TooltipComponent, CanvasRenderer]);
 
-// 接收 `words` 数据
 const props = defineProps({
   words: {
     type: Array,
@@ -22,20 +20,16 @@ const props = defineProps({
   }
 });
 
-let myChart: echarts.ECharts; // ECharts 实例
+let myChart: echarts.ECharts; 
 
-// 初始化词云图
 const initChart = () => {
   const chartDom = document.getElementById('word-cloud'); // 获取 DOM 容器
   if (!chartDom) return;
-
   echarts.registerTheme('vintage', vintage); // 注册主题
   myChart = echarts.init(chartDom, 'vintage'); // 初始化 ECharts 实例
-
-  updateChart(props.words); // 初次渲染
+  updateChart(props.words); 
 };
 
-// 更新词云图数据
 const updateChart = (words: any[]) => {
   // 限制最多 50 个高频词
   const filteredWords = words.sort((a, b) => b.value - a.value).slice(0, 50);
@@ -43,50 +37,60 @@ const updateChart = (words: any[]) => {
   const option = {
     tooltip: {
       show: true,
-      formatter: (params: any) => `<b>${params.name}</b>: ${params.value}` // 鼠标悬停时显示词语和权重
+      formatter: (params: any) => `<b>${params.name}</b>: ${params.value}`
     },
     series: [
       {
         type: 'wordCloud',
         shape: 'circle', 
-        sizeRange: [20, 60], // 词大小范围
-        gridSize: 10, // 词之间的间距
+        sizeRange: [15, 30], 
+        gridSize: 8, 
         rotationRange: [0, 0], 
         drawOutOfBound: false,
         textStyle: {
-          fontFamily: 'STKaiti, KaiTi, serif', // 使用楷体
+          fontFamily: 'STKaiti, KaiTi, serif',
           fontWeight: 'bold',
-          color: () => guFengColors[Math.floor(Math.random() * guFengColors.length)], // 配色
-          shadowColor: 'rgba(0, 0, 0, 0.3)', // 添加阴影
+          color: () => Colors[Math.floor(Math.random() * Colors.length)],
           shadowBlur: 10,
+          shadowColor: '#333'
         },
-        data: filteredWords
+        data: filteredWords,
+        emphasis: {
+          //focus: 'self',
+          textStyle: {
+            fontSize: 32, 
+            fontWeight: 'bold',
+            color: '#FF6B6B'
+          }
+        }
       }
-    ]
+    ],
+    animationDurationUpdate: 5000, 
+    animationEasingUpdate: 'elasticOut' 
   };
 
-  myChart.setOption(option); // 设置图表选项
+  myChart.setOption(option); 
 };
 
-// 组件挂载后初始化词云图
 onMounted(initChart);
 
-// 监听 `words` 数据变化，自动更新词云图
 watch(() => props.words, updateChart, { deep: true });
 
-// **古风配色方案**
-const guFengColors = [
-  '#8A5D19', // 棕褐色
-  '#B35C44', // 朱红色
-  '#406C64', // 青色
-  '#C4A484', // 米色
-  '#2E4E5B', // 墨绿色
-  '#9D836B', // 古铜色
-  '#695E45', // 土黄色
-  '#A46F52', // 赭石色
-  '#4D3D33', // 深棕色
+// 主题颜色
+const Colors = [
+  "#d87c7c", "#919e8b",
+  "#6e7074","#61a0a8",
+  "#787464","#cc7e63",
+  "#724e58","#4b565b"
 ];
 </script>
 
 <style scoped>
+.chart {
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  max-height: 400px;
+  margin: 0 auto;
+}
 </style>
