@@ -1,9 +1,9 @@
 <template>
-  <div ref="chartRef" class="chart"></div>
+  <div id="bubble-chart"></div>
 </template>
 
-<script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+<script setup lang="ts">
+import { ref, watch, onMounted, onBeforeUnmount, shallowRef } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
@@ -13,29 +13,32 @@ const props = defineProps({
   }
 })
 
-const chartRef = ref(null)
-let chartInstance = null
-
 const getRandomColor = () => {
   const colors = [
-    "#f3a6a6", 
-    "#b2c1ae", 
-    "#eac09d", 
-    "#84c1c9", 
-    "#e6a493", 
-    "#888a8e", 
+    "#f3a6a6",
+    "#b2c1ae",
+    "#eac09d",
+    "#84c1c9",
+    "#e6a493",
+    "#888a8e",
   ]
   return colors[Math.floor(Math.random() * colors.length)]
 }
 
+const bubbleChart = shallowRef();
 const initChart = () => {
-  if (!chartRef.value) return
-  chartInstance = echarts.init(chartRef.value)
-  updateChart(props.words)
+  if (bubbleChart.value) {
+    bubbleChart.value.dispose();
+  }
+  var chartDom = document.getElementById('bubble-chart')!;
+  chartDom.style.width = '100%';
+  chartDom.style.height = '100%';
+  bubbleChart.value = echarts.init(chartDom);
+  updateChart(props.words);
 }
 
 const updateChart = (words) => {
-  const currentWords = words.slice(0, 50)
+  const currentWords = words.slice(0, 70)
   if (currentWords.length === 0) return
 
   const values = currentWords.map(item => item.value)
@@ -51,15 +54,14 @@ const updateChart = (words) => {
     if (minValue === maxValue) {
       symbolSize = (symbolSizeRange.min + symbolSizeRange.max) / 2
     } else {
-      symbolSize = 
-        ((item.value - minValue) / (maxValue - minValue)) * 
-        (symbolSizeRange.max - symbolSizeRange.min) + 
+      symbolSize =
+        ((item.value - minValue) / (maxValue - minValue)) *
+        (symbolSizeRange.max - symbolSizeRange.min) +
         symbolSizeRange.min
     }
 
-    // 计算字体大小
     const normalFontSize = Math.round(symbolSize * fontSizeScale)
-    
+
     return {
       name: item.name,
       value: item.value,
@@ -84,6 +86,10 @@ const updateChart = (words) => {
     tooltip: {
       trigger: 'item',
       formatter: '{b}: {c}次'
+    },
+    title: {
+      text: '诗词单字气泡图',
+      left: 'center',
     },
     series: [{
       type: 'graph',
@@ -119,25 +125,15 @@ const updateChart = (words) => {
     }]
   }
 
-  chartInstance.setOption(option)
+  bubbleChart.value.setOption(option)
 }
 
 watch(() => props.words, (newWords) => {
-  if (chartInstance) {
-    updateChart(newWords)
-  }
+  initChart();
 }, { deep: true })
 
 onMounted(initChart)
 
 </script>
 
-<style scoped>
-.chart {
-  width: 100%;
-  height: 100%;
-  max-width: 600px;
-  max-height: 400px;
-  margin: 0 auto;
-}
-</style>
+<style scoped></style>

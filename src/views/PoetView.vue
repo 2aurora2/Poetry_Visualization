@@ -12,7 +12,7 @@
         </div>
         <div class="poet-details">
             <div class="search-box">
-                <input type="text" class="poet-search" placeholder="请输入诗人姓名" v-model="poetName">
+                <input type="text" class="poet-search" placeholder="请输入诗人姓名" v-model="poetName" @keypress.enter="queryPoet">
                 <el-button circle type="warning" :icon="Search" @click="queryPoet"></el-button>
             </div>
             <PoetCardComp :nodes="poetInfo?.nodes" :links="poetInfo?.links"></PoetCardComp>
@@ -70,16 +70,20 @@ const selectDynasty = (index: number) => {
         case 0:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(tangRegion);
+            poetName.value = '李白';
             break;
         case 1:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(songRegion);
+            poetName.value = '苏轼';
             break;
         case 2:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(yuanRegion);
+            poetName.value = '元好问';
             break;
     }
+    queryPoet();
 }
 
 const poetName = ref('');
@@ -129,13 +133,12 @@ const queryPoet = () => {
     }
     poetInfo.value!['nodes'] = nodes;
     poetInfo.value!['links'] = links;
-    console.log(poetInfo.value);
+    // TODO：预处理其他信息
     
 }
 
 onMounted(async () => {
     selectDynasty(0);
-    // TODO：默认展示当前朝代某个诗人的信息
 })
 </script>
 

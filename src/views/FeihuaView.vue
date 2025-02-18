@@ -90,7 +90,7 @@ watch(rollCount, () => {
                 const timeoutPromise = new Promise((_, reject) => {
                     setTimeout(() => {
                         reject(new Error('Timeout Error')); 
-                    }, 2000);
+                    }, 2500);
                 });
                 const res = await Promise.race([chat(chatStore.messages), timeoutPromise]);
                 chatStore.messages = res.data.data;
@@ -100,7 +100,7 @@ watch(rollCount, () => {
                 ElMessage.error('请求失败，请稍后重试！');
                 chatStore.messages = [];
             }
-        }, 300);
+        }, 200);
     }
 })
 

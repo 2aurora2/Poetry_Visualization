@@ -8,8 +8,9 @@ import * as echarts from 'echarts/core';
 import 'echarts-wordcloud'; // 引入词云图插件
 import { TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { onMounted, watch } from 'vue';
+import { onMounted, shallowRef, watch } from 'vue';
 import vintage from '@/assets/theme/vintage.json'; // 引入主题 JSON
+import CONST from '../const';
 
 echarts.use([TitleComponent, TooltipComponent, CanvasRenderer]);
 
@@ -20,32 +21,42 @@ const props = defineProps({
   }
 });
 
-let myChart: echarts.ECharts; 
-
+let myChart = shallowRef();
 const initChart = () => {
+  if (myChart.value) {
+    myChart.value.dispose();
+  }
   const chartDom = document.getElementById('word-cloud'); // 获取 DOM 容器
   if (!chartDom) return;
+  chartDom.style.width = '100%';
+  chartDom.style.height = '100%';
   echarts.registerTheme('vintage', vintage); // 注册主题
-  myChart = echarts.init(chartDom, 'vintage'); // 初始化 ECharts 实例
-  updateChart(props.words); 
+  myChart.value = echarts.init(chartDom, 'vintage'); // 初始化 ECharts 实例
+  updateChart(props.words);
 };
 
 const updateChart = (words: any[]) => {
-  // 限制最多 50 个高频词
-  const filteredWords = words.sort((a, b) => b.value - a.value).slice(0, 50);
-
-  const option = {
+  const filteredWords = words.sort((a, b) => b.value - a.value).slice(0, 80);
+  var maskImage = new Image();
+  maskImage.src = CONST.WORD_CLOUD_BG;
+  var option;
+  option = {
     tooltip: {
       show: true,
       formatter: (params: any) => `<b>${params.name}</b>: ${params.value}`
     },
+    title: {
+      text: '诗词双字词云图',
+      left: 'center'
+    },
     series: [
       {
         type: 'wordCloud',
-        shape: 'circle', 
-        sizeRange: [15, 30], 
-        gridSize: 8, 
-        rotationRange: [0, 0], 
+        shape: 'circle',
+        // maskImage: maskImage,
+        sizeRange: [15, 30],
+        gridSize: 8,
+        rotationRange: [0, 0],
         drawOutOfBound: false,
         textStyle: {
           fontFamily: 'STKaiti, KaiTi, serif',
@@ -58,18 +69,18 @@ const updateChart = (words: any[]) => {
         emphasis: {
           //focus: 'self',
           textStyle: {
-            fontSize: 32, 
+            fontSize: 32,
             fontWeight: 'bold',
             color: '#FF6B6B'
           }
         }
       }
     ],
-    animationDurationUpdate: 5000, 
-    animationEasingUpdate: 'elasticOut' 
+    animationDurationUpdate: 5000,
+    animationEasingUpdate: 'elasticOut'
   };
 
-  myChart.setOption(option); 
+  myChart.value.setOption(option);
 };
 
 onMounted(initChart);
@@ -79,18 +90,10 @@ watch(() => props.words, updateChart, { deep: true });
 // 主题颜色
 const Colors = [
   "#d87c7c", "#919e8b",
-  "#6e7074","#61a0a8",
-  "#787464","#cc7e63",
-  "#724e58","#4b565b"
+  "#6e7074", "#61a0a8",
+  "#787464", "#cc7e63",
+  "#724e58", "#4b565b"
 ];
 </script>
 
-<style scoped>
-.chart {
-  width: 100%;
-  height: 100%;
-  max-width: 600px;
-  max-height: 400px;
-  margin: 0 auto;
-}
-</style>
+<style scoped></style>

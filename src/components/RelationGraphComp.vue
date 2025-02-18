@@ -64,7 +64,7 @@ const processData = (nodes: Array<any>, info: Object) => {
     let newNodes = [];
     const filteredNodes = [...nodes]
         .sort((a, b) => b.degree - a.degree)
-        .slice(0, 100);
+        .slice(0, 50);
     let maxDegree = 0;
     for (let idx = 0; idx < filteredNodes.length; idx++) {
         if (filteredNodes[idx].degree > maxDegree) {

@@ -79,9 +79,8 @@ onMounted(() => {
         title.push({
             textBaseline: 'middle',
             top: ((index + 0.5) * 100) / 3 + '%',
-            text: dynasty
+            text: dynasty,
         });
-
         singleAxis.push({
             left: 70,
             type: 'value',
@@ -114,7 +113,7 @@ onMounted(() => {
             tooltip: {
                 formatter: function (params) {
                     if (keyPoints[index].includes(params.data[0])) {
-                        return `【KeyPoint】`
+                        return `【KeyPoint：${params.data[0]}年】`
                     }
                     return `年份：${params.data[0]}<br/>创作数量：${params.data[1]}`
                 }

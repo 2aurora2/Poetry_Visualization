@@ -19,7 +19,9 @@ import song_emotion from '@/assets/data/song/emotion_count.json'
 import yuan_emotion from '@/assets/data/yuan/emotion_count.json'
 
 onMounted(() => {
-    var chartDom = document.getElementById('emotion-pie');
+    var chartDom = document.getElementById('emotion-pie')!;
+    chartDom.style.width = '100%';
+    chartDom.style.height = '100%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     var myChart = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
@@ -43,11 +45,24 @@ onMounted(() => {
             left: 'right',
             top: 'top',
         },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            left: 'center',
+            top: '90%',
+            orient: 'horizontal',
+        },
         title: [
             {
+                text: '诗词情感分布比较',
+                left: 'center',
+                top: 'top',
+            },
+            {
                 subtext: '唐诗',
-                left: '19%',
-                top: '80%',
+                left: '18%',
+                top: '75%',
                 textAlign: 'center',
                 subtextStyle: {
                     color: '#000000',
@@ -59,7 +74,7 @@ onMounted(() => {
             {
                 subtext: '宋词',
                 left: '49%',
-                top: '80%',
+                top: '75%',
                 textAlign: 'center',
                 subtextStyle: {
                     color: '#000000',
@@ -71,7 +86,7 @@ onMounted(() => {
             {
                 subtext: '元曲',
                 left: '79%',
-                top: '80%',
+                top: '75%',
                 textAlign: 'center',
                 subtextStyle: {
                     color: '#000000',
@@ -84,14 +99,28 @@ onMounted(() => {
         series: [
             {
                 type: 'pie',
-                radius: '40%',
+                // radius: '40%',
+                radius: ['30%', '70%'],
                 center: ['50%', '50%'],
                 data: tang,
-                // roseType: 'radius',
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
                 label: {
-                    position: 'outer',
-                    alignTo: 'none',
-                    bleedMargin: 5
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
                 },
                 left: 0,
                 right: '60%',
@@ -100,30 +129,58 @@ onMounted(() => {
             },
             {
                 type: 'pie',
-                radius: '40%',
+                // radius: '40%',
+                radius: ['30%', '70%'],
                 center: ['50%', '50%'],
                 data: song,
-                // roseType: 'radius',
-                label: {
-                    position: 'outer',
-                    alignTo: 'labelLine',
-                    bleedMargin: 5
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
                 },
-                left: '20%',
-                right: '20%',
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                left: '30%',
+                right: '30%',
                 top: 0,
                 bottom: 0,
             },
             {
                 type: 'pie',
-                radius: '40%',
+                // radius: '40%',
+                radius: ['30%', '70%'],
                 center: ['50%', '50%'],
                 data: yuan,
-                // roseType: 'radius',
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
                 label: {
-                    position: 'outer',
-                    alignTo: 'edge',
-                    margin: 20
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 40,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
                 },
                 left: '60%',
                 right: 0,
