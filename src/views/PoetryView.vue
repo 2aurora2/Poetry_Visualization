@@ -16,7 +16,7 @@
           <WordCloudComp :words="selectedWordCloudWords" />
         </div>
         <div class="chart-section bubble-chart">
-          <BubbleChart :words="selectedBubbleChartWords" />
+          <BubbleChartComp :words="selectedBubbleChartWords" />
         </div>
         <div class="chart-section">
           <EmotionPieComp />
@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import WordCloudComp from '@/components/WordCloudComp.vue';
-import BubbleChart from '@/components/BubbleChart.vue';
+import BubbleChart from '@/components/BubbleChartComp.vue';
 import EmotionPieComp from '@/components/EmotionPieComp.vue';
 import TimelineScatterComp from '@/components/TimelineScatterComp.vue';
 import tangWordCloudWords from '@/assets/data/tang/word_shuang.json';
