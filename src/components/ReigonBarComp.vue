@@ -11,7 +11,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 
 echarts.use([GridComponent, BarChart, CanvasRenderer, TooltipComponent, DataZoomComponent, TitleComponent]);
 
-import { onMounted, watch, shallowRef } from "vue";
+import { onMounted, watch, shallowRef, nextTick } from "vue";
 import vintage from '@/assets/theme/vintage.json'
 
 const props = defineProps({
@@ -86,9 +86,10 @@ const initEcharts = () => {
     option && graph.value.setOption(option, { notMerge: true });
 }
 
-watch(() => [props.id, props.regionName, props.regionValue, props.width], initEcharts, { deep: true });
+watch(() => [props.id, props.regionName, props.regionValue], initEcharts, { deep: true });
 
-onMounted(() => {
+onMounted(async () => {
+    await nextTick();
     initEcharts();
 })
 </script>

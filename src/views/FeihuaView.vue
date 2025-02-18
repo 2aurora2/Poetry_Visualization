@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 import { ref, onUnmounted, watch, onMounted } from 'vue';
 import { useChatStore } from '../store/useChatStore';
 import ChatComp from '@/components/ChatComp.vue';
@@ -89,7 +90,7 @@ watch(rollCount, () => {
                 const timeoutPromise = new Promise((_, reject) => {
                     setTimeout(() => {
                         reject(new Error('Timeout Error')); 
-                    }, 1800);
+                    }, 2000);
                 });
                 const res = await Promise.race([chat(chatStore.messages), timeoutPromise]);
                 chatStore.messages = res.data.data;

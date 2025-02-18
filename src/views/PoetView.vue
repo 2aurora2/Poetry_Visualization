@@ -13,9 +13,9 @@
         <div class="poet-details">
             <div class="search-box">
                 <input type="text" class="poet-search" placeholder="请输入诗人姓名" v-model="poetName">
-                <el-button circle type="warning" :icon="Search"></el-button>
+                <el-button circle type="warning" :icon="Search" @click="queryPoet"></el-button>
             </div>
-            <PoetCardComp></PoetCardComp>
+            <PoetCardComp :nodes="poetInfo?.nodes" :links="poetInfo?.links"></PoetCardComp>
         </div>
     </div>
 </template>
@@ -26,11 +26,17 @@ import songRegion from '@/assets/data/song/region.json'
 import yuanRegion from '@/assets/data/yuan/region.json'
 import regionInfo from '@/assets/data/region_info.json'
 
+import PoetCardComp from '@/components/PoetCardComp.vue'
 import RegionBarComp from '@/components/ReigonBarComp.vue'
 
-import { Search } from '@element-plus/icons-vue'
+import tangLink from '@/assets/data/tang/links_with_name.json'
+import songLink from '@/assets/data/song/links_with_name.json'
+import yuanLink from '@/assets/data/yuan/links_with_name.json'
 
+import { Search } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
+import type { ILink, INode, IPoet } from '../interface/poet'
+import CONST from '../const'
 
 const selectedDynasty = ref(0);
 const dynasties = ['唐', '宋', '元'];
@@ -76,11 +82,60 @@ const selectDynasty = (index: number) => {
     }
 }
 
-const selectedSearchDynasty = ref('唐');
 const poetName = ref('');
+const poetInfo = ref<IPoet>(CONST.DEFAULT_POET);
+const queryPoet = () => {
+    if (poetName.value.length === 0) {
+        // @ts-ignore
+        ElMessage.warning('请输入诗人姓名');
+        return;
+    }
+    // (1) 预处理诗人的关系图信息
+    let sLinks = selectedDynasty.value === 0 ? tangLink : selectedDynasty.value === 1 ? songLink : yuanLink;
+    let nodes: INode[] = [{
+        name: poetName.value,
+        isCenter: true,
+    }];
+    let targetNodes = new Set();
+    let links: ILink[] = [];
+    for (let i = 0; i < sLinks.length; i++) {
+        if (sLinks[i]['source'] === poetName.value) {
+            targetNodes.add(sLinks[i]['target']);
+            let flag = false;
+            for (let j = 0; j < links.length; j++) {
+                if (links[j]['source'] === sLinks[i]['source'] && links[j]['target'] === sLinks[i]['target']) {
+                    links[j]['name'].push(sLinks[i]['name']);
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                links.push({
+                    source: sLinks[i]['source'],
+                    target: sLinks[i]['target'],
+                    name: [sLinks[i]['name']],
+                    lineStyle: {
+                        width: 2,
+                        curvenness: 0.2,
+                    }
+                });
+            }
+        }
+    }
+    for (const target of targetNodes) {
+        nodes.push({
+            name: target as string,
+        });
+    }
+    poetInfo.value!['nodes'] = nodes;
+    poetInfo.value!['links'] = links;
+    console.log(poetInfo.value);
+    
+}
 
-onMounted(() => {
+onMounted(async () => {
     selectDynasty(0);
+    // TODO：默认展示当前朝代某个诗人的信息
 })
 </script>
 
