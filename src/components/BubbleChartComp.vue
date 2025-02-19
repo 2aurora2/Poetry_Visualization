@@ -72,7 +72,8 @@ const updateChart = (words) => {
         fontFamily: 'KaiTi, STKaiti, serif'
       },
       itemStyle: {
-        color: getRandomColor()
+        color: getRandomColor(),
+        opacity: 0.8 // 气泡透明度
       },
       emphasis: {
         label: {
@@ -95,7 +96,7 @@ const updateChart = (words) => {
       type: 'graph',
       layout: 'force',
       data: filteredWords,
-      roam: false,
+      roam: false, //禁止图表拖动
       draggable: true,
       label: {
         show: true,
@@ -107,8 +108,8 @@ const updateChart = (words) => {
       },
       force: {
         repulsion: 50,
-        gravity: 0.2,
-        edgeLength: 25,
+        gravity: 0.3,
+        edgeLength: 30,
         layoutAnimation: true
       },
       emphasis: {
