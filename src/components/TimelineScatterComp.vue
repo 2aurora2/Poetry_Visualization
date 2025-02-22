@@ -1,5 +1,5 @@
 <template>
-    <div id="timeline-scatter" style="width: 80%;height: 200px;"></div>
+    <div id="timeline-scatter" style="width: 80%;height: 150px;"></div>
 </template>
 
 <script setup lang='ts'>

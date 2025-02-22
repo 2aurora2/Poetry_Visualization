@@ -63,7 +63,7 @@ const selectDynasty = (index: number) => {
 
   .top-row {
     display: flex;
-    width: 85%;
+    width: 90%;
     height: 60%;
     flex-direction: row;
     align-items: center;
