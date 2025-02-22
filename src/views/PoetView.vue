@@ -15,7 +15,19 @@
                 <input type="text" class="poet-search" placeholder="请输入诗人姓名" v-model="poetName" @keypress.enter="queryPoet">
                 <el-button circle type="warning" :icon="Search" @click="queryPoet"></el-button>
             </div>
-            <PoetCardComp :nodes="poetInfo?.nodes" :links="poetInfo?.links"></PoetCardComp>
+            <PoetCardComp 
+                :nodes="poetInfo?.nodes" 
+                :links="poetInfo?.links" 
+                :works="poetInfo?.representative_works"
+                :emotions="poetInfo?.emotions"
+                :avatar="poetInfo?.avatar"
+                :name="poetInfo?.name"
+                :gender="poetInfo?.gender"
+                :address="poetInfo?.address"
+                :YearBirth="poetInfo?.yearBirth"
+                :YearDeath="poetInfo?.yearDeath"
+                :desc="poetInfo?.desc"
+            />
         </div>
     </div>
 </template>
@@ -32,6 +44,14 @@ import RegionBarComp from '@/components/ReigonBarComp.vue'
 import tangLink from '@/assets/data/tang/links_with_name.json'
 import songLink from '@/assets/data/song/links_with_name.json'
 import yuanLink from '@/assets/data/yuan/links_with_name.json'
+
+import tangWorkDetails from '@/assets/data/tang/work_details.json'
+import songWorkDetails from '@/assets/data/song/work_details.json'
+import yuanWorkDetails from '@/assets/data/yuan/work_details.json'
+
+import tangPoetryInfo from '@/assets/data/tang/poet_basic_info.json'
+import songPoetryInfo from '@/assets/data/song/poet_basic_info.json'
+import yuanPoetryInfo from '@/assets/data/yuan/poet_basic_info.json'
 
 import { Search } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
@@ -133,8 +153,19 @@ const queryPoet = () => {
     }
     poetInfo.value!['nodes'] = nodes;
     poetInfo.value!['links'] = links;
-    // TODO：预处理其他信息
-    
+    // (2) 预处理诗人的作品信息
+    let sWorkDetails = selectedDynasty.value === 0? tangWorkDetails : selectedDynasty.value === 1? songWorkDetails : yuanWorkDetails;
+    poetInfo.value!['representative_works'] = sWorkDetails[poetName.value]['representative_works'] ? sWorkDetails[poetName.value]['representative_works'] : [];
+    poetInfo.value!['emotions'] = sWorkDetails[poetName.value]['emotion'];
+    // (3) 预处理诗人的基本信息
+    let sPoetryInfo = selectedDynasty.value === 0? tangPoetryInfo : selectedDynasty.value === 1? songPoetryInfo : yuanPoetryInfo;
+    poetInfo.value!['avatar'] = sPoetryInfo[poetName.value]['avatar'] === '' ? undefined : sPoetryInfo[poetName.value]['avatar'];
+    poetInfo.value!['name'] = sPoetryInfo[poetName.value]['ChineseName'];
+    poetInfo.value!['gender'] = sPoetryInfo[poetName.value]['Gender'];
+    poetInfo.value!['address'] = sPoetryInfo[poetName.value]['Address'];
+    poetInfo.value!['yearBirth'] = sPoetryInfo[poetName.value]['YearBirth'];
+    poetInfo.value!['yearDeath'] = sPoetryInfo[poetName.value]['YearDeath'];
+    poetInfo.value!['desc'] = sPoetryInfo[poetName.value]['desc'];
 }
 
 onMounted(async () => {

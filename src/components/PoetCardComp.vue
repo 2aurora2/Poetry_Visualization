@@ -6,7 +6,7 @@
                 <div class="name"><strong>姓名：</strong>{{ props.name }}</div>
                 <div class="gender"><strong>性别：</strong>{{ props.gender }}</div>
                 <div class="address"><strong>籍贯：</strong>{{ props.address }}</div>
-                <div class="year"><strong>生卒年：</strong>{{ props.YearBirth + "-" + props.YearDeath }}</div>
+                <div class="year"><strong>生卒年：</strong>{{ props.YearBirth + "年 - " + props.YearDeath + "年" }}</div>
                 <div class="desc"><strong>简介：</strong>{{ props.desc }}</div>
             </div>
         </div>
@@ -14,7 +14,7 @@
             <el-carousel-item v-for="item, index in props.works" :key="index">
                 <div class="content">
                     <p>{{ item['title'] || item['rhythmic'] }}</p>
-                    <p v-html="item['title'] ? item['paragraphs'].join('</br>') : item['paragraphs'].join('')"></p>
+                    <p v-html="item['paragraphs'].join('')"></p>
                 </div>
             </el-carousel-item>
         </el-carousel>
@@ -52,7 +52,7 @@ const props = defineProps({
     avatar: {
         type: String,
         required: true,
-        default: 'https://b0.bdstatic.com/d66b85e5ce66b3b449e0e62a8de2713c.jpg@h_1280'
+        default: 'https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2024%2F0716%2F7f96c29aj00sgpj30000ud000hs00a0m.jpg&thumbnail=660x2147483647&quality=80&type=jpg'
     },
     name: {
         type: String,
@@ -82,28 +82,7 @@ const props = defineProps({
     works: {
         type: Array,
         required: true,
-        default: () => [{
-            paragraphs: [
-                "半世为人，不曾教大人心困。",
-                "虽是搽胭粉，只争不裹头巾，将那等不做人的婆娘恨。"
-            ],
-            title: "诈妮子调风月・仙吕/点绛唇",
-        }, {
-            paragraphs: [
-                "气和玉烛，睿化著鸿明。",
-                "缇管一阳生。",
-                "郊禋盛礼燔柴毕，旋轸凤凰城。",
-                "森罗仪卫振华缨。",
-                "载路溢欢声。",
-                "皇图大业超前古，垂象泰阶平。",
-                "岁时丰衍，九土乐升平。",
-                "睹寰海澄清。",
-                "道高尧舜垂衣治，日月并文明。",
-                "嘉禾甘露登歌荐，云物焕祥经。",
-                "兢兢惕惕持谦德，未许禅云亭。"
-            ],
-            rhythmic: "导引",
-        }]
+        default: () => []
     },
     desc: {
         type: String,
@@ -113,37 +92,7 @@ const props = defineProps({
     emotions: {
         type: Array,
         required: true,
-        default: () =>
-            [
-                {
-                    "name": "悲",
-                    "value": 15579
-                },
-                {
-                    "name": "思",
-                    "value": 14211
-                },
-                {
-                    "name": "乐",
-                    "value": 11589
-                },
-                {
-                    "name": "喜",
-                    "value": 7594
-                },
-                {
-                    "name": "忧",
-                    "value": 4984
-                },
-                {
-                    "name": "怒",
-                    "value": 2674
-                },
-                {
-                    "name": "惧",
-                    "value": 716
-                }
-            ]
+        default: () => [],
     },
     nodes: {
         type: Array,
@@ -313,6 +262,10 @@ const initRelationGraph = () => {
 
 watch(() => props.nodes, async () => {
     initRelationGraph();
+})
+
+watch(() => props.emotions, async () => {
+    initPie();
 })
 
 onMounted(() => {
