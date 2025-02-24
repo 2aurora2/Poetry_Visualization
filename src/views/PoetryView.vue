@@ -11,10 +11,8 @@
         <div class="charts">
           <BubbleChartComp :words="selectedBubbleChartWords" />
           <WordCloudComp :words="selectedWordCloudWords" />
+          <EmotionPieComp :emotions="selectedEmotion" />
         </div>
-      </div>
-      <div class="pie-section">
-        <EmotionPieComp />
       </div>
     </div>
     <div class="bottom-row">
@@ -36,20 +34,26 @@ import yuanWordCloudWords from '@/assets/data/yuan/word_shuang.json';
 import tangBubbleChartWords from '@/assets/data/tang/word_dan.json';
 import songBubbleChartWords from '@/assets/data/song/word_dan.json';
 import yuanBubbleChartWords from '@/assets/data/yuan/word_dan.json';
+import tangEmotion from '@/assets/data/tang/emotion_count.json';
+import songEmotion from '@/assets/data/song/emotion_count.json';
+import yuanEmotion from '@/assets/data/yuan/emotion_count.json';
 
 const selectedDynasty = ref(0);
 const dynasties = ['唐', '宋', '元'];
 
 const wordCloudWordsData = [tangWordCloudWords, songWordCloudWords, yuanWordCloudWords];
 const bubbleChartWordsData = [tangBubbleChartWords, songBubbleChartWords, yuanBubbleChartWords];
+const emotionData = [tangEmotion, songEmotion, yuanEmotion];
 
 const selectedWordCloudWords = ref(wordCloudWordsData[selectedDynasty.value]);
 const selectedBubbleChartWords = ref(bubbleChartWordsData[selectedDynasty.value]);
+const selectedEmotion = ref(emotionData[selectedDynasty.value]);
 
 const selectDynasty = (index: number) => {
   selectedDynasty.value = index;
   selectedWordCloudWords.value = wordCloudWordsData[index];
   selectedBubbleChartWords.value = bubbleChartWordsData[index];
+  selectedEmotion.value = emotionData[index];
 };
 </script>
 

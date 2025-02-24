@@ -16,7 +16,6 @@ declare module 'vue' {
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     EmotionPieComp: typeof import('./src/components/EmotionPieComp.vue')['default']
     GeneralCateRelationComp: typeof import('./src/components/GeneralCateRelationComp.vue')['default']
-    HeatMapComp: typeof import('./src/components/HeatMapComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
     PoetCardComp: typeof import('./src/components/PoetCardComp.vue')['default']
     ReigonBarComp: typeof import('./src/components/ReigonBarComp.vue')['default']
