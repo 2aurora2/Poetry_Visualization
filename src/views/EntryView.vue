@@ -60,17 +60,17 @@ const navigateToHome = () => {
 .intro-container {
     width: 80%;
     max-width: 800px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     text-align: justify;
-    font-family: 幼圆, serif;
-    font-size: 20px;
+    font-family: 'GlobalFont', serif;
+    font-size: 25px;
     line-height: 30px;
     cursor: pointer;
 }
 
 .title {
-    font-family: 'STKaiti', serif;
-    font-size: 3rem;
+    font-family: 'GlobalFont';
+    font-size: 4rem;
     color: #333;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
 }

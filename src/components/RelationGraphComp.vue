@@ -132,6 +132,10 @@ const initEcharts = () => {
         title: {
             text: '诗人关系网络图',
             left: 'center',
+            textStyle: {
+                fontFamily: 'GlobalFont',
+                fontSize: 25,
+            }
         },
         series: [
             {

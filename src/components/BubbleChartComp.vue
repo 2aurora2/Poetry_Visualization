@@ -91,6 +91,10 @@ const updateChart = (words) => {
     title: {
       text: '诗词单字气泡图',
       left: 'center',
+      textStyle: {
+        fontFamily: 'GlobalFont',
+        fontSize: 25,
+      }
     },
     series: [{
       type: 'graph',

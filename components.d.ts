@@ -18,6 +18,7 @@ declare module 'vue' {
     GeneralCateRelationComp: typeof import('./src/components/GeneralCateRelationComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
     PoetCardComp: typeof import('./src/components/PoetCardComp.vue')['default']
+    PoetSanKeyComp: typeof import('./src/components/PoetSanKeyComp.vue')['default']
     ReigonBarComp: typeof import('./src/components/ReigonBarComp.vue')['default']
     RelationGraphComp: typeof import('./src/components/RelationGraphComp.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

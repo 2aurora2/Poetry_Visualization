@@ -50,8 +50,8 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 
 .nav-item {
     text-align: center;
-    font-family: '幼圆', sans-serif;
-    font-size: 24px;
+    font-family: 'GlobalFont', sans-serif;
+    font-size: 28px;
     font-weight: 800;
     padding: 8px;
     user-select: none;

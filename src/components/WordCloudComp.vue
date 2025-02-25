@@ -47,7 +47,11 @@ const updateChart = (words: any[]) => {
     },
     title: {
       text: '诗词双字词云图',
-      left: 'center'
+      left: 'center',
+      textStyle: {
+        fontFamily: 'GlobalFont',
+        fontSize: 25,
+      }
     },
     series: [
       {

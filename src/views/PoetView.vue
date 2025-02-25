@@ -8,7 +8,8 @@
                 </button>
             </div>
             <RegionBarComp :info="selectedRegionInfo" :id="selectedDynasty" :regionName="selectedRegionName"
-                :regionValue="selectedRegionValue"></RegionBarComp>
+                :regionValue="selectedRegionValue"/>
+            <PoetSanKeyComp/>
         </div>
         <div class="poet-details">
             <div class="search-box">
@@ -40,6 +41,7 @@ import regionInfo from '@/assets/data/region_info.json'
 
 import PoetCardComp from '@/components/PoetCardComp.vue'
 import RegionBarComp from '@/components/ReigonBarComp.vue'
+import PoetSanKeyComp from '@/components/PoetSanKeyComp.vue'
 
 import tangLink from '@/assets/data/tang/links_with_name.json'
 import songLink from '@/assets/data/song/links_with_name.json'
@@ -231,6 +233,7 @@ onMounted(async () => {
     .dynasty-button {
         width: 35px;
         height: 35px;
+        font-family: 'GlobalFont';
         border-radius: 50%;
         background-color: rgba(60, 60, 60, 0.1);
         border: 2px solid #ccc;
@@ -238,7 +241,7 @@ onMounted(async () => {
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 25px;
         font-weight: bold;
         color: #333;
         transition: all 0.3s ease;

@@ -80,6 +80,10 @@ const initEcharts = async () => {
         title: {
             text: '诗人关系类别图',
             left: 'center',
+            textStyle: {
+                fontFamily: 'GlobalFont',
+                fontSize: 25,
+            }
         },
         tooltip: {
             trigger: 'item',

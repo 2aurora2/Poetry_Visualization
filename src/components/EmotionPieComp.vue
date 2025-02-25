@@ -26,8 +26,8 @@ const props = defineProps({
 })
 
 const initPie = () => {
-    if(graph.value) {
-        graph.value.dispose(); 
+    if (graph.value) {
+        graph.value.dispose();
     }
     var chartDom = document.getElementById('emotion-pie')!;
     chartDom.style.width = '100%';
@@ -64,6 +64,10 @@ const initPie = () => {
                 text: '诗词情感分布',
                 left: 'center',
                 top: 'top',
+                textStyle: {
+                    fontFamily: 'GlobalFont',
+                    fontSize: 25,
+                }
             }
         ],
         series: [

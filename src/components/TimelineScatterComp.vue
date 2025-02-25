@@ -80,6 +80,10 @@ onMounted(() => {
             textBaseline: 'middle',
             top: ((index + 0.5) * 100) / 3 + '%',
             text: dynasty,
+            textStyle: {
+                fontFamily: 'GlobalFont',
+                fontSize: 25,
+            }
         });
         singleAxis.push({
             left: 70,

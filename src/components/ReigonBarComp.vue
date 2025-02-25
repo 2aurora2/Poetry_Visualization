@@ -51,6 +51,10 @@ const initEcharts = () => {
         title:{
             text: '诗人籍贯地域分布',
             left: 'center',
+            textStyle: {
+                fontFamily: 'GlobalFont',
+                fontSize: 25,
+            }
         },
         tooltip: {
             trigger: 'axis',
