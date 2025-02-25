@@ -141,6 +141,7 @@ const initEcharts = () => {
             {
                 name: 'Relation Graph',
                 type: 'graph',
+                top: '13%',
                 layout: 'circular', // circular环形布局，force力引导布局
                 circular: { // 环形布局配置
                     rotateLabel: true // 旋转标签

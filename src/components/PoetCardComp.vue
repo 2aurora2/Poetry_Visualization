@@ -10,14 +10,14 @@
                 <div class="desc"><strong>简介：</strong>{{ props.desc }}</div>
             </div>
         </div>
-        <el-carousel class="carousel" motion-blur indicator-position="none">
+        <!-- <el-carousel class="carousel" motion-blur indicator-position="none">
             <el-carousel-item v-for="item, index in props.works" :key="index">
                 <div class="content">
                     <p>{{ item['title'] || item['rhythmic'] }}</p>
                     <p v-html="item['paragraphs'].join('')"></p>
                 </div>
             </el-carousel-item>
-        </el-carousel>
+        </el-carousel> -->
         <div class="charts">
             <div id="emotion-pie"></div>
             <div id="relation-graph"></div>
@@ -112,7 +112,7 @@ const initPie = () => {
         pieGraph.value.dispose();
     }
     var chartDom = document.getElementById('emotion-pie')!;  // 获取容器 DOM 实例
-    chartDom.style.width = '40%';
+    chartDom.style.width = '50%';
     chartDom.style.height = '100%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
@@ -168,7 +168,7 @@ const initRelationGraph = () => {
         relationGraph.value.dispose();
     }
     var chartDom = document.getElementById('relation-graph')!;  // 获取容器 DOM 实例
-    chartDom.style.width = '60%';
+    chartDom.style.width = '50%';
     chartDom.style.height = '100%';
 
     const containerWidth = chartDom.clientWidth;
@@ -218,7 +218,7 @@ const initRelationGraph = () => {
                 type: 'graph',
                 layout: 'force',
                 force: {
-                    repulsion: 100,     // 节点间斥力（值越大节点间距越大）
+                    repulsion: 40,     // 节点间斥力（值越大节点间距越大）
                     gravity: 0.1,      // 向心力（值越大节点越靠近中心）
                     edgeLength: [50, 180],     // 边的理想长度
                     friction: 0.1,      // 摩擦系数（控制动画速度）
@@ -270,7 +270,7 @@ watch(() => props.emotions, async () => {
 
 onMounted(() => {
     initPie();
-    initRelationGraph();
+    // initRelationGraph();
 })
 </script>
 
@@ -279,15 +279,17 @@ onMounted(() => {
     width: 90%;
     display: flex;
     flex-direction: column;
-    margin-top: 16px;
+    margin-top: 4px;
 
     .avatar-info {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        height: 40vh;
 
         img {
             width: auto;
-            height: 20vh;
+            height: 25vh;
             border-radius: 50%;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
             cursor: pointer;
@@ -306,7 +308,7 @@ onMounted(() => {
     .carousel {
         width: 100%;
         height: 15vh;
-        margin-top: 8px;
+        margin-top: 16px;
 
         .el-carousel__container {
             height: 100%;
@@ -345,10 +347,10 @@ onMounted(() => {
 
     .charts {
         width: 100%;
-        height: 40vh;
+        height: 42vh;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
     }
 }

@@ -9,7 +9,7 @@
             </div>
             <RegionBarComp :info="selectedRegionInfo" :id="selectedDynasty" :regionName="selectedRegionName"
                 :regionValue="selectedRegionValue"/>
-            <PoetSanKeyComp/>
+            <PoetSanKeyComp :nodes="selectedSankey.nodes" :links="selectedSankey.links"/>
         </div>
         <div class="poet-details">
             <div class="search-box">
@@ -55,6 +55,10 @@ import tangPoetryInfo from '@/assets/data/tang/poet_basic_info.json'
 import songPoetryInfo from '@/assets/data/song/poet_basic_info.json'
 import yuanPoetryInfo from '@/assets/data/yuan/poet_basic_info.json'
 
+import tangPoetSankey from '@/assets/data/tang/poet_sankey.json'
+import songPoetSankey from '@/assets/data/song/poet_sankey.json'
+import yuanPoetSankey from '@/assets/data/yuan/poet_sankey.json'
+
 import { Search } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
 import type { ILink, INode, IPoet } from '../interface/poet'
@@ -65,6 +69,7 @@ const dynasties = ['唐', '宋', '元'];
 const selectedRegionName = ref([]);
 const selectedRegionValue = ref([]);
 const selectedRegionInfo = ref([]);
+const selectedSankey = ref({});
 
 const preprocessRegion = (region: Object) => {
     let regionList = Object.entries(region).sort((a, b) => b[1] - a[1]);
@@ -92,16 +97,19 @@ const selectDynasty = (index: number) => {
         case 0:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(tangRegion);
+            selectedSankey.value = tangPoetSankey;
             poetName.value = '李白';
             break;
         case 1:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(songRegion);
+            selectedSankey.value = songPoetSankey;
             poetName.value = '苏轼';
             break;
         case 2:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(yuanRegion);
+            selectedSankey.value = yuanPoetSankey;
             poetName.value = '元好问';
             break;
     }
@@ -196,7 +204,7 @@ onMounted(async () => {
         align-items: center;
 
         .search-box {
-            width: 90%;
+            width: 95%;
             display: flex;
             flex-direction: row;
 
