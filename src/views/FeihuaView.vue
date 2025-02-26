@@ -90,7 +90,7 @@ watch(rollCount, () => {
                 const timeoutPromise = new Promise((_, reject) => {
                     setTimeout(() => {
                         reject(new Error('Timeout Error')); 
-                    }, 3000);
+                    }, 3500);
                 });
                 const res = await Promise.race([chat(chatStore.messages), timeoutPromise]);
                 chatStore.messages = res.data.data;
@@ -149,18 +149,20 @@ $color-text: #eb8585; // 文字颜色
 
     .title.center-align {
         text-align: center;
-        font-size: 1.5rem;
+        font-size: 3rem;
+        font-family: 'ContentFont';
         color: $color-primary;
         padding-bottom: 1rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     }
 
     .subtitle.center-align {
         text-align: center;
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         color: $color-text;
         margin-bottom: 1.5rem;
+        font-family: 'ContentFont';
     }
 
     .imagery-choose {
@@ -195,6 +197,8 @@ $color-text: #eb8585; // 文字颜色
 
         .icon-rule-item {
             font-size: 1.125rem;
+            font-weight: 600;
+            font-family: 'ContentFont';
             color: $color-text;
             padding: 1rem;
             position: relative;
@@ -217,6 +221,7 @@ $color-text: #eb8585; // 文字颜色
         width: 80%;
         margin: 2rem auto;
         padding: 1rem;
+        font-family: 'ContentFont';
         background-color: $color-secondary;
         color: #ffffff;
         font-size: 1.125rem;

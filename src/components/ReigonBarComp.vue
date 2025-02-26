@@ -52,7 +52,7 @@ const initEcharts = () => {
             text: '诗人籍贯地域分布',
             left: 'center',
             textStyle: {
-                fontFamily: 'GlobalFont',
+                fontFamily: 'TitleFont',
                 fontSize: 25,
             }
         },
@@ -65,14 +65,28 @@ const initEcharts = () => {
             formatter: (params: any) => {
                 const index = params[0].dataIndex;
                 return `<strong>${params[0].name}</strong>：${props.info[index]}`;
+            },
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 16,
             }
         },
         xAxis: {
             type: 'category',
             data: props.regionName,
+            axisLabel: {
+                show: true,
+                fontFamily: 'ContentFont',
+                fontSize: 16, 
+            }
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            axisLabel: {
+                show: true,
+                fontFamily: 'ContentFont',
+                fontSize: 16, 
+            }
         },
         dataZoom: [{ type: 'inside', disabled: true }],
         series: [

@@ -5,7 +5,7 @@
                 <div v-if="msg.role === 'assistant'" class="ai-message">
                     <div class="avatar robot-avatar">🤖</div>
                     <div class="content-wrapper">
-                        <div class="name">Robot</div>
+                        <div class="name">Poet-Robot</div>
                         <div class="bubble" v-html="msg.content"></div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="input-area">
-            <input type="text" v-model="input" placeholder="输入你的回答" @keypress.enter="sendMessage"/>
+            <input type="text" v-model="input" placeholder="输入你的回答" @keypress.enter="sendMessage" />
             <button @click="sendMessage">发送</button>
             <button @click="resetFeihua">重新挑战</button>
         </div>
@@ -74,7 +74,7 @@ const resetFeihua = () => {
 
 onMounted(() => {
     scrollToBottom();
-    
+
 })
 </script>
 
@@ -140,10 +140,10 @@ onMounted(() => {
             }
 
             .content-wrapper {
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-family: 'ContentFont';
 
                 .name {
-                    font-size: 12px;
+                    font-size: 15px;
                     color: #666;
                     margin-bottom: 4px;
                 }
@@ -200,16 +200,20 @@ onMounted(() => {
             border-radius: 8px;
             outline: none;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'ContentFont';
+            font-size: 18px;
         }
 
         button {
-            padding: 0 24px;
+            padding: 0 16px;
             background: #007bff;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s;
+            font-family: 'ContentFont';
+            font-size: 18px;
 
             &:hover {
                 background: #0056b3;

@@ -86,13 +86,17 @@ const updateChart = (words) => {
   const option = {
     tooltip: {
       trigger: 'item',
-      formatter: '{b}: {c}次'
+      formatter: '{b}: {c}次',
+      textStyle: {
+        fontFamily: 'ContentFont',
+        fontSize: 18,
+      }
     },
     title: {
       text: '诗词单字气泡图',
       left: 'center',
       textStyle: {
-        fontFamily: 'GlobalFont',
+        fontFamily: 'TitleFont',
         fontSize: 25,
       }
     },

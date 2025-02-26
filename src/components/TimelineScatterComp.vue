@@ -58,7 +58,7 @@ onMounted(() => {
         }
         return acc;
     }, []);
-    
+
     // 关键时间节点
     const keyPoints = Array.from([
         Array.from([650, 718, 756, 793, 818]),
@@ -81,7 +81,7 @@ onMounted(() => {
             top: ((index + 0.5) * 100) / 3 + '%',
             text: dynasty,
             textStyle: {
-                fontFamily: 'GlobalFont',
+                fontFamily: 'TitleFont',
                 fontSize: 25,
             }
         });
@@ -95,6 +95,9 @@ onMounted(() => {
             height: 100 / 3 - 15 + '%',
             axisTick: {
                 interval: 20,
+            },
+            axisLabel:{
+                fontFamily: 'ContentFont',
             }
         });
 
@@ -120,7 +123,7 @@ onMounted(() => {
                         return `【KeyPoint：${params.data[0]}年】`
                     }
                     return `年份：${params.data[0]}<br/>创作数量：${params.data[1]}`
-                }
+                },
             }
         });
     })
@@ -129,7 +132,11 @@ onMounted(() => {
     })
     option = {
         tooltip: {
-            position: 'top'
+            position: 'top',
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 16,
+            }
         },
         title: title,
         singleAxis: singleAxis,

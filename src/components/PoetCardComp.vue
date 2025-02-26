@@ -128,6 +128,13 @@ const initPie = () => {
             left: -10,
             top: 'middle',
             orient: 'vertical',
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 18,
+            }
+        },
+        label: {
+            fontFamily: 'ContentFont'
         },
         series: [
             {
@@ -149,6 +156,12 @@ const initPie = () => {
                         show: true,
                         fontSize: 40,
                         fontWeight: 'bold'
+                    }
+                },
+                tooltip:{
+                    textStyle:{
+                        fontFamily: 'ContentFont',
+                        fontSize: 18,
                     }
                 },
                 labelLine: {
@@ -210,6 +223,10 @@ const initRelationGraph = () => {
             orient: 'horizontal',
             left: 'right',
             top: 'top',
+        },
+        label:{
+            fontFamily: 'ContentFont',
+            fontSize: 25,
         },
         animationDurationUpdate: 1500,
         animationEasingUpdate: 'quinticInOut',
@@ -279,7 +296,7 @@ onMounted(() => {
     width: 90%;
     display: flex;
     flex-direction: column;
-    margin-top: 4px;
+    margin-top: 2px;
 
     .avatar-info {
         display: flex;
@@ -297,11 +314,12 @@ onMounted(() => {
 
         .info {
             margin-left: 32px;
-            font-size: 18px;
+            font-size: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 8px
+            gap: 8px;
+            font-family: 'ContentFont';
         }
     }
 

@@ -47,13 +47,17 @@ const initEcharts = () => {
             text: '诗人情感派系桑基图',
             left: 'center',
             textStyle: {
-                fontFamily: 'GlobalFont',
+                fontFamily: 'TitleFont',
                 fontSize: 25,
             }
         },
         tooltip: {
             trigger: 'item',
-            triggerOn: 'mousemove'
+            triggerOn: 'mousemove',
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 18, 
+            }
         },
         toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
             show: true,
@@ -67,7 +71,9 @@ const initEcharts = () => {
             top: 'top',
         },
         label:{
-            textBorderWidth: -100
+            textBorderWidth: -100,
+            fontFamily: 'ContentFont',
+            fontSize: 20,
         },
         series: [
             {

@@ -113,7 +113,7 @@ function initEcharts(geoJson: GeoJson, name: string, chart: echarts.ECharts) {
       left: 'center',
       top: '4%',
       textStyle: {
-        fontFamily: 'GlobalFont',
+        fontFamily: 'TitleFont',
         fontSize: 25,
       }
     },

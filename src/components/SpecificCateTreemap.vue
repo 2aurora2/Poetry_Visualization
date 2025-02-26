@@ -81,7 +81,7 @@ const initEcharts = async () => {
             text: '诗人关系类别图',
             left: 'center',
             textStyle: {
-                fontFamily: 'GlobalFont',
+                fontFamily: 'TitleFont',
                 fontSize: 25,
             }
         },
@@ -97,6 +97,10 @@ const initEcharts = async () => {
                         : params.name;
                     return `${path}<br/>数值: ${params.value}`;
                 }
+            },
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 18, 
             }
         },
         toolbox: {
@@ -124,11 +128,17 @@ const initEcharts = async () => {
                 },
                 label: {
                     show: true,
-                    formatter: '{b}'
+                    formatter: '{b}',
+                    fontSize: 18,
+                    fontFamily: 'ContentFont',
                 },
                 upperLabel: {
                     show: true,
-                    height: 30
+                    height: 30,
+                    textBorderWidth: -100,
+                    fontSize: 18,
+                    fontFamily: 'ContentFont',
+                    color: '#fff'
                 },
                 levels: getLevelOption(),
             }
@@ -153,6 +163,8 @@ const initEcharts = async () => {
                     rotate: 'radial',
                     formatter: '{b}',
                     minAngle: 5,
+                    fontSize: 18,
+                    fontFamily: 'ContentFont',
                 }
             }
         ]

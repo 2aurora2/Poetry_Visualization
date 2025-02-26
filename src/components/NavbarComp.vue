@@ -50,10 +50,10 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 
 .nav-item {
     text-align: center;
-    font-family: 'GlobalFont', sans-serif;
-    font-size: 28px;
+    font-family: 'TitleFont', sans-serif;
+    font-size: 33px;
     font-weight: 800;
-    padding: 8px;
+    padding: 4px;
     user-select: none;
     cursor: pointer;
     transition: color 0.3s ease, transform 0.3s ease; // 添加平滑过渡效果

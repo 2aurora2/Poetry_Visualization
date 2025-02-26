@@ -90,7 +90,7 @@ const selectDynasty = (index: number) => {
         .dynasty-button {
           width: 35px;
           height: 35px;
-          font-family: 'GlobalFont';
+          font-family: 'TitleFont';
           border-radius: 50%;
           background-color: rgba(60, 60, 60, 0.1);
           border: 2px solid #ccc;
@@ -147,7 +147,7 @@ const selectDynasty = (index: number) => {
     align-items: center;
 
     p {
-      font-family: 'GlobalFont';
+      font-family: 'TitleFont';
       margin: 0;
       font-size: 25px;
       font-weight: bolder;

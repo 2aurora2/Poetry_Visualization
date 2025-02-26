@@ -112,7 +112,12 @@ const initEcharts = () => {
 
     var option: EChartsOption;
     option = {
-        tooltip: {},
+        tooltip: {
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 18,
+            }
+        },
         toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
             show: true,
             feature: {
@@ -133,7 +138,7 @@ const initEcharts = () => {
             text: '诗人关系网络图',
             left: 'center',
             textStyle: {
-                fontFamily: 'GlobalFont',
+                fontFamily: 'TitleFont',
                 fontSize: 25,
             }
         },
@@ -141,7 +146,8 @@ const initEcharts = () => {
             {
                 name: 'Relation Graph',
                 type: 'graph',
-                top: '13%',
+                top: '18%',
+                bottom: '15%',
                 layout: 'circular', // circular环形布局，force力引导布局
                 circular: { // 环形布局配置
                     rotateLabel: true // 旋转标签
@@ -160,7 +166,9 @@ const initEcharts = () => {
                 label: {
                     show: true,
                     position: 'right',
-                    formatter: '{b}'
+                    formatter: '{b}',
+                    fontFamily: 'ContentFont',
+                    fontSize: 16
                 },
                 draggable: true,    // 节点是否可拖拽
                 focusNodeAdjacency: true,   // 鼠标悬停时是否高亮相邻节点和边

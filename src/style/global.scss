@@ -38,8 +38,12 @@ body {
     z-index: -1;
 }
 
+@font-face {
+    font-family: 'TitleFont';
+    src: url('../assets/fonts/FZZJ-YLWBJW.TTF');
+}
 
 @font-face {
-    font-family: 'GlobalFont';
-    src: url('../assets/fonts/FZZJ-YLKSJW.TTF');
+    font-family: 'ContentFont';
+    src: url('../assets/fonts/FZChuSLKSJW.TTF');
 }

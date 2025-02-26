@@ -58,6 +58,13 @@ const initPie = () => {
             left: 'center',
             top: '90%',
             orient: 'horizontal',
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 18,
+            }
+        },
+        label: {
+            fontFamily: 'ContentFont'
         },
         title: [
             {
@@ -65,7 +72,7 @@ const initPie = () => {
                 left: 'center',
                 top: 'top',
                 textStyle: {
-                    fontFamily: 'GlobalFont',
+                    fontFamily: 'TitleFont',
                     fontSize: 25,
                 }
             }
@@ -79,7 +86,7 @@ const initPie = () => {
                 itemStyle: {
                     borderRadius: 10,
                     borderColor: '#fff',
-                    borderWidth: 2
+                    borderWidth: 2,
                 },
                 label: {
                     show: false,
@@ -95,7 +102,13 @@ const initPie = () => {
                 labelLine: {
                     show: false
                 },
-                data: props.emotions
+                data: props.emotions,
+                tooltip:{
+                    textStyle:{
+                        fontFamily: 'ContentFont',
+                        fontSize: 18,
+                    }
+                }
             }
         ]
     };

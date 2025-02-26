@@ -8,27 +8,19 @@
                 </button>
             </div>
             <RegionBarComp :info="selectedRegionInfo" :id="selectedDynasty" :regionName="selectedRegionName"
-                :regionValue="selectedRegionValue"/>
-            <PoetSanKeyComp :nodes="selectedSankey.nodes" :links="selectedSankey.links"/>
+                :regionValue="selectedRegionValue" />
+            <PoetSanKeyComp :nodes="selectedSankey.nodes" :links="selectedSankey.links" />
         </div>
         <div class="poet-details">
             <div class="search-box">
-                <input type="text" class="poet-search" placeholder="请输入诗人姓名" v-model="poetName" @keypress.enter="queryPoet">
+                <input type="text" class="poet-search" placeholder="请输入诗人姓名" v-model="poetName"
+                    @keypress.enter="queryPoet">
                 <el-button circle type="warning" :icon="Search" @click="queryPoet"></el-button>
             </div>
-            <PoetCardComp 
-                :nodes="poetInfo?.nodes" 
-                :links="poetInfo?.links" 
-                :works="poetInfo?.representative_works"
-                :emotions="poetInfo?.emotions"
-                :avatar="poetInfo?.avatar"
-                :name="poetInfo?.name"
-                :gender="poetInfo?.gender"
-                :address="poetInfo?.address"
-                :YearBirth="poetInfo?.yearBirth"
-                :YearDeath="poetInfo?.yearDeath"
-                :desc="poetInfo?.desc"
-            />
+            <PoetCardComp :nodes="poetInfo?.nodes" :links="poetInfo?.links" :works="poetInfo?.representative_works"
+                :emotions="poetInfo?.emotions" :avatar="poetInfo?.avatar" :name="poetInfo?.name"
+                :gender="poetInfo?.gender" :address="poetInfo?.address" :YearBirth="poetInfo?.yearBirth"
+                :YearDeath="poetInfo?.yearDeath" :desc="poetInfo?.desc" />
         </div>
     </div>
 </template>
@@ -164,11 +156,11 @@ const queryPoet = () => {
     poetInfo.value!['nodes'] = nodes;
     poetInfo.value!['links'] = links;
     // (2) 预处理诗人的作品信息
-    let sWorkDetails = selectedDynasty.value === 0? tangWorkDetails : selectedDynasty.value === 1? songWorkDetails : yuanWorkDetails;
+    let sWorkDetails = selectedDynasty.value === 0 ? tangWorkDetails : selectedDynasty.value === 1 ? songWorkDetails : yuanWorkDetails;
     poetInfo.value!['representative_works'] = sWorkDetails[poetName.value]['representative_works'] ? sWorkDetails[poetName.value]['representative_works'] : [];
     poetInfo.value!['emotions'] = sWorkDetails[poetName.value]['emotion'];
     // (3) 预处理诗人的基本信息
-    let sPoetryInfo = selectedDynasty.value === 0? tangPoetryInfo : selectedDynasty.value === 1? songPoetryInfo : yuanPoetryInfo;
+    let sPoetryInfo = selectedDynasty.value === 0 ? tangPoetryInfo : selectedDynasty.value === 1 ? songPoetryInfo : yuanPoetryInfo;
     poetInfo.value!['avatar'] = sPoetryInfo[poetName.value]['avatar'] === '' ? undefined : sPoetryInfo[poetName.value]['avatar'];
     poetInfo.value!['name'] = sPoetryInfo[poetName.value]['ChineseName'];
     poetInfo.value!['gender'] = sPoetryInfo[poetName.value]['Gender'];
@@ -208,6 +200,11 @@ onMounted(async () => {
             display: flex;
             flex-direction: row;
 
+            input {
+                font-family: 'ContentFont';
+                font-size: 18px;
+            }
+
             .poet-search {
                 flex: 9;
                 margin-right: 8px;
@@ -241,7 +238,7 @@ onMounted(async () => {
     .dynasty-button {
         width: 35px;
         height: 35px;
-        font-family: 'GlobalFont';
+        font-family: 'TitleFont';
         border-radius: 50%;
         background-color: rgba(60, 60, 60, 0.1);
         border: 2px solid #ccc;

@@ -43,13 +43,17 @@ const updateChart = (words: any[]) => {
   option = {
     tooltip: {
       show: true,
-      formatter: (params: any) => `<b>${params.name}</b>: ${params.value}`
+      formatter: (params: any) => `<b>${params.name}</b>: ${params.value}`,
+      textStyle: {
+        fontFamily: 'ContentFont',
+        fontSize: 18,
+      }
     },
     title: {
       text: '诗词双字词云图',
       left: 'center',
       textStyle: {
-        fontFamily: 'GlobalFont',
+        fontFamily: 'TitleFont',
         fontSize: 25,
       }
     },
