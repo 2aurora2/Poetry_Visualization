@@ -32,7 +32,7 @@ const initChart = () => {
   }
   var chartDom = document.getElementById('bubble-chart')!;
   chartDom.style.width = '100%';
-  chartDom.style.height = '100%';
+  chartDom.style.height = '90%';
   bubbleChart.value = echarts.init(chartDom);
   updateChart(props.words);
 }
@@ -44,7 +44,7 @@ const updateChart = (words) => {
   const values = currentWords.map(item => item.value)
   const minValue = Math.min(...values)
   const maxValue = Math.max(...values)
-  const symbolSizeRange = { min: 25, max: 60 }
+  const symbolSizeRange = { min: 30, max: 50 }
   const fontSizeScale = 0.5
   const highlightScale = 1.3
 
@@ -103,6 +103,8 @@ const updateChart = (words) => {
     series: [{
       type: 'graph',
       layout: 'force',
+      top: '10%',
+      bottom: '5%',
       data: filteredWords,
       roam: false, //禁止图表拖动
       draggable: true,
@@ -115,7 +117,7 @@ const updateChart = (words) => {
         verticalAlign: 'middle'
       },
       force: {
-        repulsion: 50,
+        repulsion: 55,
         gravity: 0.3,
         edgeLength: 30,
         layoutAnimation: true

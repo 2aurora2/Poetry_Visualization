@@ -1,7 +1,6 @@
 <template>
   <div class="analysis-container">
     <div class="top-row">
-      <div class="word-section">
         <div class="dynasty-choose">
           <button v-for="(dynasty, index) in dynasties" :key="index"
             :class="['dynasty-button', { active: selectedDynasty === index }]" @click="selectDynasty(index)">
@@ -13,7 +12,6 @@
           <WordCloudComp :words="selectedWordCloudWords" />
           <EmotionPieComp :emotions="selectedEmotion" />
         </div>
-      </div>
     </div>
     <div class="bottom-row">
       <p>创作数量分布时间轴</p>
@@ -68,20 +66,13 @@ const selectDynasty = (index: number) => {
   .top-row {
     display: flex;
     width: 90%;
-    height: 60%;
-    flex-direction: row;
+    height: 55%;
+    flex-direction: column;
     align-items: center;
-
-    .word-section {
-      flex: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
+    justify-content: center;
 
       .dynasty-choose {
-        width: 100%;
+        width: 90%;
         display: flex;
         gap: 10px;
         justify-content: center;
@@ -116,19 +107,26 @@ const selectDynasty = (index: number) => {
       }
 
       .charts {
-        width: 100%;
+        width: 90%;
         height: 100%;
         display: flex;
         flex-direction: row;
-        gap: 4px;
+        gap: 2px;
         align-items: center;
         justify-content: center;
 
-        div {
-          flex: 1
+        div:nth-child(1) {
+          flex: 1.2
+        }
+
+        div:nth-child(2) {
+          flex: 1.5
+        }
+
+        div:nth-child(3) {
+          flex: 1.2
         }
       }
-    }
 
     .pie-section {
       flex: 1;

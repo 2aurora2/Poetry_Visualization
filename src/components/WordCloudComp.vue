@@ -10,7 +10,6 @@ import { TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import { onMounted, shallowRef, watch } from 'vue';
 import vintage from '@/assets/theme/vintage.json'; // 引入主题 JSON
-import CONST from '../const';
 
 echarts.use([TitleComponent, TooltipComponent, CanvasRenderer]);
 
@@ -29,16 +28,14 @@ const initChart = () => {
   const chartDom = document.getElementById('word-cloud'); // 获取 DOM 容器
   if (!chartDom) return;
   chartDom.style.width = '100%';
-  chartDom.style.height = '100%';
+  chartDom.style.height = '90%';
   echarts.registerTheme('vintage', vintage); // 注册主题
   myChart.value = echarts.init(chartDom, 'vintage'); // 初始化 ECharts 实例
   updateChart(props.words);
 };
 
 const updateChart = (words: any[]) => {
-  const filteredWords = words.sort((a, b) => b.value - a.value).slice(0, 80);
-  var maskImage = new Image();
-  maskImage.src = CONST.WORD_CLOUD_BG;
+  const filteredWords = words.sort((a, b) => b.value - a.value).slice(0, 85);
   var option;
   option = {
     tooltip: {
@@ -61,8 +58,7 @@ const updateChart = (words: any[]) => {
       {
         type: 'wordCloud',
         shape: 'circle',
-        // maskImage: maskImage,
-        sizeRange: [15, 30],
+        sizeRange: [15, 40],
         gridSize: 8,
         rotationRange: [0, 0],
         drawOutOfBound: false,

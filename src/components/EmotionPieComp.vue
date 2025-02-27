@@ -31,7 +31,7 @@ const initPie = () => {
     }
     var chartDom = document.getElementById('emotion-pie')!;
     chartDom.style.width = '100%';
-    chartDom.style.height = '100%';
+    chartDom.style.height = '90%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     graph.value = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
@@ -56,11 +56,11 @@ const initPie = () => {
         },
         legend: {
             left: 'center',
-            top: '90%',
+            top: '85%',
             orient: 'horizontal',
             textStyle: {
                 fontFamily: 'ContentFont',
-                fontSize: 18,
+                fontSize: 12,
             }
         },
         label: {
@@ -81,7 +81,7 @@ const initPie = () => {
             {
                 name: '诗词情感类别分布',
                 type: 'pie',
-                radius: ['40%', '70%'],
+                radius: ['20%', '70%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,

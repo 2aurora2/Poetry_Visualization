@@ -1,5 +1,6 @@
 <template>
     <div class="home-container">
+        <div class="entry-bg"></div>
         <div class="content-wrapper">
             <div class="title-container">
                 <h1 class="title">韵·代：诗词文化的视觉交响</h1>

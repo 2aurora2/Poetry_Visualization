@@ -52,7 +52,6 @@ watch(() => router.currentRoute.value.path, (newPath) => {
     text-align: center;
     font-family: 'TitleFont', sans-serif;
     font-size: 33px;
-    font-weight: 800;
     padding: 4px;
     user-select: none;
     cursor: pointer;

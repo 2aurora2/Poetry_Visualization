@@ -90,7 +90,7 @@ watch(rollCount, () => {
                 const timeoutPromise = new Promise((_, reject) => {
                     setTimeout(() => {
                         reject(new Error('Timeout Error')); 
-                    }, 3500);
+                    }, 5000);
                 });
                 const res = await Promise.race([chat(chatStore.messages), timeoutPromise]);
                 chatStore.messages = res.data.data;
