@@ -43,5 +43,4 @@ watch(() => router.currentRoute.value.path, (newRoute) => {
 }, {
   immediate: true
 })
-
 </script>

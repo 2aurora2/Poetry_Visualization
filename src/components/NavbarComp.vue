@@ -9,14 +9,14 @@
 
 <script setup lang='ts'>
 import { ref, watch } from 'vue';
-import router from '@/router';
+import router from '../router';
 
 const navItems = [
-    { title: '诗韵初章', link: '/home' },
-    { title: '诗络寻踪', link: '/network' },
-    { title: '诗蕴析微', link: '/poetry' },
-    { title: '诗家探源', link: '/poet' },
-    { title: '诗韵飞花', link: '/feihua' },
+    { title: '诗史经纬', link: '/home' },
+    { title: '诗云xx', link: '/network' },
+    { title: '江山诗脉', link: '/poetry' },
+    { title: '诗人生平录', link: '/poet' },
+    { title: '飞花擂台', link: '/feihua' },
 ];
 
 const currentIndex = ref(0);
@@ -37,7 +37,7 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 
 <style scoped lang="scss">
 .nav-bar {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     height: 70px;
     display: flex;
@@ -46,6 +46,8 @@ watch(() => router.currentRoute.value.path, (newPath) => {
     box-sizing: border-box;
     position: relative;
     z-index: 1;
+    background-color: rgba(185, 184, 182, 0.735);
+    margin-bottom: 8px;
 }
 
 .nav-item {

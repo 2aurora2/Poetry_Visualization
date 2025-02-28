@@ -3,7 +3,9 @@
         <div class="messages" ref="messagesContainer">
             <div v-for="(msg, index) in messages" :key="index" :class="['message', msg.role]">
                 <div v-if="msg.role === 'assistant'" class="ai-message">
-                    <div class="avatar robot-avatar">🤖</div>
+                    <div class="avatar robot-avatar">
+                        <img src="../assets/images/poet.png" alt="poet-robot"/>
+                    </div>
                     <div class="content-wrapper">
                         <div class="name">Poet-Robot</div>
                         <div class="bubble" v-html="msg.content"></div>
@@ -19,7 +21,10 @@
             </div>
         </div>
         <div class="input-area">
-            <input type="text" v-model="input" placeholder="输入你的回答" @keypress.enter="sendMessage" />
+            <div class="input">
+                <img src="../assets/images/input.png" alt="input" />
+                <input type="text" v-model="input" placeholder="输入你的回答" @keypress.enter="sendMessage" />
+            </div>
             <button @click="sendMessage">发送</button>
             <button @click="resetFeihua">重新挑战</button>
         </div>
@@ -81,7 +86,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .chat-container {
     width: 100%;
-    height: 65vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
@@ -155,18 +160,24 @@ onMounted(() => {
                     word-break: break-word;
                     cursor: pointer;
                     user-select: none;
+                    font-size: 18px;
                 }
             }
 
             .avatar {
-                width: 40px;
-                height: 40px;
+                width: 30px;
+                height: 30px;
                 border-radius: 50%;
                 flex-shrink: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 font-size: 20px;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
             }
 
             &.assistant {
@@ -190,23 +201,43 @@ onMounted(() => {
         margin-top: 8px;
         padding-top: 8px;
         display: flex;
-        gap: 12px;
+        gap: 8px;
 
-        input {
+        .input {
+            position: relative;
             flex: 1;
-            padding: 12px;
-            border: 1px solid #faf4f4;
-            background: transparent;
-            border-radius: 8px;
             outline: none;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             font-family: 'ContentFont';
             font-size: 18px;
+            border-radius: 10px;
+
+            img {
+                width: 100%;
+                height: 7vh;
+                display: block;
+                opacity: 0.6;
+            }
+            
+            input {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 80%;
+                padding: 16px;
+                border: none;
+                background: transparent;
+                outline: none;
+                font-family: 'ContentFont', serif;
+                font-size: 20px;
+                color: #4a2c2a;
+            }
         }
 
         button {
             padding: 0 16px;
-            background: #007bff;
+            background: #cc936d;
             color: white;
             border: none;
             border-radius: 8px;
@@ -216,7 +247,7 @@ onMounted(() => {
             font-size: 18px;
 
             &:hover {
-                background: #0056b3;
+                background: #c67641;
             }
         }
     }

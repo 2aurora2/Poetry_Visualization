@@ -1,11 +1,11 @@
 <template>
     <div class="feihua-container">
         <div class="body">
-            <h1 class="title center-align">诗韵飞花</h1>
+            <h1 class="title center-align">飞花擂台</h1>
             <div class="rules" v-show="compId === 0">
                 <h3 class="subtitle center-align">与AI来一场酣畅淋漓的飞花令挑战吧</h3>
                 <ol class="icon-rule-list">
-                    <li class="icon-rule-item">与AI轮流回答包含某个意象（如山、水等）的一句诗词，意象在诗词的位置不作限制。</li>
+                    <li class="icon-rule-item">与AI轮流回答包含/描述某个意象（如山、水等）的一句诗词，意象在诗词的位置不作限制。</li>
                     <li class="icon-rule-item">禁止回答任一方曾经回答过的诗词。</li>
                     <li class="icon-rule-item">如若需要帮助可以输入[提示]，AI会给予一个包含指定意象的诗词作品名，但<strong>有且仅有</strong>3次提示机会。</li>
                     <li class="icon-rule-item">如若作答不出，请输入[我认输]，本轮游戏将会结束；若你的回答违反规则，同样本轮游戏也将会结束。</li>
@@ -19,10 +19,11 @@
                 </div>
             </div>
             <div class="chat-comp" v-show="compId === 2">
-                <ChatComp></ChatComp>
+                <ChatComp />
             </div>
         </div>
     </div>
+    <canvas ref="liveCanvas" class="live-canvas"></canvas>
 </template>
 
 <script setup lang="ts">
@@ -31,6 +32,12 @@ import { ref, onUnmounted, watch, onMounted } from 'vue';
 import { useChatStore } from '../store/useChatStore';
 import ChatComp from '@/components/ChatComp.vue';
 import { chat } from '../utils/llm';
+
+import * as PIXI from 'pixi.js';
+import { Live2DModel } from 'pixi-live2d-display/cubism4';
+window.PIXI = PIXI; // 为了pixi-live2d-display内部调用
+let app; // 为了存储pixi实例
+let model; // 为了存储live2d实例
 
 const chatStore = useChatStore();
 
@@ -51,6 +58,7 @@ const imageries = ref([
 ])
 
 const currentImagery = ref(imageries.value[0]);
+const liveCanvas = ref();
 let currentImageIndex = 0;
 let interval: number | undefined;
 
@@ -89,7 +97,7 @@ watch(rollCount, () => {
             try {
                 const timeoutPromise = new Promise((_, reject) => {
                     setTimeout(() => {
-                        reject(new Error('Timeout Error')); 
+                        reject(new Error('Timeout Error'));
                     }, 5000);
                 });
                 const res = await Promise.race([chat(chatStore.messages), timeoutPromise]);
@@ -108,17 +116,29 @@ watch(compId, () => {
     localStorage.setItem('compId', compId.value.toString());
 })
 
-onMounted(() => {
+onMounted(async () => {
     const savedCompId = localStorage.getItem('compId');
     if (savedCompId) {
         compId.value = parseInt(savedCompId);
     }
+    app = new PIXI.Application({
+        view: liveCanvas.value,
+        autoStart: true,
+        resizeTo: window,
+        backgroundAlpha: 0
+    })
+
+    model = await Live2DModel.from('/public/live2d/model/poet.model3.json');
+    app.stage.addChild(model);
+    model.scale.set(0.2);
 })
 
 onUnmounted(() => {
     if (interval) {
         window.clearInterval(interval);
     }
+    model?.destory();
+    app?.destory();
 });
 </script>
 
@@ -135,8 +155,18 @@ $color-text: #eb8585; // 文字颜色
     align-items: center;
 }
 
+.live-canvas {
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    width: 40%;
+    height: 40%;
+    z-index: -1;
+}
+
 .body {
     width: 60%;
+    height: 75vh;
     padding: 2rem;
     border-radius: 12px;
     background-color: transparent;
@@ -189,6 +219,7 @@ $color-text: #eb8585; // 文字颜色
 
     .chat-comp {
         width: 100%;
+        height: 100%;
     }
 
     .icon-rule-list {
