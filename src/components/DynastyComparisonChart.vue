@@ -1,99 +1,129 @@
 <template>
-  <div ref="chartContainer" class="chart-container"></div>
+  <div ref="chartContainer" style="width: 100%; height: 500px;"></div>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import * as echarts from 'echarts/core'
-import { PieChart } from 'echarts/charts'
-import { TooltipComponent, LegendComponent } from 'echarts/components'
-import { CanvasRenderer } from 'echarts/renderers'
-import vintage from '@/assets/theme/vintage.json' // 引入主题 JSON
+<script lang="ts">
+import { onMounted, ref } from 'vue';
+import * as echarts from 'echarts/core';
+import {
+  TooltipComponent,GridComponent,LegendComponent,ToolboxComponent,
+} from 'echarts/components';
+import { BarChart, LineChart } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
 
-// 注册必要的 ECharts 组件
-echarts.use([TooltipComponent, LegendComponent, PieChart, CanvasRenderer])
-// 注册主题
-echarts.registerTheme('vintage', vintage)
+echarts.use([
+  ToolboxComponent,TooltipComponent,GridComponent,LegendComponent,BarChart,LineChart,CanvasRenderer,
+]);
 
-const chartContainer = ref<HTMLElement>()
-let chart: echarts.ECharts | null = null
+export default {
+  name: 'PoetryDataChart',
+  setup() {
+    const chartContainer = ref(null);
 
-function initChart() {
-  if (!chartContainer.value) return
+    const categories = ['唐代', '宋代', '元代'];
+    const totalPoems = [57347, 19484, 8771];
+    const totalPoets = [3662, 1489, 230];
 
-  // 使用主题初始化 ECharts 实例
-  chart = echarts.init(chartContainer.value, 'vintage')
+    onMounted(() => {
+      const chart = echarts.init(chartContainer.value);
 
-  const option: echarts.EChartsCoreOption = {
-    tooltip: {
-      trigger: 'item'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left',
-      data: ['唐诗', '宋词', '元曲', '唐代诗人', '宋代诗人', '元代诗人']
-    },
-    series: [
-      {
-        name: '作品总量',
-        type: 'pie',
-        radius: ['50%', '70%'],
-        avoidLabelOverlap: false,
-        label: {
-          show: false,
-          position: 'center'
+      const option: echarts.ComposeOption<
+        TooltipComponentOption | GridComponentOption | LegendComponentOption | BarSeriesOption | LineSeriesOption
+      > = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999',
+            },
+          },
+          formatter: function (params: any) {
+            let res = `${params[0].name}<br/>`;
+            params.forEach((param: any) => {
+              res += `${param.marker}${param.seriesName}: ${param.value}<br/>`;
+            });
+            return res;
+          },
         },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: '36',
-            fontWeight: 'bold'
-          }
+        toolbox: {
+          feature: {
+            magicType: {
+              show: true,
+              type: ['line', 'bar'],
+              title: {
+                line: '折线图', 
+                bar: '柱状图', 
+              },
+            }, 
+            restore: { show: true, title: '重置' }, 
+            saveAsImage: { show: true, title: '保存为png' }, 
+          },
         },
-        labelLine: {
-          show: false
+        legend: {
+          data: ['作品总量', '诗人总数'],
         },
-        data: [
-          { value: 57347, name: '唐诗' },
-          { value: 19484, name: '宋词' },
-          { value: 8771, name: '元曲' }
-        ]
-      },
-      {
-        name: '诗人占比',
-        type: 'pie',
-        radius: ['30%', '50%'],
-        label: {
-          show: false
-        },
-        data: [
-          { value: 3662, name: '唐代诗人' },
-          { value: 1489, name: '宋代诗人' },
-          { value: 230, name: '元代诗人' }
-        ]
-      }
-    ]
-  }
+        xAxis: [
+          {
+            type: 'category',
+            data: categories,
+            axisPointer: {
+              type: 'shadow',
+            },
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            name: '作品总量',
+            position: 'left',
+            axisLabel: {
+              formatter: '{value}',
+            },
+          },
+          {
+            type: 'value',
+            name: '诗人总数',
+            position: 'right',
+            axisLabel: {
+              formatter: '{value}',
+            },
+          },
+        ],
+        series: [
+          {
+            name: '作品总量',
+            type: 'bar',
+            data: totalPoems,  
+            tooltip: {
+              valueFormatter: function (value: number) {
+                return `${value} 首`;
+              },
+            },
+          },
+          {
+            name: '诗人总数',
+            type: 'line',
+            yAxisIndex: 1,
+            data: totalPoets,
+            tooltip: {
+              valueFormatter: function (value: number) {
+                return `${value} 位`;
+              },
+            },
+            smooth: true,
+          },
+        ],
+      };
 
-  chart.setOption(option)
+      chart.setOption(option);
+    });
 
-  const resizeHandler = () => chart?.resize()
-  window.addEventListener('resize', resizeHandler)
-
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', resizeHandler)
-    chart?.dispose()
-  })
-}
-
-onMounted(() => {
-  initChart()
-})
+    return {
+      chartContainer,
+    };
+  },
+};
 </script>
 
-<style scoped>
-.chart-container {
-  width: 400px;
-  height: 400px;
-}
-</style> 
+<style scope lang="scss"></style>

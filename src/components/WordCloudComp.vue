@@ -98,6 +98,7 @@ const Colors = [
   "#787464", "#cc7e63",
   "#724e58", "#4b565b"
 ];
+
 </script>
 
 <style scoped></style>
