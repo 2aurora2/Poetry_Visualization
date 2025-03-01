@@ -10,14 +10,6 @@
                 <div class="desc"><strong>简介：</strong>{{ props.desc }}</div>
             </div>
         </div>
-        <!-- <el-carousel class="carousel" motion-blur indicator-position="none">
-            <el-carousel-item v-for="item, index in props.works" :key="index">
-                <div class="content">
-                    <p>{{ item['title'] || item['rhythmic'] }}</p>
-                    <p v-html="item['paragraphs'].join('')"></p>
-                </div>
-            </el-carousel-item>
-        </el-carousel> -->
         <div class="charts">
             <div id="emotion-pie"></div>
             <div id="relation-graph"></div>
@@ -38,6 +30,7 @@ import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 import { draggable } from 'element-plus/es/components/color-picker/src/utils/draggable.mjs';
 
+
 echarts.use([
     TooltipComponent,
     LegendComponent,
@@ -52,7 +45,7 @@ const props = defineProps({
     avatar: {
         type: String,
         required: true,
-        default: 'https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2024%2F0716%2F7f96c29aj00sgpj30000ud000hs00a0m.jpg&thumbnail=660x2147483647&quality=80&type=jpg'
+        default: 'https://pic.rmb.bdstatic.com/bjh/240509/7f39f3e985978e480382b1f80f438e149853.jpeg'
     },
     name: {
         type: String,
@@ -78,11 +71,6 @@ const props = defineProps({
         type: String,
         required: true,
         default: "0"
-    },
-    works: {
-        type: Array,
-        required: true,
-        default: () => []
     },
     desc: {
         type: String,
@@ -118,6 +106,11 @@ const initPie = () => {
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     pieGraph.value = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
 
+    // props.emotions按照元素的value排序
+    props.emotions.sort((a, b) => {
+        return b.value - a.value; 
+    })
+
     var option;
 
     option = {
@@ -140,8 +133,9 @@ const initPie = () => {
             {
                 name: '诗词情感类别分布',
                 type: 'pie',
-                radius: ['40%', '70%'],
+                radius: ['15%', '75%'],
                 avoidLabelOverlap: false,
+                // roseType: 'radius',
                 itemStyle: {
                     borderRadius: 10,
                     borderColor: '#fff',
@@ -320,46 +314,6 @@ onMounted(() => {
             justify-content: center;
             gap: 8px;
             font-family: 'ContentFont';
-        }
-    }
-
-    .carousel {
-        width: 100%;
-        height: 15vh;
-        margin-top: 16px;
-
-        .el-carousel__container {
-            height: 100%;
-        }
-
-        .el-carousel__item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            background: rgba(166, 165, 165, 0.25);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.535);
-            backdrop-filter: blur(5px);
-
-            .content {
-                width: 98%;
-                height: 100%;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                p {
-                    margin: 4px;
-                }
-
-                p:first-child {
-                    font-size: 20px;
-                    font-weight: bold;
-                    margin-top: 2px;
-                }
-            }
         }
     }
 

@@ -177,8 +177,8 @@ $color-text: #eb8585; // 文字颜色
 
 .body {
     width: 60%;
-    height: 75vh;
-    padding: 2rem;
+    height: 80vh;
+    padding: 1rem;
     border-radius: 12px;
     background-color: transparent;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -193,8 +193,6 @@ $color-text: #eb8585; // 文字颜色
         font-size: 3rem;
         font-family: 'ContentFont';
         color: $color-primary;
-        padding-bottom: 1rem;
-        margin-bottom: 1rem;
         border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     }
 

@@ -16,7 +16,9 @@
                         <div class="name">你</div>
                         <div class="bubble">{{ msg.content }}</div>
                     </div>
-                    <div class="avatar user-avatar">👤</div>
+                    <div class="avatar user-avatar">
+                        <img src="../assets/images/user.png" alt="poet-user"/>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,7 +87,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .chat-container {
     width: 100%;
-    height: 63vh;
+    height: 65vh;
     display: flex;
     flex-direction: column;
 
@@ -119,13 +121,13 @@ onMounted(() => {
         padding: 8px;
 
         .message {
-            margin: 15px 0;
+            margin: 4px 0;
 
             .ai-message,
             .user-message {
                 display: flex;
                 gap: 12px;
-                max-width: 80%;
+                max-width: 85%;
             }
 
             .ai-message {
@@ -164,18 +166,19 @@ onMounted(() => {
             }
 
             .avatar {
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
                 border-radius: 50%;
                 flex-shrink: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 20px;
+                font-size: 18px;
 
                 img{
                     width: 100%;
                     height: 100%;
+                    border-radius: 50%;
                 }
             }
 
@@ -188,7 +191,7 @@ onMounted(() => {
 
             &.user {
                 .bubble {
-                    background: #c5ad8c;
+                    background: #cc936d;
                     color: rgb(255, 255, 255);
                 }
             }
@@ -229,7 +232,7 @@ onMounted(() => {
                 background: transparent;
                 outline: none;
                 font-family: 'ContentFont', serif;
-                font-size: 20px;
+                font-size: 18px;
                 color: #4a2c2a;
             }
         }
