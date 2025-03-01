@@ -7,13 +7,13 @@
                         <img src="../assets/images/poet.png" alt="poet-robot"/>
                     </div>
                     <div class="content-wrapper">
-                        <div class="name">Poet-Robot</div>
+                        <div class="name">小柿子</div>
                         <div class="bubble" v-html="msg.content"></div>
                     </div>
                 </div>
                 <div v-else class="user-message">
                     <div class="content-wrapper">
-                        <div class="name">User</div>
+                        <div class="name">你</div>
                         <div class="bubble">{{ msg.content }}</div>
                     </div>
                     <div class="avatar user-avatar">👤</div>
@@ -79,14 +79,13 @@ const resetFeihua = () => {
 
 onMounted(() => {
     scrollToBottom();
-
 })
 </script>
 
 <style scoped lang="scss">
 .chat-container {
     width: 100%;
-    height: 100%;
+    height: 63vh;
     display: flex;
     flex-direction: column;
 
@@ -189,8 +188,8 @@ onMounted(() => {
 
             &.user {
                 .bubble {
-                    background: #007bff;
-                    color: white;
+                    background: #c5ad8c;
+                    color: rgb(255, 255, 255);
                 }
             }
         }

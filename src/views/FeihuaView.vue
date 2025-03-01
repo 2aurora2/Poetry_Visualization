@@ -22,8 +22,8 @@
                 <ChatComp />
             </div>
         </div>
+        <canvas ref="liveCanvas" class="live-canvas"></canvas>
     </div>
-    <canvas ref="liveCanvas" class="live-canvas"></canvas>
 </template>
 
 <script setup lang="ts">
@@ -137,8 +137,8 @@ onUnmounted(() => {
     if (interval) {
         window.clearInterval(interval);
     }
-    model?.destory();
-    app?.destory();
+    model?.destroy();
+    app?.destroy();
 });
 </script>
 
