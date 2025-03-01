@@ -17,6 +17,9 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true
       }
+    },
+    rollupOptions: {
+      external: ['echarts/types/src/util/log']
     }
   },
   resolve: {
