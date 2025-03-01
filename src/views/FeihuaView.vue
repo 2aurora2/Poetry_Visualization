@@ -3,14 +3,17 @@
         <div class="body">
             <h1 class="title center-align">飞花擂台</h1>
             <div class="rules" v-show="compId === 0">
-                <h3 class="subtitle center-align">与AI来一场酣畅淋漓的飞花令挑战吧</h3>
+                <h3 class="subtitle center-align">欢迎来到飞花擂台！</h3>
+                <h3 class="subtitle center-align">与诗词达人小柿子姑娘</h3>
+                <h3 class="subtitle center-align">来一场酣畅淋漓的飞花令挑战吧！</h3>
                 <ol class="icon-rule-list">
-                    <li class="icon-rule-item">与AI轮流回答包含/描述某个意象（如山、水等）的一句诗词，意象在诗词的位置不作限制。</li>
-                    <li class="icon-rule-item">禁止回答任一方曾经回答过的诗词。</li>
-                    <li class="icon-rule-item">如若需要帮助可以输入[提示]，AI会给予一个包含指定意象的诗词作品名，但<strong>有且仅有</strong>3次提示机会。</li>
-                    <li class="icon-rule-item">如若作答不出，请输入[我认输]，本轮游戏将会结束；若你的回答违反规则，同样本轮游戏也将会结束。</li>
-                    <li class="icon-rule-item">准备好了吗？准备好了那就点击下方按钮抽取本轮意象并开启挑战吧。</li>
+                    <li class="icon-rule-item">请你与小柿子轮流回答包含/描述某个意象（如山、水等）的一句诗词，意象在诗词的位置不作限制。</li>
+                    <li class="icon-rule-item">双方均禁止在一局中重复回答出现过的诗词。</li>
+                    <li class="icon-rule-item">
+                        如若需要小柿子的帮助，可以输入<span style="color: brown;">[提示]</span>，小柿子会给出一个包含指定意象的诗词作品名。<strong>注意：一局中有且仅有<span style="color: brown;">3</span>次提示机会。</strong></li>
+                    <li class="icon-rule-item">如若无法继续挑战，请输入<span style="color: brown;">[我认输]</span>，本局游戏将结束；若你的回答违反规则，本局游戏也将结束。</li>
                 </ol>
+                <h3 class="subtitle center-align">若准备完毕，请点击下方按钮，抽取本局意象并开启挑战吧！</h3>
                 <button class="start-button" @click="chooseImagery">开始游戏</button>
             </div>
             <div class="imagery-choose" v-show="compId === 1">
@@ -156,7 +159,7 @@ onUnmounted(() => {
 <style scoped lang="scss">
 $color-primary: #3d0b0b; // 主色调
 $color-secondary: #d7ab82; // 按钮颜色
-$color-text: #eb8585; // 文字颜色
+$color-text: #491f1f; // 文字颜色
 
 .feihua-container {
     width: 100%;
@@ -164,6 +167,7 @@ $color-text: #eb8585; // 文字颜色
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .live-canvas {
@@ -178,7 +182,7 @@ $color-text: #eb8585; // 文字颜色
 .body {
     width: 60%;
     height: 80vh;
-    padding: 1rem;
+    padding: 2.4rem;
     border-radius: 12px;
     background-color: transparent;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -189,6 +193,7 @@ $color-text: #eb8585; // 文字颜色
     align-items: center;
 
     .title.center-align {
+        margin: 16px;
         text-align: center;
         font-size: 3rem;
         font-family: 'ContentFont';
@@ -199,9 +204,14 @@ $color-text: #eb8585; // 文字颜色
     .subtitle.center-align {
         text-align: center;
         font-size: 1.5rem;
+        padding: 0;
+        margin: 4px;
         color: $color-text;
-        margin-bottom: 1.5rem;
         font-family: 'ContentFont';
+    }
+
+    .rules {
+        width: 95%;
     }
 
     .imagery-choose {
@@ -236,7 +246,7 @@ $color-text: #eb8585; // 文字颜色
         list-style-type: none;
 
         .icon-rule-item {
-            font-size: 1.125rem;
+            font-size: 1.35rem;
             font-weight: 600;
             font-family: 'ContentFont';
             color: $color-text;
@@ -244,7 +254,7 @@ $color-text: #eb8585; // 文字颜色
             position: relative;
 
             &:before {
-                content: "▲";
+                content: "🎈";
                 position: absolute;
                 top: 50%;
                 left: -1rem;
@@ -264,7 +274,7 @@ $color-text: #eb8585; // 文字颜色
         font-family: 'ContentFont';
         background-color: $color-secondary;
         color: #ffffff;
-        font-size: 1.125rem;
+        font-size: 1.8rem;
         border: none;
         border-radius: 8px;
         cursor: pointer;
