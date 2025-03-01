@@ -6,7 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Poetry_Visualization/',
+  base: './',
   server: {
     port: 8080,
   },
@@ -19,7 +19,9 @@ export default defineConfig({
       }
     },
     rollupOptions: {
-      external: ['echarts/types/src/util/log']
+      output: {
+        manualChunks: undefined,
+      }
     }
   },
   resolve: {
