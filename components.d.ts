@@ -12,8 +12,6 @@ declare module 'vue' {
     ChinaMapComp: typeof import('./src/components/ChinaMapComp.vue')['default']
     DynastyComparisonChart: typeof import('./src/components/DynastyComparisonChart.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCarousel: typeof import('element-plus/es')['ElCarousel']
-    ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     EmotionPieComp: typeof import('./src/components/EmotionPieComp.vue')['default']
     GeneralCateRelationComp: typeof import('./src/components/GeneralCateRelationComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']

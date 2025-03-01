@@ -227,6 +227,6 @@ onMounted(() => {
 <style scoped>
 .chart-container {
   width: 100%;
-  height: 600px;
+  height: 500px;
 }
 </style>

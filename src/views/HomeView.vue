@@ -71,10 +71,10 @@ import DynastyComparisonChart from '../components/DynastyComparisonChart.vue'
 }
 
 .map-comp {
-  flex: 0 0 70%;
+  flex: 0 0 40%;
 }
 
 .chart-comp {
-  flex: 0 0 30%;
+  flex: 0 0 40%;
 }
 </style>
