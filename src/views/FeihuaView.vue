@@ -45,7 +45,6 @@ import shan from '@/assets/images/imagery/shan.png';
 import shui from '@/assets/images/imagery/shui.png';
 import yan from '@/assets/images/imagery/yan.png';
 import yue from '@/assets/images/imagery/yue.png';
-import { log } from 'echarts/types/src/util/log.js';
 
 window.PIXI = PIXI; // 为了pixi-live2d-display内部调用
 let app; // 为了存储pixi实例

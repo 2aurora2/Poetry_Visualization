@@ -6,7 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/Poetry_Visualization/',
   server: {
     port: 8080,
   },
