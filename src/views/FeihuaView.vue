@@ -45,6 +45,7 @@ import shan from '@/assets/images/imagery/shan.png';
 import shui from '@/assets/images/imagery/shui.png';
 import yan from '@/assets/images/imagery/yan.png';
 import yue from '@/assets/images/imagery/yue.png';
+import { log } from 'echarts/types/src/util/log.js';
 
 window.PIXI = PIXI; // 为了pixi-live2d-display内部调用
 let app; // 为了存储pixi实例
@@ -57,7 +58,7 @@ const maxRolls = 20;
 const targetIndex = ref(0);
 const imageries = ref([
     { name: '船', path: chaun },
-    { name: '风', path: feng  },
+    { name: '风', path: feng },
     { name: '酒', path: jiu },
     { name: '柳', path: liu },
     { name: '梅', path: mei },
@@ -138,7 +139,8 @@ onMounted(async () => {
         backgroundAlpha: 0
     })
 
-    model = await Live2DModel.from('../../public/live2d/model/poet.model3.json');
+    const modelPath = `${import.meta.env.BASE_URL}live2d/model/poet.model3.json`;
+    model = await Live2DModel.from(modelPath);
     app.stage.addChild(model);
     model.scale.set(0.2);
 })
