@@ -13,7 +13,6 @@ declare module 'vue' {
     DynastyComparisonChart: typeof import('./src/components/DynastyComparisonChart.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     EmotionPieComp: typeof import('./src/components/EmotionPieComp.vue')['default']
-    GeneralCateRelationComp: typeof import('./src/components/GeneralCateRelationComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
     PoetCardComp: typeof import('./src/components/PoetCardComp.vue')['default']
     PoetSanKeyComp: typeof import('./src/components/PoetSanKeyComp.vue')['default']

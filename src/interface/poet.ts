@@ -21,7 +21,7 @@ export interface IWork {
 export interface IPoet {
     nodes: INode[];
     links: ILink[];
-    representative_works: IWork[];
+    representative_works?: IWork[];
     emotions: any[];
     avatar: string;
     name: string;
@@ -29,4 +29,5 @@ export interface IPoet {
     address: string;
     yearBirth: string;
     yearDeath: string;
+    desc: string;
 }

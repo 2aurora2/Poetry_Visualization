@@ -61,7 +61,10 @@ const dynasties = ['唐', '宋', '元'];
 const selectedRegionName = ref([]);
 const selectedRegionValue = ref([]);
 const selectedRegionInfo = ref([]);
-const selectedSankey = ref({});
+const selectedSankey = ref({
+    nodes: [],
+    links: []
+});
 
 const preprocessRegion = (region: Object) => {
     let regionList = Object.entries(region).sort((a, b) => b[1] - a[1]);
@@ -102,7 +105,7 @@ const selectDynasty = (index: number) => {
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(yuanRegion);
             selectedSankey.value = yuanPoetSankey;
-            poetName.value = '元好问';
+            poetName.value = '张养浩';
             break;
     }
     queryPoet();
@@ -125,7 +128,7 @@ const queryPoet = () => {
     let targetNodes = new Set();
     let links: ILink[] = [];
     for (let i = 0; i < sLinks.length; i++) {
-        if (sLinks[i]['source'] === poetName.value) {
+        if (sLinks[i]['source'] === poetName.value && sLinks[i]['target'] !== poetName.value) {
             targetNodes.add(sLinks[i]['target']);
             let flag = false;
             for (let j = 0; j < links.length; j++) {
@@ -153,12 +156,12 @@ const queryPoet = () => {
             name: target as string,
         });
     }
+    
     poetInfo.value!['nodes'] = nodes;
     poetInfo.value!['links'] = links;
     // (2) 预处理诗人的作品信息
     let sWorkDetails = selectedDynasty.value === 0 ? tangWorkDetails : selectedDynasty.value === 1 ? songWorkDetails : yuanWorkDetails;
-    poetInfo.value!['representative_works'] = sWorkDetails[poetName.value]['representative_works'] ? sWorkDetails[poetName.value]['representative_works'] : [];
-    poetInfo.value!['emotions'] = sWorkDetails[poetName.value]['emotion'];
+    poetInfo.value!['emotions'] = sWorkDetails[poetName.value] ? sWorkDetails[poetName.value]['emotion'] : [];
     // (3) 预处理诗人的基本信息
     let sPoetryInfo = selectedDynasty.value === 0 ? tangPoetryInfo : selectedDynasty.value === 1 ? songPoetryInfo : yuanPoetryInfo;
     poetInfo.value!['avatar'] = sPoetryInfo[poetName.value]['avatar'] === '' ? undefined : sPoetryInfo[poetName.value]['avatar'];

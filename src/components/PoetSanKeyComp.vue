@@ -83,9 +83,6 @@ const initEcharts = () => {
                 top: '10%',
                 left: '13%',
                 right: '13%',
-                emphasis: {
-                    focus: 'adjacency'
-                },
                 lineStyle: {
                     curveness: 0.5,
                     opacity: 0.07

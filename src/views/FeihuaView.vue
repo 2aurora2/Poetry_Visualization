@@ -22,8 +22,8 @@
                 <ChatComp />
             </div>
         </div>
+        <canvas ref="liveCanvas" class="live-canvas"></canvas>
     </div>
-    <canvas ref="liveCanvas" class="live-canvas"></canvas>
 </template>
 
 <script setup lang="ts">
@@ -35,26 +35,36 @@ import { chat } from '../utils/llm';
 
 import * as PIXI from 'pixi.js';
 import { Live2DModel } from 'pixi-live2d-display/cubism4';
+
+import chaun from '@/assets/images/imagery/chuan.png';
+import feng from '@/assets/images/imagery/feng.png';
+import jiu from '@/assets/images/imagery/jiu.png';
+import liu from '@/assets/images/imagery/liu.png';
+import mei from '@/assets/images/imagery/mei.png';
+import shan from '@/assets/images/imagery/shan.png';
+import shui from '@/assets/images/imagery/shui.png';
+import yan from '@/assets/images/imagery/yan.png';
+import yue from '@/assets/images/imagery/yue.png';
+
 window.PIXI = PIXI; // 为了pixi-live2d-display内部调用
 let app; // 为了存储pixi实例
 let model; // 为了存储live2d实例
 
 const chatStore = useChatStore();
-
 const compId = ref(0);
 const rollCount = ref(0);
 const maxRolls = 20;
 const targetIndex = ref(0);
 const imageries = ref([
-    { name: '船', path: ref('src/assets/images/imagery/chuan.png') },
-    { name: '风', path: ref('src/assets/images/imagery/feng.png') },
-    { name: '酒', path: ref('src/assets/images/imagery/jiu.png') },
-    { name: '柳', path: ref('src/assets/images/imagery/liu.png') },
-    { name: '梅', path: ref('src/assets/images/imagery/mei.png') },
-    { name: '山', path: ref('src/assets/images/imagery/shan.png') },
-    { name: '水', path: ref('src/assets/images/imagery/shui.png') },
-    { name: '雁', path: ref('src/assets/images/imagery/yan.png') },
-    { name: '月', path: ref('src/assets/images/imagery/yue.png') },
+    { name: '船', path: chaun },
+    { name: '风', path: feng },
+    { name: '酒', path: jiu },
+    { name: '柳', path: liu },
+    { name: '梅', path: mei },
+    { name: '山', path: shan },
+    { name: '水', path: shui },
+    { name: '雁', path: yan },
+    { name: '月', path: yue },
 ])
 
 const currentImagery = ref(imageries.value[0]);
@@ -128,7 +138,8 @@ onMounted(async () => {
         backgroundAlpha: 0
     })
 
-    model = await Live2DModel.from('/public/live2d/model/poet.model3.json');
+    const modelPath = `${import.meta.env.BASE_URL}live2d/model/poet.model3.json`;
+    model = await Live2DModel.from(modelPath);
     app.stage.addChild(model);
     model.scale.set(0.2);
 })
@@ -137,8 +148,8 @@ onUnmounted(() => {
     if (interval) {
         window.clearInterval(interval);
     }
-    model?.destory();
-    app?.destory();
+    model?.destroy();
+    app?.destroy();
 });
 </script>
 
@@ -166,8 +177,8 @@ $color-text: #eb8585; // 文字颜色
 
 .body {
     width: 60%;
-    height: 75vh;
-    padding: 2rem;
+    height: 80vh;
+    padding: 1rem;
     border-radius: 12px;
     background-color: transparent;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -182,8 +193,6 @@ $color-text: #eb8585; // 文字颜色
         font-size: 3rem;
         font-family: 'ContentFont';
         color: $color-primary;
-        padding-bottom: 1rem;
-        margin-bottom: 1rem;
         border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     }
 
