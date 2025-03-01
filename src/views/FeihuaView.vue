@@ -138,7 +138,7 @@ onMounted(async () => {
         backgroundAlpha: 0
     })
 
-    model = await Live2DModel.from('/live2d/model/poet.model3.json');
+    model = await Live2DModel.from('../../public/live2d/model/poet.model3.json');
     app.stage.addChild(model);
     model.scale.set(0.2);
 })
