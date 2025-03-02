@@ -4,8 +4,6 @@
 
 <script setup lang='ts'>
 // @ts-nocheck
-// RelationGraphComp：关系图谱组件
-// 从官网直接复制按需引入组件
 import * as echarts from 'echarts/core';
 import {
     ToolboxComponent,
@@ -18,6 +16,9 @@ import {
 import { GraphChart, type GraphSeriesOption } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
+
+import PoetAva from '@/assets/images/network/储光羲.png'
+import { avatars } from '../utils/network.ts'
 
 echarts.use([
     ToolboxComponent,
@@ -36,17 +37,18 @@ type EChartsOption = echarts.ComposeOption<
 import { onMounted, watch, shallowRef } from "vue";
 import vintage from '@/assets/theme/vintage.json'
 
-// 节点列表nodes、关系列表links、图注title
 const props = defineProps({
     nodes: {
         type: Array,
         required: true,
+        default: () => []
     },
     links: {
         type: Array,
         required: true,
+        default: () => []
     },
-    info: {
+    infos: {
         type: Object,
         required: true,
     },
@@ -57,48 +59,97 @@ const props = defineProps({
 });
 const graph = shallowRef();
 
-const baseSize = 15;
-const increSize = 30;
-
-const processData = (nodes: Array<any>, info: Object) => {
+const processData = (nodes: Array<any>, infos: Object) => {
     let newNodes = [];
-    const filteredNodes = [...nodes]
-        .sort((a, b) => b.degree - a.degree)
-        .slice(0, 50);
-    let maxDegree = 0;
-    for (let idx = 0; idx < filteredNodes.length; idx++) {
-        if (filteredNodes[idx].degree > maxDegree) {
-            maxDegree = filteredNodes[idx].degree;
-        }
-    }
-    for (let idx = 0; idx < filteredNodes.length; idx++) {
+
+    for (let idx = 0; idx < nodes.length; idx++) {
         let new_node = {
-            id: filteredNodes[idx].name,
-            name: filteredNodes[idx].name,
-            category: filteredNodes[idx].community,
-            symbolSize: baseSize + filteredNodes[idx].degree * increSize / maxDegree,
-            gender: info[filteredNodes[idx].name].Gender,
-            birth: info[filteredNodes[idx].name].YearBirth,
-            death: info[filteredNodes[idx].name].YearDeath,
-            address: info[filteredNodes[idx].name].Address,
+            id: nodes[idx].name,
+            name: nodes[idx].name,
+            category: nodes[idx].community,
+            symbolSize: nodes[idx].symbolSize,
+            gender: infos[nodes[idx].name].Gender,
+            birth: infos[nodes[idx].name].YearBirth,
+            death: infos[nodes[idx].name].YearDeath,
+            address: infos[nodes[idx].name].Address,
+            avatar: infos[nodes[idx].name].avatar,
+            symbol: infos[nodes[idx].name].avatar,
+            x: nodes[idx].x,
+            y: nodes[idx].y,
         }
         newNodes.push(new_node);
     }
     return newNodes;
 }
 
+const getImgData = (name) => {
+    var fun = function (resolve) {
+        const canvas = document.createElement('canvas');
+        const contex = canvas.getContext('2d');
+        const img = new Image();
+
+        img.onload = function () {
+            let center = {
+                x: img.width / 2,
+                y: img.height / 2
+            }
+            var diameter = img.width;
+            canvas.width = diameter;
+            canvas.height = diameter;
+            contex.clearRect(0, 0, diameter, diameter);
+            contex.save();
+            contex.beginPath();
+            var radius = img.width / 2;
+            contex.arc(radius, radius, radius, 0, 2 * Math.PI); //画出圆
+            contex.clip(); //裁剪上面的圆形
+            contex.drawImage(img, center.x - radius, center.y - radius, diameter, diameter, 0, 0,
+                diameter, diameter); // 在刚刚裁剪的园上画图
+            contex.restore(); // 还原状态
+            resolve(canvas.toDataURL('image/png', 1))
+        }
+        img.src = avatars[props.id][name];
+    }
+
+    var promise = new Promise(fun);
+    return promise
+}
+
+const pubdata = (nodes) => {
+    var picList = [];
+    let arr = nodes;
+    console.log(nodes);
+
+    for (var i = 0; i < arr.length; i++) {
+        var object = arr[i];
+
+        var p = getImgData(object.name);
+        picList.push(p);
+    }
+    Promise.all(picList).then(function (images) {
+        for (var i = 0; i < images.length; i++) {
+            var img = "image://" + images[i];
+            arr[i].symbol = img;
+        }
+        graph.value.setOption({
+            series: [{
+                data: arr
+            }]
+        })
+    })
+}
+
 const initEcharts = () => {
     if (graph.value) {
         graph.value.dispose();
     }
-    var chartDom = document.getElementById('relation-graph')!;  // 获取容器 DOM 实例
+    var chartDom = document.getElementById('relation-graph')!;
     chartDom.style.width = '100%';
     chartDom.style.height = '100%';
-    let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
-    echarts.registerTheme('vintage', themeObj)   // 注册主题
-    graph.value = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称
+    let themeObj = JSON.parse(JSON.stringify(vintage))
+    echarts.registerTheme('vintage', themeObj)
+    graph.value = echarts.init(chartDom, 'vintage');
 
-    let nodes = processData(props.nodes, props.info);
+    let nodes = processData(props.nodes, props.infos);
     let categories = [];
     let categorySet = new Set<string>();
     for (let idx = 0; idx < nodes.length; idx++) {
@@ -118,7 +169,14 @@ const initEcharts = () => {
                 fontSize: 18,
             }
         },
-        toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
+                itemStyle: {
+                    borderWidth: 2,
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 2
+                },
+        toolbox: {
             show: true,
             feature: {
                 saveAsImage: {
@@ -148,30 +206,32 @@ const initEcharts = () => {
                 type: 'graph',
                 top: '18%',
                 bottom: '15%',
-                layout: 'circular', // circular环形布局，force力引导布局
-                circular: { // 环形布局配置
-                    rotateLabel: true // 旋转标签
-                },
-                force: { // 力引导布局配置
-                    repulsion: 400, // 增大斥力减少重叠
-                    edgeLength: [300, 600],
-                    layoutAnimation: false, // 关闭布局动画
-                    friction: 0.8,         // 增加摩擦系数加快稳定
-                },
-                data: nodes,
-                // @ts-ignore
-                links: props.links,
+                layout: 'none',
+                data: props.nodes.map(node => ({
+                    ...node,
+                    symbol: `image://${node.avatar}`,
+                    symbolKeepAspect: true,
+                    edgeSymbol: "circle"
+                })),
+                links: props.links.map(link => ({
+                    ...link,
+                    lineStyle: {
+                        color: link.color
+                    }
+                })),
                 categories: categories,
                 roam: true,
+                edgeSymbol: ['arrow', 'arrow'],
+                edgeSymbolSize: 6,
                 label: {
                     show: true,
-                    position: 'right',
+                    position: 'bottom',
                     formatter: '{b}',
                     fontFamily: 'ContentFont',
                     fontSize: 16
                 },
-                draggable: true,    // 节点是否可拖拽
-                focusNodeAdjacency: true,   // 鼠标悬停时是否高亮相邻节点和边
+                draggable: true,
+                focusNodeAdjacency: true,
                 labelLayout: {
                     hideOverlap: true
                 },
@@ -180,21 +240,25 @@ const initEcharts = () => {
                     max: 2
                 },
                 lineStyle: {
-                    color: 'source',
-                    curveness: 0.3
+                    color: function(params) {
+                        return params.data.lineStyle?.color || '#4f8fa7';
+                    },
+                    curveness: 0.15,
+                    width: 2,
+                    opacity: 0.8
                 },
                 tooltip: {
                     formatter: function (params) {
                         if (params.dataType === 'node') {
-                            // @ts-ignore
-                            return `<strong>姓名：</strong>${params.data.name}<br/>
-                                    <strong>性别：</strong>${params.data.gender}<br/>
-                                    <strong>出生年份：</strong>${params.data.birth}<br/>
-                                    <strong>死亡年份：</strong>${params.data.death}<br/>
-                                    <strong>常驻地：</strong>${params.data.address}`;
+                            return `
+                                        <strong>姓名：</strong>${params.data.name}<br/>
+                                        <strong>性别：</strong>${params.data.gender}<br/>
+                                        <strong>出生年份：</strong>${params.data.birth}<br/>
+                                        <strong>死亡年份：</strong>${params.data.death}<br/>
+                                        <strong>常驻地：</strong>${params.data.address}<br/>
+                                    `;
                         } else if (params.dataType === 'edge') {
-                            // @ts-ignore
-                            return `${params.data.source} → ${params.data.target}`;
+                            return `${params.data.source} ↔︎ ${params.data.target}`;
                         }
                         return '';
                     }
@@ -203,6 +267,12 @@ const initEcharts = () => {
         ]
     };
     option && graph.value.setOption(option, { notMerge: true });
+    pubdata(nodes);
+    
+    // 监听restore事件
+    graph.value.on('restore', () => {
+        pubdata(nodes);
+    });
 }
 
 watch(() => props.id, () => {

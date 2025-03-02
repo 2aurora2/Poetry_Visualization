@@ -25,7 +25,7 @@ const routes = [
     {
         path: '/poetry',
         name: 'Poetry',
-        component: () => import('@/views/PoetryView.vue')
+        component: () => import('@/views/PoetSummaryView.vue')
     },
     {
         path: '/poet',
