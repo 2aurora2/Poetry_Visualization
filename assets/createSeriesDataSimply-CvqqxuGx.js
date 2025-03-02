@@ -1,0 +1,1 @@
+import{ae as e,D as n,c3 as a,bM as s}from"./installCanvasRenderer-B0UAo2nS.js";function o(o,i,r){i=e(i)&&{coordDimensions:i}||n({encodeDefine:o.getEncode()},i);var t=o.getSource(),c=a(t,i).dimensions,d=new s(c,o);return d.initData(t,r),d}export{o as c};
