@@ -13,7 +13,7 @@ import router from '../router';
 
 const navItems = [
     { title: '诗史经纬', link: '/home' },
-    { title: '词云xx', link: '/network' },
+    { title: '诗海词云', link: '/network' },
     { title: '江山诗脉', link: '/poetry' },
     { title: '诗人生平录', link: '/poet' },
     { title: '飞花擂台', link: '/feihua' },
