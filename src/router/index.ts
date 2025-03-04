@@ -23,14 +23,14 @@ const routes = [
         component: () => import('@/views/NetworkView.vue')
     },
     {
-        path: '/poetry',
-        name: 'Poetry',
+        path: '/poet-summary',
+        name: 'PoetSummary',
         component: () => import('@/views/PoetSummaryView.vue')
     },
     {
-        path: '/poet',
-        name: 'Poet',
-        component: () => import('@/views/PoetView.vue')
+        path: '/poet-details',
+        name: 'PoetDetails',
+        component: () => import('@/views/PoetDetailsView.vue')
     },
     // 无匹配页面则跳转到404
     {

@@ -9,7 +9,7 @@
           </div>
           <div class="charts">
             <WordCloudComp :words="selectedWordCloudWords" />
-            <EmotionPieComp :emotions="selectedEmotion" />
+            <EmotionPieComp :data="selectedEmotion" />
           </div>
       </div>
       <div class="bottom-row">

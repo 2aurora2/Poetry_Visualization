@@ -16,9 +16,12 @@ const router = useRouter()
 
 const navigateToHome = () => {
     const content = document.querySelector('.content-wrapper') as HTMLElement | null
-    if (content) {
-        content.style.transition = 'transform 1s ease-in-out'
+    const entryBg = document.querySelector('.entry-bg') as HTMLElement | null // 获取背景元素
+    
+    if (content && entryBg) {
         content.style.transform = 'translateY(-10vh)'
+        entryBg.style.opacity = '0'  // 透明度从 1 变为 0
+        
         setTimeout(() => {
             router.push('/home')
         }, 800)

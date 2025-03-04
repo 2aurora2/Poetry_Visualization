@@ -1,16 +1,17 @@
 import type { IPoet } from "../interface/poet";
 
 const DEFAULT_POET: IPoet = {
-    nodes: [],
-    links: [],
-    representative_works: [],
-    emotions: [],
+    ChineseName: "",
+    EnglishName: "",
+    Gender: "",
+    YearBirth: "",
+    EraBirth: "",
+    EraYearBirth: "",
+    YearDeath: "",
+    EraDeath: "",
+    EraYearDeath: "",
+    Address: "",
     avatar: "",
-    name: "",
-    gender: "",
-    address: "",
-    yearBirth: "",
-    yearDeath: "",
     desc: ""
 }
 

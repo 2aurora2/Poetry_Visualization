@@ -1,15 +1,15 @@
 <template>
-    <div id="emotion-pie" style="width: 600px;height: 250px;"></div>
+    <div id="pie" style="width: 600px;height: 250px;"></div>
 </template>
 
 <script setup lang='ts'>
 import * as echarts from 'echarts/core';
-import { TitleComponent, ToolboxComponent } from 'echarts/components';
+import { TitleComponent, ToolboxComponent, LegendComponent } from 'echarts/components';
 import { PieChart } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 
-echarts.use([TitleComponent, PieChart, CanvasRenderer, LabelLayout, ToolboxComponent]);
+echarts.use([TitleComponent, PieChart, CanvasRenderer, LabelLayout, ToolboxComponent, LegendComponent]);
 
 import { onMounted, watch, shallowRef } from 'vue';
 import vintage from '@/assets/theme/vintage.json';
@@ -17,7 +17,7 @@ import vintage from '@/assets/theme/vintage.json';
 const graph = shallowRef();
 
 const props = defineProps({
-    emotions: {
+    data: {
         type: Array,
         default: () => {
             return []
@@ -29,7 +29,7 @@ const initPie = () => {
     if (graph.value) {
         graph.value.dispose();
     }
-    var chartDom = document.getElementById('emotion-pie')!;
+    var chartDom = document.getElementById('pie')!;
     chartDom.style.width = '100%';
     chartDom.style.height = '90%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
@@ -102,7 +102,7 @@ const initPie = () => {
                 labelLine: {
                     show: false
                 },
-                data: props.emotions,
+                data: props.data,
                 tooltip:{
                     textStyle:{
                         fontFamily: 'ContentFont',
@@ -120,7 +120,7 @@ onMounted(() => {
     initPie();
 })
 
-watch(() => props.emotions, async () => {
+watch(() => props.data, async () => {
     initPie();
 })
 </script>

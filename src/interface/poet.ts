@@ -10,24 +10,17 @@ export interface ILink {
     lineStyle: any;
 }
 
-export interface IWork {
-    paragraphs: string[];
-    emotion: string;
-    title?: string;
-    tags?: string[];
-    rhythmic?: string;
-}
-
 export interface IPoet {
-    nodes: INode[];
-    links: ILink[];
-    representative_works?: IWork[];
-    emotions: any[];
+    ChineseName: string;
+    EnglishName: string;
+    Gender: string;
+    YearBirth: string;
+    EraBirth: string;
+    EraYearBirth: string;
+    YearDeath: string;
+    EraDeath: string;
+    EraYearDeath: string;
+    Address: string;
     avatar: string;
-    name: string;
-    gender: string;
-    address: string;
-    yearBirth: string;
-    yearDeath: string;
     desc: string;
 }
