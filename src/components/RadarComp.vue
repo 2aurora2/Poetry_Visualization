@@ -49,6 +49,9 @@ const initRadar = () => {
     var option;
 
     option = {
+        tooltip: {
+            trigger: 'axis'
+        },
         radar: {
             shape: 'circle',
             indicator: props.indicator,
@@ -56,21 +59,35 @@ const initRadar = () => {
                 color: '#000000',
                 fontFamily: 'ContentFont',
                 fontSize: 20
+            },
+
+            splitArea: {
+                areaStyle: {
+                    color: ['transparent', '#e6a23c55']
+                }
             }
         },
 
         series: [
             {
-                name: 'Poet',
+                name: '情感雷达图',
                 type: 'radar',
                 tooltip: {
-                    trigger: 'item'
+                    trigger: 'item',
+                    textStyle: {
+                        fontFamily: 'ContentFont',
+                        fontSize: 18
+                    }
+                },
+                emphasis: {
+                    lineStyle: {
+                        width: 3
+                    }
                 },
                 areaStyle: {},
                 data: [
                     {
                         value: props.value,
-                        name: 'Poet'
                     }
                 ]
             }

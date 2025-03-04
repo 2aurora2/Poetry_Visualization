@@ -52,7 +52,7 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 
 .nav-item {
     text-align: center;
-    font-family: 'TitleFont', sans-serif;
+    font-family: '华文行楷', sans-serif;
     font-size: 33px;
     padding: 4px;
     user-select: none;

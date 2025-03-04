@@ -4,14 +4,14 @@
 
 <script setup lang='ts'>
 import * as echarts from 'echarts/core';
-import { TitleComponent, ToolboxComponent, LegendComponent } from 'echarts/components';
+import { TitleComponent, ToolboxComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { PieChart } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 
-echarts.use([TitleComponent, PieChart, CanvasRenderer, LabelLayout, ToolboxComponent, LegendComponent]);
+echarts.use([TitleComponent, PieChart, CanvasRenderer, LabelLayout, ToolboxComponent, LegendComponent, TooltipComponent]);
 
-import { onMounted, watch, shallowRef } from 'vue';
+import { onMounted, watch, shallowRef, nextTick } from 'vue';
 import vintage from '@/assets/theme/vintage.json';
 
 const graph = shallowRef();
@@ -30,6 +30,8 @@ const initPie = () => {
         graph.value.dispose();
     }
     var chartDom = document.getElementById('pie')!;
+    if(!chartDom)
+        return;
     chartDom.style.width = '100%';
     chartDom.style.height = '100%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
@@ -93,8 +95,8 @@ const initPie = () => {
                     show: false
                 },
                 data: props.data,
-                tooltip:{
-                    textStyle:{
+                tooltip: {
+                    textStyle: {
                         fontFamily: 'ContentFont',
                         fontSize: 18,
                     }

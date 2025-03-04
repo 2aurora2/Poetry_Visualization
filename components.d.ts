@@ -14,6 +14,8 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     EmotionPieComp: typeof import('./src/components/EmotionPieComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
+    PersonalNetwork: typeof import('./src/components/PersonalNetwork.vue')['default']
+    PersonalNetworkComp: typeof import('./src/components/PersonalNetworkComp.vue')['default']
     PieComp: typeof import('./src/components/PieComp.vue')['default']
     PoetCardComp: typeof import('./src/components/PoetCardComp.vue')['default']
     PoetSanKeyComp: typeof import('./src/components/PoetSanKeyComp.vue')['default']

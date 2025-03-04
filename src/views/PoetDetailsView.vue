@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="right">
-            111
+            <PersonalNetworkComp :nodes="poetNodes" :links="poetLinks" />
         </div>
     </div>
 </template>
@@ -60,9 +60,67 @@ const poetInfo = ref<IPoet>(CONST.DEFAULT_POET);
 const poetEmotionIndicator = ref<Array<any>>([]);
 const poetEmotionValue = ref<Array<any>>([]);
 const poetImagery = ref<Array<any>>([]);
+const poetNodes = ref<Array<INode>>([]);
+const poetLinks = ref<Array<ILink>>([]);
+
+const preprocessNetworkData = (info: Array) => {
+    let tempNodes = new Set();
+    tempNodes.add(poetName.value);
+    for (let i = 0; i < info.length; i++) {
+        if (info[i]['source'] === poetName.value && info[i]['target'] !== poetName.value) {
+            tempNodes.add(info[i]['target']);
+            let flag = false;
+            for (let j = 0; j < poetLinks.value.length; j++) {
+                if (poetLinks.value[j]['source'] === poetName.value && poetLinks.value[j]['target'] === info[i]['target']) {
+                    flag = true;
+                    poetLinks.value[j]['name'].push(info[i]['name']);
+                    break;
+                }
+            }
+            if (!flag) {
+                poetLinks.value.push({
+                    source: poetName.value,
+                    target: info[i]['target'],
+                    name: [info[i]['name']]
+                })
+            }
+        }
+    }
+    for (let node of tempNodes) {
+        poetNodes.value.push({
+            name: node,
+            isCenter: node === poetName.value
+        })
+    }
+    // 对于非poetName的节点，看看是否有边的两个节点是位于tempNodes的节点，有则将边加入poetLinks
+    for (let i = 0; i < info.length; i++) {
+        if (info[i]['source'] !== poetName.value && info[i]['target'] !== poetName.value) {
+            if (tempNodes.has(info[i]['source']) && tempNodes.has(info[i]['target'])) {
+                let flag = false;
+                for (let j = 0; j < poetLinks.value.length; j++) {
+                    if (poetLinks.value[j]['source'] === info[i]['source'] && poetLinks.value[j]['target'] === info[i]['target']) {
+                        flag = true;
+                        poetLinks.value[j]['name'].push(info[i]['name']);
+                        break;
+                    }
+                }
+                if (!flag) {
+                    poetLinks.value.push({
+                        source: info[i]['source'],
+                        target: info[i]['target'],
+                        name: [info[i]['name']]
+                    })
+                }
+            }
+        }
+    }
+}
+
 const queryPoet = () => {
     poetEmotionIndicator.value = [];
     poetEmotionValue.value = [];
+    poetNodes.value = [];
+    poetLinks.value = [];
     if (poetName.value.length === 0) {
         // @ts-ignore
         ElMessage.warning('请输入诗人姓名');
@@ -84,6 +142,7 @@ const queryPoet = () => {
         if (Object.keys(tangImagery).includes(poetName.value)) { // 诗人诗词意象信息
             poetImagery.value = tangImagery[poetName.value];
         }
+        preprocessNetworkData(tangLink);
     }
     else if (songPoets.includes(poetName.value)) {
         poetInfo.value = songPoetInfo[poetName.value];
@@ -101,13 +160,13 @@ const queryPoet = () => {
         if (Object.keys(songImagery).includes(poetName.value)) { // 诗人诗词意象信息
             poetImagery.value = songImagery[poetName.value];
         }
+        preprocessNetworkData(songLink);
     }
     else if (yuanPoets.includes(poetName.value)) {
         poetInfo.value = yuanPoetInfo[poetName.value];
         if (Object.keys(yuanPoetEmotion).includes(poetName.value)) {   // 诗人诗词情感信息
             let emotion = yuanPoetEmotion[poetName.value]['emotion'];
             let maxVal = Math.max(...emotion.map((item: any) => item['value']));
-            console.log(poetEmotionIndicator.value);
 
             for (let i = 0; i < emotion.length; i++) {
                 poetEmotionIndicator.value.push({
@@ -120,6 +179,7 @@ const queryPoet = () => {
         if (Object.keys(yuanImagery).includes(poetName.value)) { // 诗人诗词意象信息
             poetImagery.value = yuanImagery[poetName.value];
         }
+        preprocessNetworkData(yuanLink);
     }
 }
 
@@ -200,10 +260,9 @@ onMounted(() => {
                 height: 100%;
 
                 .chart-title {
-                    font-family: 'ContentFont';
+                    font-family: 'TitleFont';
                     font-size: 25px;
                     text-align: center;
-                    font-weight: 800;
                     margin-bottom: 4px;
                 }
             }
