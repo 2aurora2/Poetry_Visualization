@@ -1,6 +1,6 @@
 <template>
   <!-- 词云图容器 -->
-  <div id="word-cloud" class="chart"></div>
+  <div id="word-cloud"></div>
 </template>
 
 <script setup lang="ts">
@@ -34,13 +34,35 @@ const initChart = () => {
   updateChart(props.words);
 };
 
+// 数据归一化函数
+const normalizeData = (data: any[]) => {
+  const values = data.map(item => item.value);
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+  return data.map(item => ({
+    ...item,
+    originalValue: item.value, 
+    normalizedValue: (item.value - minValue) / (maxValue - minValue)
+  }));
+};
+
 const updateChart = (words: any[]) => {
-  const filteredWords = words.sort((a, b) => b.value - a.value).slice(0, 85);
+  // 进行数据归一化
+  const normalizedWords = normalizeData(words);
+  const filteredWords = normalizedWords.sort((a, b) => b.normalizedValue - a.normalizedValue).slice(0, 100);
+
+  const sizeRange = [15, 60];
+  const mappedWords = filteredWords.map(word => ({
+    ...word,
+    // 使用归一化后的值映射到词云图的大小范围
+    value: word.normalizedValue * (sizeRange[1] - sizeRange[0]) + sizeRange[0]
+  }));
+
   var option;
   option = {
     tooltip: {
       show: true,
-      formatter: (params: any) => `<b>${params.name}</b>: ${params.value}`,
+      formatter: (params: any) => `<b>${params.data.name}</b>: ${params.data.originalValue}`,
       textStyle: {
         fontFamily: 'ContentFont',
         fontSize: 18,
@@ -58,8 +80,8 @@ const updateChart = (words: any[]) => {
       {
         type: 'wordCloud',
         shape: 'circle',
-        sizeRange: [15, 40],
-        gridSize: 8,
+        sizeRange: sizeRange,
+        gridSize: 5,
         rotationRange: [0, 0],
         drawOutOfBound: false,
         textStyle: {
@@ -69,11 +91,10 @@ const updateChart = (words: any[]) => {
           shadowBlur: 10,
           shadowColor: '#333'
         },
-        data: filteredWords,
+        data: mappedWords,
         emphasis: {
-          //focus: 'self',
           textStyle: {
-            fontSize: 32,
+            //fontSize: 32,
             fontWeight: 'bold',
             color: '#FF6B6B'
           }
