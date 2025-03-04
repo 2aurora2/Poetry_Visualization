@@ -9,7 +9,7 @@
           </div>
           <div class="charts">
             <WordCloudComp :words="selectedWordCloudWords" />
-            <EmotionPieComp :data="selectedEmotion" />
+            <SunBurstComp />
           </div>
       </div>
       <div class="bottom-row">
@@ -22,34 +22,20 @@
   <script setup lang="ts">
   import { ref } from 'vue';
   import WordCloudComp from '@/components/WordCloudComp.vue';
-  import EmotionPieComp from '@/components/EmotionPieComp.vue';
+  import SunBurstComp from '@/components/SunBurstComp.vue';
   import TimelineScatterComp from '@/components/TimelineScatterComp.vue';
   import tangWordCloudWords from '@/assets/data/tang/word_shuang.json';
   import songWordCloudWords from '@/assets/data/song/word_shuang.json';
   import yuanWordCloudWords from '@/assets/data/yuan/word_shuang.json';
-  import tangBubbleChartWords from '@/assets/data/tang/word_dan.json';
-  import songBubbleChartWords from '@/assets/data/song/word_dan.json';
-  import yuanBubbleChartWords from '@/assets/data/yuan/word_dan.json';
-  import tangEmotion from '@/assets/data/tang/emotion_count.json';
-  import songEmotion from '@/assets/data/song/emotion_count.json';
-  import yuanEmotion from '@/assets/data/yuan/emotion_count.json';
+
   
   const selectedDynasty = ref(0);
   const dynasties = ['唐', '宋', '元'];
-  
   const wordCloudWordsData = [tangWordCloudWords, songWordCloudWords, yuanWordCloudWords];
-  const bubbleChartWordsData = [tangBubbleChartWords, songBubbleChartWords, yuanBubbleChartWords];
-  const emotionData = [tangEmotion, songEmotion, yuanEmotion];
-  
   const selectedWordCloudWords = ref(wordCloudWordsData[selectedDynasty.value]);
-  const selectedBubbleChartWords = ref(bubbleChartWordsData[selectedDynasty.value]);
-  const selectedEmotion = ref(emotionData[selectedDynasty.value]);
-  
   const selectDynasty = (index: number) => {
     selectedDynasty.value = index;
     selectedWordCloudWords.value = wordCloudWordsData[index];
-    selectedBubbleChartWords.value = bubbleChartWordsData[index];
-    selectedEmotion.value = emotionData[index];
   };
   </script>
   
@@ -64,7 +50,7 @@
     .top-row {
       display: flex;
       width: 90%;
-      height: 55%;
+      height: 58%;
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -113,26 +99,11 @@
           align-items: center;
           justify-content: center;
   
-          div:nth-child(1) {
-            flex: 1.2
-          }
-  
-          div:nth-child(2) {
-            flex: 1.5
-          }
-  
-          div:nth-child(3) {
-            flex: 1.2
+          div:nth-child(1), div:nth-child(2) {
+            flex: 1; 
           }
         }
   
-      .pie-section {
-        flex: 1;
-        height: 60%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
     }
   
     .bottom-row {
