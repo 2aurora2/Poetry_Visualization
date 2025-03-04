@@ -1,0 +1,59 @@
+[
+    {
+        "source": "孟浩然",
+        "target": "李白",
+        "color": "#cd9957"
+    },
+    {
+        "source": "李白",
+        "target": "杜甫"
+    },
+    {
+        "source": "李白",
+        "target": "白居易"
+    },
+    {
+        "source": "李白",
+        "target": "高适"
+    },
+    {
+        "source": "李白",
+        "target": "韩愈"
+    },
+    {
+        "source": "杜甫",
+        "target": "白居易"
+    },
+    {
+        "source": "杜甫",
+        "target": "高适"
+    },
+    {
+        "source": "杜甫",
+        "target": "孟浩然"
+    },
+    {
+        "source": "杜甫",
+        "target": "储光羲"
+    },
+    {
+        "source": "卢照邻",
+        "target": "李白"
+    },
+    {
+        "source": "卢照邻",
+        "target": "杜甫"
+    },
+    {
+        "source": "卢照邻",
+        "target": "高适"
+    },
+    {
+        "source": "卢照邻",
+        "target": "孟浩然"
+    },
+    {
+        "source": "卢照邻",
+        "target": "韦应物"
+    }
+]

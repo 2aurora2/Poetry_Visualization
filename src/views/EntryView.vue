@@ -2,14 +2,6 @@
     <div class="home-container">
         <div class="entry-bg"></div>
         <div class="content-wrapper">
-            <div class="title-container">
-                <h1 class="title">韵·代：诗词文化的视觉交响</h1>
-            </div>
-            <div class="intro-container">
-                <p>
-                    本项目聚焦唐诗、宋词、元曲等丰富数据，通过多维度数据分析，挖掘古典诗词的丰富内涵。通过将复杂分析结果转化为直观图像，打破古今文化理解壁垒，提供全新视角解读经典，助力传统文化在数字时代绽放新光彩，促进传统诗词与现代数据可视化的深度融合。
-                </p>
-            </div>
             <div class="arrow-container" @click="navigateToHome">
                 <div class="arrow">></div>
             </div>
@@ -26,10 +18,10 @@ const navigateToHome = () => {
     const content = document.querySelector('.content-wrapper') as HTMLElement | null
     if (content) {
         content.style.transition = 'transform 1s ease-in-out'
-        content.style.transform = 'translateY(-100vh)'
+        content.style.transform = 'translateY(-10vh)'
         setTimeout(() => {
             router.push('/home')
-        }, 1000)
+        }, 800)
     }
 }
 </script>
