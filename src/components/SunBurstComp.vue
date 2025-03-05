@@ -37,12 +37,12 @@ const data = [
         itemStyle: { color: '#cd5c5c' }, // 深红
         children: [
           { name: '喜', value: 1357, itemStyle: { color: '#f4a460' } }, // 浅橙红
-          { name: '怒', value: 773, itemStyle: { color: '#8b4513' } }, // 深棕红
-          { name: '悲', value: 5431, itemStyle: { color: '#b22222' } }, // 红褐
+          { name: '怒', value: 773, itemStyle: { color: '#cd5c5c' } }, // 深红
+          { name: '悲', value: 5431, itemStyle: { color: '#8b4513' } }, // 深棕红
           { name: '乐', value: 1948, itemStyle: { color: '#e9967a' } }, // 浅红
           { name: '思', value: 3960, itemStyle: { color: '#a0522d' } }, // 棕红
           { name: '惧', value: 432, itemStyle: { color: '#800000' } }, // 深红
-          { name: '忧', value: 1799, itemStyle: { color: '#8b0000' } } // 深红
+          { name: '忧', value: 1799, itemStyle: { color: '#b22222' } } // 红褐
         ]
       },
       {
@@ -63,12 +63,12 @@ const data = [
         itemStyle: { color: '#993333' }, // 珊瑚红
         children: [
           { name: '喜', value: 1656, itemStyle: { color: '#f4a460' } }, // 浅橙红
-          { name: '怒', value: 1003, itemStyle: { color: '#8b4513' } }, // 深棕红
-          { name: '悲', value: 5013, itemStyle: { color: '#b22222' } }, // 红褐
+          { name: '怒', value: 1003, itemStyle: { color: '#cd5c5c' } }, // 深红
+          { name: '悲', value: 5013, itemStyle: { color: '#8b4513' } }, // 深棕红
           { name: '乐', value: 2603, itemStyle: { color: '#e9967a' } }, // 浅红
           { name: '思', value: 4064, itemStyle: { color: '#a0522d' } }, // 棕红
           { name: '惧', value: 156, itemStyle: { color: '#800000' } }, // 深红
-          { name: '忧', value: 1632, itemStyle: { color: '#8b0000' } } // 深红
+          { name: '忧', value: 1632, itemStyle: { color: '#b22222' } } // 红褐
         ]
       }
     ]
@@ -95,9 +95,9 @@ const data = [
         itemStyle: { color: '#8fbc8f' }, // 中绿
         children: [
           { name: '喜', value: 2356, itemStyle: { color: '#b8d8b8' } }, // 浅绿
-          { name: '怒', value: 108, itemStyle: { color: '#a8c3a8' } }, // 浅绿
-          { name: '悲', value: 3403, itemStyle: { color: '#8fbc8f' } }, // 中绿
-          { name: '乐', value: 931, itemStyle: { color: '#6b8e23' } }, // 深绿
+          { name: '怒', value: 108, itemStyle: { color: '#6b8e23' } }, // 深绿
+          { name: '悲', value: 3403, itemStyle: { color: '#556b2f' } }, // 深绿
+          { name: '乐', value: 931, itemStyle: { color: '#a8c3a8' } }, // 浅绿
           { name: '思', value: 3640, itemStyle: { color: '#8fbc8f' } }, // 中绿
           { name: '惧', value: 82, itemStyle: { color: '#2e8b57' } }, // 深绿
           { name: '忧', value: 589, itemStyle: { color: '#3cb371' } } // 中绿
@@ -113,26 +113,26 @@ const data = [
         name: '豪放派',
         itemStyle: { color: '#e0b890' }, // 浅黄
         children: [
-          { name: '喜', value: 894, itemStyle: { color: '#f0d8a8' } }, // 浅黄
-          { name: '怒', value: 391, itemStyle: { color: '#b8860b' } }, // 深黄
-          { name: '悲', value: 832, itemStyle: { color: '#8b7355' } }, // 深黄
-          { name: '乐', value: 831, itemStyle: { color: '#e0b890' } }, // 浅黄
-          { name: '思', value: 736, itemStyle: { color: '#d2b48c' } }, // 中黄
-          { name: '惧', value: 118, itemStyle: { color: '#8b4513' } }, // 深黄
-          { name: '忧', value: 380, itemStyle: { color: '#a0522d' } } // 棕黄
+            { name: '喜', value: 894, itemStyle: { color: '#f0d8a8' } }, // 浅黄
+            { name: '怒', value: 391, itemStyle: { color: '#b8860b' } }, // 深黄
+            { name: '悲', value: 832, itemStyle: { color: '#8b7355' } }, // 深黄
+            { name: '乐', value: 831, itemStyle: { color: '#e0b890' } }, // 浅黄
+            { name: '思', value: 736, itemStyle: { color: '#d2b48c' } }, // 中黄
+            { name: '惧', value: 118, itemStyle: { color: '#8b4513' } }, // 深黄
+            { name: '忧', value: 380, itemStyle: { color: '#a0522d' } } // 棕黄
         ]
       },
       {
         name: '清丽派',
         itemStyle: { color: '#d2b48c' }, // 中黄
         children: [
-          { name: '喜', value: 770, itemStyle: { color: '#f0d8a8' } }, // 浅黄
-          { name: '怒', value: 107, itemStyle: { color: '#e0b890' } }, // 浅黄
-          { name: '悲', value: 902, itemStyle: { color: '#d2b48c' } }, // 中黄
-          { name: '乐', value: 820, itemStyle: { color: '#b8860b' } }, // 深黄
-          { name: '思', value: 924, itemStyle: { color: '#d2b48c' } }, // 中黄
-          { name: '惧', value: 401, itemStyle: { color: '#8b4513' } }, // 深黄
-          { name: '忧', value: 665, itemStyle: { color: '#a0522d' } } // 棕黄
+            { name: '喜', value: 770, itemStyle: { color: '#f0d8a8' } }, // 浅黄
+            { name: '怒', value: 107, itemStyle: { color: '#b8860b' } }, // 深黄
+            { name: '悲', value: 902, itemStyle: { color: '#8b7355' } }, // 深黄
+            { name: '乐', value: 820, itemStyle: { color: '#e0b890' } }, // 浅黄
+            { name: '思', value: 924, itemStyle: { color: '#d2b48c' } }, // 中黄
+            { name: '惧', value: 401, itemStyle: { color: '#8b4513' } }, // 深黄
+            { name: '忧', value: 665, itemStyle: { color: '#a0522d' } } // 棕黄
         ]
       }
     ]
@@ -140,7 +140,7 @@ const data = [
 ];
 
 const option = {
-    title: {
+  title: {
         text: '朝代-派系-情感旭日图', 
         left: 'center',
         textStyle: {
@@ -149,40 +149,55 @@ const option = {
         }
     },
     series: {
-        type: 'sunburst',
-        data: data,
-        emphasis: {
-            focus: 'ancestor'
-        },
-        radius: [30, '90%'],
-        itemStyle: {
-            borderRadius: 7,
-            borderWidth: 2
-        },
-        levels: [
-            {
-                label: {show: true}
-            },
-            {
-                label: {show: true}
-            },
-            {
-                label: {show: true}
-            },
-            {
-                r0: '70%',
-                r: '75%',
-                itemStyle: {
-                    borderRadius: 7,
-                    borderWidth: 2
-                },
-                label: {
-                    show: true,
-                    position: 'outside'
-                }
-            }
-        ]
-    }
+      type: 'sunburst',
+      data: data,
+      label: {
+        fontFamily: 'ContentFont', 
+        fontSize: 12,      
+        fontWeight: 'bold',
+      },
+      emphasis: {
+          focus: 'ancestor',
+          label: {
+            show: true,
+            rotate: 0,
+            fontSize: 20,
+            fontWeight: 'bold',
+        }
+      },
+      radius: [30, '90%'],
+      itemStyle: {
+          borderRadius: 7,
+          borderWidth: 2
+      },
+    levels: [
+      {
+        label: { show: true }
+      },
+      {
+        label: { show: true, rotate: 0, fontSize: 20 }
+      },
+      {
+        label: { show: true, rotate: 'tangential' }
+      },
+      {
+          r0: '70%',
+          r: '75%',
+          label: {
+              show: true,
+              position: 'outside',
+              distance:10,
+              minAngle:3.5
+          },
+          labelLine: {
+            show: true,
+            showAbove: true,
+            smooth: true,
+            minTurnAngle: 45
+          }
+        }
+    ]
+  }
 };
 
 onMounted(() => {
