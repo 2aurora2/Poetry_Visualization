@@ -3,6 +3,7 @@
 </template>
 
 <script setup lang='ts'>
+// @ts-nocheck
 import vintage from '@/assets/theme/vintage.json'
 
 import * as echarts from 'echarts/core';
@@ -11,7 +12,6 @@ import { PieChart } from 'echarts/charts';
 import { GraphChart } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
-import { draggable } from 'element-plus/es/components/color-picker/src/utils/draggable.mjs';
 
 import { onMounted, watch, shallowRef } from 'vue';
 
@@ -46,29 +46,38 @@ const initRelationGraph = () => {
     var chartDom = document.getElementById('personal-network')!;  // 获取容器 DOM 实例
     if (!chartDom) return;
     chartDom.style.width = '98%';
-    chartDom.style.height = '100%';
+    chartDom.style.height = '95%';
 
     const containerWidth = chartDom.clientWidth;
     const containerHeight = chartDom.clientHeight;
 
-    const nodes = props.nodes.map(node => {
-        if (node.isCenter) {
-            return {
-                ...node,
-                // x: containerWidth / 2,
-                // y: containerHeight / 2,
-                // fixed: true,
-                symbolSize: 65,
-                symbol: 'diamond',
-            };
-        }
-        else {
-            return {
-                ...node,
-                symbolSize: 45,
+        const nodes = props.nodes.map(node => {
+            if (node.isCenter) {
+                return {
+                    ...node,
+                    symbolSize: 65,
+                    symbol: 'roundRect',
+                    itemStyle: {
+                        color: '#D2B48Cee',
+                        borderWidth: 0
+                    },
+                    label:{
+                        fontSize: 22,
+                    }
+                };
             }
-        }
-    });
+            else {
+                return {
+                    ...node,
+                    symbol: 'circle',
+                    symbolSize: 50,
+                    itemStyle: {
+                        color: '#D2B48C88', 
+                        borderWidth: 0
+                    }
+                }
+            }
+        });
 
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
@@ -78,17 +87,17 @@ const initRelationGraph = () => {
 
     option = {
         tooltip: {},
-        toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
-            show: true,
-            feature: {
-                restore: {
-                    title: '重置'
-                }
-            },
-            orient: 'horizontal',
-            left: 'right',
-            top: 'top',
-        },
+        // toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
+        //     show: true,
+        //     feature: {
+        //         restore: {
+        //             title: '重置'
+        //         }
+        //     },
+        //     orient: 'horizontal',
+        //     left: 'right',
+        //     top: 'top',
+        // },
         label: {
             fontFamily: 'ContentFont',
             fontSize: 25,
@@ -99,6 +108,8 @@ const initRelationGraph = () => {
             {
                 type: 'graph',
                 layout: 'force',
+                edgeSymbol: ['none', 'arrow'],
+                edgeSymbolSize: 4,
                 force: {
                     repulsion: 150,     // 增加节点间斥力
                     edgeLength: [80, 350],     // 调整边的理想长度范围
@@ -110,6 +121,10 @@ const initRelationGraph = () => {
                 data: nodes,
                 links: props.links,
                 focusNodeAdjacency: true,
+                itemStyle: {
+                    color: '#D2B48C',
+                    borderWidth: 0
+                },
                 label: {
                     show: true,
                     position: 'inside',
@@ -129,10 +144,6 @@ const initRelationGraph = () => {
                             if (params.data.name.length === 1)
                                 return `${params.data.name[0]}`;
                             let labelList = [];
-                            for (let i = 0; i < params.data.name.length; i++) {
-                                labelList.push('(' + (i + 1) + ') ' + params.data.name[i]);
-                            }
-                            return `${labelList.join('</br>')}`;
                         }
                         return '';
                     },

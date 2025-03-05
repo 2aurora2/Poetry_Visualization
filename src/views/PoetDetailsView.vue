@@ -21,12 +21,14 @@
             </div>
         </div>
         <div class="right">
+            <div class="chart-title">诗人关系圈</div>
             <PersonalNetworkComp :nodes="poetNodes" :links="poetLinks" />
         </div>
     </div>
 </template>
 
 <script setup lang='ts'>
+// @ts-nocheck
 import PoetCardComp from '@/components/PoetCardComp.vue'
 import RadarComp from '@/components/RadarComp.vue'
 
@@ -55,7 +57,7 @@ let tangPoets = Object.keys(tangPoetInfo);
 let songPoets = Object.keys(songPoetInfo);
 let yuanPoets = Object.keys(yuanPoetInfo);
 
-const poetName = ref('李白');
+const poetName = ref('孟浩然');
 const poetInfo = ref<IPoet>(CONST.DEFAULT_POET);
 const poetEmotionIndicator = ref<Array<any>>([]);
 const poetEmotionValue = ref<Array<any>>([]);
@@ -108,7 +110,11 @@ const preprocessNetworkData = (info: Array) => {
                     poetLinks.value.push({
                         source: info[i]['source'],
                         target: info[i]['target'],
-                        name: [info[i]['name']]
+                        name: [info[i]['name']],
+                        lineStyle: {
+                            width: Math.random() * 2 + 0.1,
+                            opacity: Math.random() * 0.5 + 0.01
+                        }
                     })
                 }
             }
@@ -245,33 +251,29 @@ onMounted(() => {
             .imagery {
                 flex: 1.2;
                 height: 100%;
-
-                .chart-title {
-                    font-family: 'ContentFont';
-                    font-size: 25px;
-                    text-align: center;
-                    font-weight: 800;
-                    margin-bottom: 4px;
-                }
             }
 
             .emotion {
                 flex: 1;
                 height: 100%;
-
-                .chart-title {
-                    font-family: 'TitleFont';
-                    font-size: 25px;
-                    text-align: center;
-                    margin-bottom: 4px;
-                }
             }
         }
     }
 
     .right {
         width: 45%;
-        height: 100%;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
+}
+
+.chart-title {
+    font-family: 'TitleFont';
+    font-size: 25px;
+    text-align: center;
+    font-weight: 600;
 }
 </style>

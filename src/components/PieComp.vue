@@ -11,7 +11,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 
 echarts.use([TitleComponent, PieChart, CanvasRenderer, LabelLayout, ToolboxComponent, LegendComponent, TooltipComponent]);
 
-import { onMounted, watch, shallowRef, nextTick } from 'vue';
+import { onMounted, watch, shallowRef } from 'vue';
 import vintage from '@/assets/theme/vintage.json';
 
 const graph = shallowRef();
@@ -62,7 +62,7 @@ const initPie = () => {
             orient: 'horizontal',
             textStyle: {
                 fontFamily: 'ContentFont',
-                fontSize: 12,
+                fontSize: 20,
             }
         },
         label: {
@@ -98,7 +98,7 @@ const initPie = () => {
                 tooltip: {
                     textStyle: {
                         fontFamily: 'ContentFont',
-                        fontSize: 18,
+                        fontSize: 20,
                     }
                 }
             }
