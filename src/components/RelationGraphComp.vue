@@ -18,7 +18,7 @@ import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 
 import PoetAva from '@/assets/images/network/储光羲.png'
-import { avatars } from '../utils/network.ts'
+import { avatars, colors } from '../utils/network.ts'
 
 echarts.use([
     ToolboxComponent,
@@ -82,7 +82,7 @@ const processData = (nodes: Array<any>, infos: Object) => {
     return newNodes;
 }
 
-const getImgData = (name) => {
+const getImgData = (name, cate) => {
     var fun = function (resolve) {
         const canvas = document.createElement('canvas');
         const contex = canvas.getContext('2d');
@@ -105,6 +105,17 @@ const getImgData = (name) => {
             contex.drawImage(img, center.x - radius, center.y - radius, diameter, diameter, 0, 0,
                 diameter, diameter); // 在刚刚裁剪的园上画图
             contex.restore(); // 还原状态
+
+            // 添加红色边框（在裁剪区域外绘制）
+            contex.beginPath();
+            contex.arc(radius, radius, radius - 10, 0, 2 * Math.PI); // 留出边框空间
+            
+            contex.strokeStyle = colors[cate]; 
+            
+            contex.lineWidth = 20;         
+            contex.stroke();
+
+
             resolve(canvas.toDataURL('image/png', 1))
         }
         img.src = avatars[props.id][name];
@@ -117,12 +128,10 @@ const getImgData = (name) => {
 const pubdata = (nodes) => {
     var picList = [];
     let arr = nodes;
-    console.log(nodes);
 
     for (var i = 0; i < arr.length; i++) {
         var object = arr[i];
-
-        var p = getImgData(object.name);
+        var p = getImgData(object.name, object.category);
         picList.push(p);
     }
     Promise.all(picList).then(function (images) {
@@ -207,6 +216,10 @@ const initEcharts = () => {
                 top: '18%',
                 bottom: '15%',
                 layout: 'none',
+                force: {
+                    repulsion: 1,
+                    edgeLength: 10,
+                },
                 data: props.nodes.map(node => ({
                     ...node,
                     symbol: `image://${node.avatar}`,
@@ -216,7 +229,8 @@ const initEcharts = () => {
                 links: props.links.map(link => ({
                     ...link,
                     lineStyle: {
-                        color: link.color
+                        color: link.color,
+                        curveness: 0.02,
                     }
                 })),
                 categories: categories,
@@ -275,7 +289,7 @@ const initEcharts = () => {
     });
 }
 
-watch(() => props.id, () => {
+watch(() => [props.id, props.nodes, props.links, props.infos], () => {
     initEcharts();
 })
 

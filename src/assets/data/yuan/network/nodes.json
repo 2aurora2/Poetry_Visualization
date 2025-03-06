@@ -1,0 +1,114 @@
+[
+  {
+    "name": "张养浩",
+    "community": 1,
+    "x": 10,
+    "y": 10,
+    "symbolSize": 40
+  },
+  {
+    "name": "马致远",
+    "community": 1,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "萨都剌",
+    "community": 1,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "杨载",
+    "community": 1,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "范梈",
+    "community": 1,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "关汉卿",
+    "community": 1,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "睢景臣",
+    "community": 1,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "白朴",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "元好问",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "虞集",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "张可久",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "乔吉",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "徐再思",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "吴西逸",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "郑光祖",
+    "community": 2,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  },
+  {
+    "name": "贯云石",
+    "community": 1,
+    "x": 20,
+    "y": 20,
+    "symbolSize": 40
+  }
+]
