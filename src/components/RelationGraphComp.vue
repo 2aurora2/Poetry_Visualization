@@ -17,7 +17,6 @@ import { GraphChart, type GraphSeriesOption } from 'echarts/charts';
 import { LabelLayout } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
 
-import PoetAva from '@/assets/images/network/储光羲.png'
 import { avatars, colors } from '../utils/network.ts'
 
 echarts.use([
@@ -109,10 +108,10 @@ const getImgData = (name, cate) => {
             // 添加红色边框（在裁剪区域外绘制）
             contex.beginPath();
             contex.arc(radius, radius, radius - 10, 0, 2 * Math.PI); // 留出边框空间
-            
-            contex.strokeStyle = colors[cate]; 
-            
-            contex.lineWidth = 20;         
+
+            contex.strokeStyle = colors[cate];
+
+            contex.lineWidth = 20;
             contex.stroke();
 
 
@@ -178,13 +177,13 @@ const initEcharts = () => {
                 fontSize: 18,
             }
         },
-                itemStyle: {
-                    borderWidth: 2,
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)',
-                    shadowOffsetX: 2,
-                    shadowOffsetY: 2
-                },
+        itemStyle: {
+            borderWidth: 2,
+            shadowBlur: 10,
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+            shadowOffsetX: 2,
+            shadowOffsetY: 2
+        },
         toolbox: {
             show: true,
             feature: {
@@ -254,7 +253,7 @@ const initEcharts = () => {
                     max: 2
                 },
                 lineStyle: {
-                    color: function(params) {
+                    color: function (params) {
                         return params.data.lineStyle?.color || '#4f8fa7';
                     },
                     curveness: 0.15,
@@ -282,7 +281,7 @@ const initEcharts = () => {
     };
     option && graph.value.setOption(option, { notMerge: true });
     pubdata(nodes);
-    
+
     // 监听restore事件
     graph.value.on('restore', () => {
         pubdata(nodes);

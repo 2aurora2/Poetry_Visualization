@@ -2,134 +2,134 @@
   {
     "name": "苏轼",
     "community": 1,
-    "x": 10,
-    "y": 10,
-    "symbolSize": 40
+    "x": 50,
+    "y": 50,
+    "symbolSize": 60
   },
   {
     "name": "苏洵",
     "community": 1,
-    "x": 20,
-    "y": 20,
+    "x": 39,
+    "y": 58,
     "symbolSize": 40
   },
   {
     "name": "辛弃疾",
     "community": 1,
-    "x": 20,
+    "x": 50,
     "y": 20,
     "symbolSize": 40
   },
   {
     "name": "陆游",
     "community": 1,
-    "x": 20,
-    "y": 20,
+    "x": 55,
+    "y": 35,
     "symbolSize": 40
   },
   {
     "name": "岳飞",
     "community": 1,
-    "x": 20,
-    "y": 20,
+    "x": 50,
+    "y": 65,
     "symbolSize": 40
   },
   {
     "name": "范仲淹",
     "community": 1,
-    "x": 20,
-    "y": 20,
-    "symbolSize": 40
+    "x": 95,
+    "y": 25,
+    "symbolSize": 50
   },
   {
     "name": "王安石",
     "community": 1,
-    "x": 20,
-    "y": 20,
+    "x": 70,
+    "y": 90,
     "symbolSize": 40
   },
   {
     "name": "黄庭坚",
     "community": 1,
-    "x": 20,
-    "y": 20,
+    "x": 34,
+    "y": 43,
     "symbolSize": 40
   },
   {
     "name": "朱熹",
     "community": 1,
-    "x": 20,
-    "y": 20,
+    "x": 1,
+    "y": 40,
     "symbolSize": 40
   },
   {
     "name": "苏辙",
     "community": 2,
     "x": 20,
-    "y": 20,
-    "symbolSize": 40
+    "y": 55,
+    "symbolSize": 60
   },
   {
     "name": "柳永",
     "community": 2,
-    "x": 20,
-    "y": 20,
+    "x": 18,
+    "y": 75,
     "symbolSize": 40
   },
   {
     "name": "李清照",
     "community": 2,
-    "x": 20,
-    "y": 20,
+    "x": 5,
+    "y": 58,
     "symbolSize": 40
   },
   {
     "name": "晏殊",
     "community": 2,
-    "x": 20,
-    "y": 20,
+    "x": 70,
+    "y": 10,
     "symbolSize": 40
   },
   {
     "name": "晏几道",
     "community": 2,
-    "x": 20,
-    "y": 20,
-    "symbolSize": 40
+    "x": 50,
+    "y": 1,
+    "symbolSize": 30
   },
   {
     "name": "秦观",
     "community": 2,
-    "x": 20,
-    "y": 20,
+    "x": 30,
+    "y": 30,
     "symbolSize": 40
   },
   {
     "name": "李煜",
     "community": 2,
-    "x": 20,
-    "y": 20,
+    "x": 15,
+    "y": 30,
     "symbolSize": 40
   },
   {
     "name": "欧阳修",
     "community": 2,
-    "x": 20,
-    "y": 20,
-    "symbolSize": 40
+    "x": 25,
+    "y": 10,
+    "symbolSize": 50
   },
   {
     "name": "杨万里",
     "community": 2,
-    "x": 20,
-    "y": 20,
+    "x": 75,
+    "y": 28,
     "symbolSize": 40
   },
   {
     "name": "姜夔",
     "community": 2,
-    "x": 20,
-    "y": 20,
-    "symbolSize": 40
+    "x": 62,
+    "y": 22,
+    "symbolSize": 35
   }
 ]

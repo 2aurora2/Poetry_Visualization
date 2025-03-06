@@ -121,7 +121,7 @@ const selectDynasty = async (index: number) => {
 }
 
 onMounted(async () => {
-    selectDynasty(0);
+    selectDynasty(2);
 })
 </script>
 
