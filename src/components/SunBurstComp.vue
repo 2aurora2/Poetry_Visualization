@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartRef" style="width: 100%; height: 350px;"></div>
+  <div ref="chartRef" style="width: 100%; height: 380px;"></div>
 </template>
 
 <script setup>
@@ -161,7 +161,7 @@ const option = {
           label: {
             show: true,
             rotate: 0,
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: 'bold',
         }
       },
