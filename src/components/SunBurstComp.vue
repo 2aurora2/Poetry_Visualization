@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartRef" style="width: 100%; height: 380px;"></div>
+  <div ref="sunBurst" style="width: 100%; height: 380px;"></div>
 </template>
 
 <script setup>
@@ -11,7 +11,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 
 echarts.use([TitleComponent, SunburstChart, CanvasRenderer]);
 
-const chartRef = ref(null);
+const sunBurst = ref(null);
 let myChart = null;
 
 const data = [
@@ -201,8 +201,8 @@ const option = {
 };
 
 onMounted(() => {
-  if (chartRef.value) {
-    myChart = echarts.init(chartRef.value);
+  if (sunBurst.value) {
+    myChart = echarts.init(sunBurst.value);
     myChart.setOption(option);
 
     // 添加窗口大小改变时的自适应

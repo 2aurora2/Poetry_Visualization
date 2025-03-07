@@ -85,7 +85,7 @@ const updateChart = (words: any[]) => {
         rotationRange: [0, 0],
         drawOutOfBound: false,
         textStyle: {
-          fontFamily: 'STKaiti, KaiTi, serif',
+          fontFamily: 'ContentFont',
           fontWeight: 'bold',
           color: () => Colors[Math.floor(Math.random() * Colors.length)],
           shadowBlur: 10,
@@ -94,7 +94,7 @@ const updateChart = (words: any[]) => {
         data: mappedWords,
         emphasis: {
           textStyle: {
-            //fontSize: 32,
+            //fontSize: 60,
             fontWeight: 'bold',
             color: '#FF6B6B'
           }

@@ -98,6 +98,7 @@ onMounted(() => {
             },
             axisLabel:{
                 fontFamily: 'ContentFont',
+                fontWeight: 'bold',
             }
         });
 
@@ -136,6 +137,7 @@ onMounted(() => {
             textStyle: {
                 fontFamily: 'ContentFont',
                 fontSize: 16,
+                fontWeight: 'bold'
             }
         },
         title: title,
