@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="right">
-            <div class="chart-title">诗人关系圈</div>
+            <div class="chart-title">{{ poetName }}的“社交圈”</div>
             <PersonalNetworkComp :nodes="poetNodes" :links="poetLinks" />
         </div>
     </div>

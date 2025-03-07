@@ -13,6 +13,12 @@
                 <PoetSanKeyComp :nodes="selectedSankey.nodes" :links="selectedSankey.links" />
             </div>
             <div class="right">
+                <div class="legends">
+                    <div class="legend" v-for="(item, index) in legend[selectedDynasty]" :key="index">
+                        <div class="circle" :style="{ backgroundColor: item.color }"></div>
+                        <div class="name">{{ item.name }}</div>
+                    </div>
+                </div>
                 <RelationGraphComp :nodes="selectedNodes" :links="selectedLinks" :infos="selectedInfos"
                     :id="selectedDynasty" />
             </div>
@@ -68,6 +74,46 @@ const selectedSankey = ref({
 const selectedNodes = ref([]);
 const selectedLinks = ref([]);
 const selectedInfos = ref({});
+const legend = ref([
+    [
+        {
+            name: '浪漫主义诗派',
+            color: '#f4a460'
+        },
+        {
+            name: '现实主义诗派',
+            color: '#919e8b'
+        },
+        {
+            name: '山水田园诗派',
+            color: '#d87c7c'
+        },
+        {
+            name: '边塞诗派',
+            color: '#0e6aab'
+        },
+    ],
+    [
+        {
+            name: '豪放派',
+            color: '#f4a460'
+        },
+        {
+            name: '婉约派',
+            color: '#919e8b'
+        }
+    ],
+    [
+        {
+            name: '豪放派',
+            color: '#f4a460'
+        },
+        {
+            name: '清丽派',
+            color: '#919e8b'
+        }
+    ]
+])
 
 const preprocessRegion = (region: Object) => {
     let regionList = Object.entries(region).sort((a, b) => b[1] - a[1]);
@@ -121,7 +167,7 @@ const selectDynasty = async (index: number) => {
 }
 
 onMounted(async () => {
-    selectDynasty(2);
+    selectDynasty(0);
 })
 </script>
 
@@ -189,6 +235,35 @@ onMounted(async () => {
         .right {
             flex: 1;
             height: 100%;
+            position: relative;
+
+            .legends {
+                position: absolute;
+                top: 8%;
+                left: 5%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 10px;
+
+                .legend {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 8px;
+
+                    .circle {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 50%;
+                    }
+
+                    .name {
+                        font-family: 'ContentFont';
+                        font-size: 20px;
+                    }
+                }
+            }
         }
     }
 }

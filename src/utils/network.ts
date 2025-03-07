@@ -119,4 +119,4 @@ const yuan = {
 }
 
 export const avatars = [tang, song, yuan]
-export const colors = ['#993333', '#f4a460', '#919e8b', '#5286e9', '#0e6aab']
+export const colors = ['#993333', '#f4a460', '#919e8b', '#d87c7c', '#0e6aab']
