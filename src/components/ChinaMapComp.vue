@@ -1,5 +1,5 @@
 <template>
-  <div ref="chartContainer" class="chart-container"></div>
+  <div ref="mapChart" class="chart-container"></div>
 </template>
 
 <script setup lang="ts">
@@ -60,7 +60,7 @@ const yuanData: MapItem[] = [
 ]
 
 // Vue 相关引用
-const chartContainer = ref<HTMLElement>()
+const mapChart = ref<HTMLElement>()
 let chart: echarts.ECharts | null = null
 
 // 获取地理数据
@@ -71,9 +71,9 @@ async function getGeoJson(jsonName: string): Promise<GeoJson> {
 
 // 初始化图表
 async function initChart() {
-  if (!chartContainer.value) return
+  if (!mapChart.value) return
 
-  chart = echarts.init(chartContainer.value)
+  chart = echarts.init(mapChart.value)
 
   try {
     const [alladcode, chinaGeoJson] = await Promise.all([
@@ -227,6 +227,6 @@ onMounted(() => {
 <style scoped>
 .chart-container {
   width: 100%;
-  height: 500px;
+  height: 100%;
 }
 </style>

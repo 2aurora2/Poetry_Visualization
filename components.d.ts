@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BarChartComp: typeof import('./src/components/BarChartComp.vue')['default']
     BubbleChartComp: typeof import('./src/components/BubbleChartComp.vue')['default']
     ChatComp: typeof import('./src/components/ChatComp.vue')['default']
     ChinaMapComp: typeof import('./src/components/ChinaMapComp.vue')['default']
@@ -22,6 +23,7 @@ declare module 'vue' {
     RelationGraphComp: typeof import('./src/components/RelationGraphComp.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScatterComp: typeof import('./src/components/ScatterComp.vue')['default']
     SpecificCateTreemap: typeof import('./src/components/SpecificCateTreemap.vue')['default']
     SunBurstComp: typeof import('./src/components/SunBurstComp.vue')['default']
     TimelineScatterComp: typeof import('./src/components/TimelineScatterComp.vue')['default']

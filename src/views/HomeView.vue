@@ -1,65 +1,113 @@
 <template>
-  <div class="layout">
-    <div class="content-section">
-      <DynastyComparisonChart class="chart-comp" />
+  <div class="container">
+    <div class="button-container">
+      <button
+        v-for="(dynasty, index) in dynasties"
+        :key="index"
+        :class="['dynasty-button', { active: selectedDynasty === index }]"
+        @click="selectDynasty(index)"
+      >
+        {{ dynasty }}
+      </button>
+    </div>
+    <div class="chart-container">
+      <div class="left-column">
+        <BarChartComp :selected-dynasty="selectedDynasty"/>
+      </div>
+      <div class="middle-column">
+        <ChinaMapComp />
+      </div>
+      <div class="right-column">
+        <ScatterComp :selected-dynasty="selectedDynasty"/>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import ChinaMapComp from '../components/ChinaMapComp.vue'
-import DynastyComparisonChart from '../components/DynastyComparisonChart.vue'
+<script setup lang="ts">
+import { ref } from 'vue';
+import BarChartComp from '../components/BarChartComp.vue';
+import ScatterComp from '../components/ScatterComp.vue';
+import ChinaMapComp from '../components/ChinaMapComp.vue';
+
+const dynasties = ['唐', '宋', '元'];
+const selectedDynasty = ref(0);
+const selectDynasty = (index: number) => {
+  selectedDynasty.value = index;
+};
 </script>
 
 <style scoped>
-.layout {
-  width: 100%;
-  height: 100%;
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-}
-
-.overview-section {
-  display: flex;
-  justify-content: space-around;
   width: 100%;
-  margin-bottom: 10px;
+  height: 100vh;
+  padding: 10px;
 }
 
-.card {
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 40%;
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.card-title {
-  font-family: 'STXingkai', 'KaiTi', serif; /* 华文行楷 */
-  font-size: 26px;
-  color: rgba(188, 19, 62, 0.98);
-}
-
-.card-content {
-  font-family: 'KaiTi', serif;
-  font-size: 18px;
+.dynasty-button {
+  width: 35px;
+  height: 35px;
+  font-family: 'TitleFont';
+  border-radius: 50%;
+  background-color: rgba(60, 60, 60, 0.1);
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: bold;
   color: #333;
+  transition: all 0.3s ease;
 }
 
-.content-section {
-  display: flex;
-  justify-content: space-between;
+.dynasty-button:hover {
+  background-color: rgba(60, 60, 60, 0.2);
+}
+
+.active {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}
+
+.chart-container {
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
 }
 
-.map-comp {
-  flex: 0 0 40%;
+.left-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
-.chart-comp {
-  flex: 0 0 40%;
+.middle-column {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.right-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 </style>
