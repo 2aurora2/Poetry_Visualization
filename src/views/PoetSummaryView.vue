@@ -8,9 +8,9 @@
         </div>
         <div class="main">
             <div class="left">
-                <RegionBarComp :info="selectedRegionInfo" :id="selectedDynasty" :regionName="selectedRegionName"
-                    :regionValue="selectedRegionValue" />
                 <PoetSanKeyComp :nodes="selectedSankey.nodes" :links="selectedSankey.links" />
+                <PoetryCateBarComp :id="selectedDynasty" :regionName="selectedCateName"
+                    :regionValue="selectedCateValue" />
             </div>
             <div class="right">
                 <div class="legends">
@@ -28,14 +28,13 @@
 
 <script setup lang='ts'>
 // @ts-nocheck
-import RegionBarComp from '@/components/ReigonBarComp.vue'
+import PoetryCateBarComp from '@/components/PoetryCateBarComp.vue'
 import PoetSanKeyComp from '@/components/PoetSanKeyComp.vue'
 import RelationGraphComp from '@/components/RelationGraphComp.vue'
 
-import tangRegion from '@/assets/data/tang/region.json'
-import songRegion from '@/assets/data/song/region.json'
-import yuanRegion from '@/assets/data/yuan/region.json'
-import regionInfo from '@/assets/data/region_info.json'
+import tangPoetryCate from '@/assets/data/tang/natural_science.json'
+import songPoetryCate from '@/assets/data/song/natural_science.json'
+import yuanPoetryCate from '@/assets/data/yuan/natural_science.json'
 
 import tangPoetSankey from '@/assets/data/tang/poet_sankey.json'
 import songPoetSankey from '@/assets/data/song/poet_sankey.json'
@@ -64,9 +63,8 @@ const avatar = async (name) => {
 
 const selectedDynasty = ref(0);
 const dynasties = ['唐', '宋', '元'];
-const selectedRegionName = ref([]);
-const selectedRegionValue = ref([]);
-const selectedRegionInfo = ref([]);
+const selectedCateName = ref([]);
+const selectedCateValue = ref([]);
 const selectedSankey = ref({
     nodes: [],
     links: []
@@ -115,24 +113,13 @@ const legend = ref([
     ]
 ])
 
-const preprocessRegion = (region: Object) => {
-    let regionList = Object.entries(region).sort((a, b) => b[1] - a[1]);
-    let regionName = [];
-    let regionValue = [];
-    let regionDesc = [];
-    let tar = 16;
-    for (let i = 0; i < regionList.length; i++) {
-        if (regionInfo.hasOwnProperty(dynasties[selectedDynasty.value] + regionList[i][0])) {
-            regionName.push(regionList[i][0]);
-            regionValue.push(regionList[i][1]);
-            regionDesc.push(regionInfo[dynasties[selectedDynasty.value] + regionList[i][0]]);
-            tar--;
-        }
-        if (tar === 0) {
-            break;
-        }
+const preprocessCate = (cate: Array) => {
+    selectedCateName.value = [];
+    selectedCateValue.value = [];
+    for (let i = 0; i < cate.length; i++) {
+        selectedCateName.value.push(cate[i].name);
+        selectedCateValue.value.push(cate[i].value);
     }
-    return [regionName, regionValue, regionDesc];
 }
 
 const selectDynasty = async (index: number) => {
@@ -141,7 +128,7 @@ const selectDynasty = async (index: number) => {
     switch (index) {
         case 0:
             // @ts-ignore
-            [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(tangRegion);
+            preprocessCate(tangPoetryCate);
             selectedSankey.value = tangPoetSankey;
             selectedNodes.value = tangNodes;
             selectedLinks.value = tangLinks;
@@ -149,7 +136,7 @@ const selectDynasty = async (index: number) => {
             break;
         case 1:
             // @ts-ignore
-            [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(songRegion);
+            preprocessCate(songPoetryCate);
             selectedSankey.value = songPoetSankey;
             selectedNodes.value = songNodes;
             selectedLinks.value = songLinks;
@@ -157,7 +144,7 @@ const selectDynasty = async (index: number) => {
             break;
         case 2:
             // @ts-ignore
-            [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(yuanRegion);
+            preprocessCate(yuanPoetryCate);
             selectedSankey.value = yuanPoetSankey;
             selectedNodes.value = yuanNodes;
             selectedLinks.value = yuanLinks;

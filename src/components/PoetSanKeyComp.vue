@@ -56,21 +56,21 @@ const initEcharts = () => {
             triggerOn: 'mousemove',
             textStyle: {
                 fontFamily: 'ContentFont',
-                fontSize: 18, 
+                fontSize: 18,
             }
         },
-        toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
-            show: true,
-            feature: {
-                restore: {
-                    title: '重置'
-                }
-            },
-            orient: 'horizontal',
-            left: 'right',
-            top: 'top',
-        },
-        label:{
+        // toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
+        //     show: true,
+        //     feature: {
+        //         restore: {
+        //             title: '重置'
+        //         }
+        //     },
+        //     orient: 'horizontal',
+        //     left: 'right',
+        //     top: 'top',
+        // },
+        label: {
             textBorderWidth: -100,
             fontFamily: 'ContentFont',
             fontSize: 20,
@@ -80,12 +80,16 @@ const initEcharts = () => {
                 type: 'sankey',
                 data: props.nodes,
                 links: props.links,
-                top: '10%',
-                left: '13%',
-                right: '13%',
+                top: '15%',
+                left: '10%',
+                right: '10%',
                 lineStyle: {
                     curveness: 0.5,
                     opacity: 0.07
+                },
+                label: {
+                    fontSize: 16,
+                    position: 'left'
                 },
                 emphasis: {
                     disabled: false,

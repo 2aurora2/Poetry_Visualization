@@ -5,7 +5,7 @@
 <script setup lang='ts'>
 // @ts-nocheck
 import * as echarts from 'echarts/core';
-import { GridComponent, TooltipComponent, DataZoomComponent, TitleComponent  } from 'echarts/components';
+import { GridComponent, TooltipComponent, DataZoomComponent, TitleComponent } from 'echarts/components';
 import { BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 
@@ -15,10 +15,6 @@ import { onMounted, watch, shallowRef, nextTick } from "vue";
 import vintage from '@/assets/theme/vintage.json'
 
 const props = defineProps({
-    info: {
-        type: Array,
-        required: true,
-    },
     id: {
         type: Number,
         required: true,
@@ -48,8 +44,8 @@ const initEcharts = () => {
     var option;
 
     option = {
-        title:{
-            text: '诗人籍贯地域分布',
+        title: {
+            text: '诗词自然科学学科分布柱状图',
             left: 'center',
             textStyle: {
                 fontFamily: 'TitleFont',
@@ -60,11 +56,6 @@ const initEcharts = () => {
             trigger: 'axis',
             axisPointer: {
                 type: 'shadow'
-            },
-            extraCssText: 'width: 210px; white-space: pre-wrap;',
-            formatter: (params: any) => {
-                const index = params[0].dataIndex;
-                return `<strong>${params[0].name}</strong>：${props.info[index]}`;
             },
             textStyle: {
                 fontFamily: 'ContentFont',
@@ -77,7 +68,15 @@ const initEcharts = () => {
             axisLabel: {
                 show: true,
                 fontFamily: 'ContentFont',
-                fontSize: 16, 
+                fontSize: 16,
+                interval: 0,
+                formatter: function (value: string) {
+                    if (value.length > 3) {
+                        // 每两个字插入换行符
+                        return value.match(/.{1,2}/g)?.join('\n') || value;
+                    }
+                    return value;
+                },
             }
         },
         yAxis: {
@@ -85,7 +84,7 @@ const initEcharts = () => {
             axisLabel: {
                 show: true,
                 fontFamily: 'ContentFont',
-                fontSize: 16, 
+                fontSize: 16,
             }
         },
         dataZoom: [{ type: 'inside', disabled: true }],

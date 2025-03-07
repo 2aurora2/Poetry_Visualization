@@ -18,9 +18,9 @@ const routes = [
         component: () => import('@/views/FeihuaView.vue')
     },
     {
-        path: '/network',
-        name: 'Network',
-        component: () => import('@/views/NetworkView.vue')
+        path: '/poetry-summary',
+        name: 'PoetrySummary',
+        component: () => import('@/views/PoetrySummaryView.vue')
     },
     {
         path: '/poet-summary',
