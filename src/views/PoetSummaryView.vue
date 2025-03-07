@@ -13,7 +13,8 @@
                 <PoetSanKeyComp :nodes="selectedSankey.nodes" :links="selectedSankey.links" />
             </div>
             <div class="right">
-                <RelationGraphComp :nodes="nodes" :links="links" :infos="infos" :id="selectedDynasty" />
+                <RelationGraphComp :nodes="selectedNodes" :links="selectedLinks" :infos="selectedInfos"
+                    :id="selectedDynasty" />
             </div>
         </div>
     </div>
@@ -34,9 +35,17 @@ import tangPoetSankey from '@/assets/data/tang/poet_sankey.json'
 import songPoetSankey from '@/assets/data/song/poet_sankey.json'
 import yuanPoetSankey from '@/assets/data/yuan/poet_sankey.json'
 
-import nodes from '@/assets/data/test/nodes.json'
-import links from '@/assets/data/test/links.json'
-import infos from '@/assets/data/test/infos.json'
+import tangNodes from '@/assets/data/tang/network/nodes.json'
+import tangLinks from '@/assets/data/tang/network/links.json'
+import tangInfos from '@/assets/data/tang/network/infos.json'
+
+import songNodes from '@/assets/data/song/network/nodes.json'
+import songLinks from '@/assets/data/song/network/links.json'
+import songInfos from '@/assets/data/song/network/infos.json'
+
+import yuanNodes from '@/assets/data/yuan/network/nodes.json'
+import yuanLinks from '@/assets/data/yuan/network/links.json'
+import yuanInfos from '@/assets/data/yuan/network/infos.json'
 
 import { onMounted, ref } from 'vue'
 
@@ -56,6 +65,9 @@ const selectedSankey = ref({
     nodes: [],
     links: []
 });
+const selectedNodes = ref([]);
+const selectedLinks = ref([]);
+const selectedInfos = ref({});
 
 const preprocessRegion = (region: Object) => {
     let regionList = Object.entries(region).sort((a, b) => b[1] - a[1]);
@@ -85,22 +97,31 @@ const selectDynasty = async (index: number) => {
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(tangRegion);
             selectedSankey.value = tangPoetSankey;
+            selectedNodes.value = tangNodes;
+            selectedLinks.value = tangLinks;
+            selectedInfos.value = tangInfos;
             break;
         case 1:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(songRegion);
             selectedSankey.value = songPoetSankey;
+            selectedNodes.value = songNodes;
+            selectedLinks.value = songLinks;
+            selectedInfos.value = songInfos;
             break;
         case 2:
             // @ts-ignore
             [selectedRegionName.value, selectedRegionValue.value, selectedRegionInfo.value] = preprocessRegion(yuanRegion);
             selectedSankey.value = yuanPoetSankey;
+            selectedNodes.value = yuanNodes;
+            selectedLinks.value = yuanLinks;
+            selectedInfos.value = yuanInfos;
             break;
     }
 }
 
 onMounted(async () => {
-    selectDynasty(0);
+    selectDynasty(2);
 })
 </script>
 

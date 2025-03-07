@@ -1,0 +1,137 @@
+[
+  {
+    "source": "李白",
+    "target": "杜甫",
+    "color": "#cd9957"
+  },
+  {
+    "source": "李白",
+    "target": "白居易",
+    "color": "#cd9957"
+  },
+  {
+    "source": "李白",
+    "target": "高适",
+    "color": "#cd9957"
+  },
+  {
+    "source": "李白",
+    "target": "韩愈",
+    "color": "#cd9957"
+  },
+  {
+    "source": "李白",
+    "target": "贺知章",
+    "color": "#cd9957"
+  },
+  {
+    "source": "杜甫",
+    "target": "白居易",
+    "color": "#cd9957"
+  },
+  {
+    "source": "杜甫",
+    "target": "李商隐",
+    "color": "#cd9957"
+  },
+  {
+    "source": "杜甫",
+    "target": "孟浩然",
+    "color": "#cd9957"
+  },
+  {
+    "source": "杜甫",
+    "target": "王维",
+    "color": "#cd9957"
+  },
+  {
+    "source": "杜甫",
+    "target": "岑参",
+    "color": "#cd9957"
+  },
+  {
+    "source": "李贺",
+    "target": "李商隐",
+    "color": "#cd9957"
+  },
+  {
+    "source": "李贺",
+    "target": "韩愈",
+    "color": "#cd9957"
+  },
+  {
+    "source": "李贺",
+    "target": "杜牧",
+    "color": "#cd9957"
+  },
+  {
+    "source": "杜牧",
+    "target": "韩愈",
+    "color": "#cd9957"
+  },
+  {
+    "source": "刘禹锡",
+    "target": "韩愈",
+    "color": "#cd9957"
+  },
+  {
+    "source": "陈子昂",
+    "target": "杜甫",
+    "color": "#cd9957"
+  },
+  {
+    "source": "元稹",
+    "target": "白居易",
+    "color": "#cd9957"
+  },
+  {
+    "source": "元稹",
+    "target": "韩愈",
+    "color": "#cd9957"
+  },
+  {
+    "source": "元稹",
+    "target": "刘禹锡",
+    "color": "#cd9957"
+  },
+  {
+    "source": "岑参",
+    "target": "高适",
+    "color": "#cd9957"
+  },
+  {
+    "source": "王昌龄",
+    "target": "王之涣",
+    "color": "#cd9957"
+  },
+  {
+    "source": "杨炯",
+    "target": "杜甫",
+    "color": "#cd9957"
+  },
+  {
+    "source": "韦应物",
+    "target": "韩愈",
+    "color": "#cd9957"
+  },
+  {
+    "source": "王维",
+    "target": "孟浩然",
+    "color": "#cd9957"
+  },
+  {
+    "source": "贺知章",
+    "target": "张若虚",
+    "color": "#cd9957"
+  },
+  {
+    "source": "王之涣",
+    "target": "高适",
+    "color": "#cd9957"
+  },
+  {
+    "source": "王昌龄",
+    "target": "岑参",
+    "color": "#cd9957"
+  }
+]
