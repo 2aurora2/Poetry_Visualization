@@ -1,232 +1,166 @@
 <template>
-  <div ref="mapChart" class="chart-container"></div>
+  <div id="map"></div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import * as echarts from 'echarts/core'
-import { TooltipComponent, VisualMapComponent, TitleComponent } from 'echarts/components'
-import { MapChart, ScatterChart, EffectScatterChart } from 'echarts/charts'
-import { LabelLayout } from 'echarts/features'
-import { CanvasRenderer } from 'echarts/renderers'
-import axios from 'axios'
-
-// 注册必要的 ECharts 组件
-echarts.use([
+import * as echarts from 'echarts/core';
+import {
+  TitleComponent,
+  ToolboxComponent,
   TooltipComponent,
   VisualMapComponent,
+  GeoComponent
+} from 'echarts/components';
+import { MapChart } from 'echarts/charts';
+import { CanvasRenderer } from 'echarts/renderers';
+
+import { onMounted, onUnmounted, shallowRef, watch } from "vue";
+import vintage from '@/assets/theme/vintage.json'
+import chinaJson from '@/assets/map/china.json'
+import siteJson from '@/assets/map/site.json'
+
+echarts.use([
   TitleComponent,
+  ToolboxComponent,
+  TooltipComponent,
+  VisualMapComponent,
+  GeoComponent,
   MapChart,
-  ScatterChart,
-  EffectScatterChart,
-  CanvasRenderer,
-  LabelLayout
-])
+  CanvasRenderer
+]);
 
-// 类型定义
-interface MapItem {
-  name: string
-  value: number
-}
+const props = defineProps({
+  data: {
+    type: Array,
+    required: true,
+  },
+  ratio: {
+    type: Number,
+    required: true,
+  },
+})
 
-interface GeoJson {
-  type: string
-  features: Array<{
-    properties: {
-      name: string
-      center: [number, number]
-      [key: string]: any
-    }
-    [key: string]: any
-  }>
-  [key: string]: any
-}
-
-// 配置项
-const publicUrl = 'https://geo.datav.aliyun.com/areas_v2/bound/'
-const tangData: MapItem[] = [
-  { name: "河南省", value: 50 },
-  // ...其他数据
-]
-
-const songData: MapItem[] = [
-  { name: "陕西省", value: 30 },
-  // ...其他数据
-]
-
-const yuanData: MapItem[] = [
-  { name: "浙江省", value: 20 },
-  // ...其他数据
-]
-
-// Vue 相关引用
-const mapChart = ref<HTMLElement>()
-let chart: echarts.ECharts | null = null
-
-// 获取地理数据
-async function getGeoJson(jsonName: string): Promise<GeoJson> {
-  const response = await axios.get(`${publicUrl}${jsonName}`)
-  return response.data
-}
-
-// 初始化图表
-async function initChart() {
-  if (!mapChart.value) return
-
-  chart = echarts.init(mapChart.value)
-
-  try {
-    const [alladcode, chinaGeoJson] = await Promise.all([
-      getGeoJson('all.json'),
-      getGeoJson('100000_full.json')
-    ])
-
-    initEcharts(chinaGeoJson, '诗人籍贯分布演变', chart)
-  } catch (error) {
-    console.error('Failed to load geo data:', error)
-  }
-}
-
-// ECharts 配置
-function initEcharts(geoJson: GeoJson, name: string, chart: echarts.ECharts) {
-  const geoCoordMap: Record<string, [number, number]> = {}
-
-  geoJson.features.forEach(v => {
-    const name = v.properties.name
-    if (name) {
-      geoCoordMap[name] = v.properties.center
-    }
-  })
-
-  echarts.registerMap(name, geoJson as any)
-
-  const convertData = (data: MapItem[]) => {
-    return data.map(item => {
-      const coord = geoCoordMap[item.name]
-      return coord ? { name: item.name, value: coord.concat(item.value) } : null
-    }).filter(item => item !== null)
+const graph = shallowRef();
+const initChart = () => {
+  if (graph.value) {
+    graph.value.dispose();
   }
 
-  const option: echarts.EChartsCoreOption = {
-    title: {
-      text: name,
+  var chartDom = document.getElementById('map')!;
+  if (!chartDom) return;
+  chartDom.style.width = '100%';
+  chartDom.style.height = '100%';
+  let themeObj = JSON.parse(JSON.stringify(vintage))
+  echarts.registerTheme('vintage', themeObj)
+  graph.value = echarts.init(chartDom, 'vintage');
+
+  echarts.registerMap('china', chinaJson);
+
+  const d = [];
+  for (const key in props.data) {
+    d.push({
+      name: key,
+      value: siteJson[key].concat([props.data[key]])
+    })
+  }
+
+  const option = {
+    title:{
+      text: '诗人地域分布图',
       left: 'center',
-      top: '4%',
-      textStyle: {
+      textStyle:{
         fontFamily: 'TitleFont',
-        fontSize: 25,
+        fontSize: 26,
       }
     },
-    tooltip: {
-      triggerOn: "mousemove",
-      formatter: (params: any) => {
-        const value = isNaN(params.value) ? 0 : params.value
-        return `<span>${params.name}：</span><br/><span>值：${value}</span>`
-      },
-      backgroundColor: 'rgba(29, 38, 71)',
-      extraCssText: 'box-shadow:0 0 4px rgba(11, 19, 43,0.8)',
-    },
     geo: {
-      show: true,
-      top: '10%',
-      map: name,
-      label: {
-        show: false,
-        emphasis: {
-          show: true,
-          color: "#31322c",
-        }
-      },
-      roam: false,
+      map: 'china',
+      roam: true,
+      zoom: 1.25,
       itemStyle: {
-        areaColor: '#fff',
-        borderColor: '#686a67',
-        emphasis: {
-          areaColor: '#00828B',
-        }
+        areaColor: '#9ba99599',
+        borderColor: '#19595699',
+        borderWidth: 1,
       },
+      // 设置高亮状态下的多边形和标签样式
+      emphasis: {
+        // 设置区域样式
+        itemStyle: {
+          areaColor: "#9ba995", // 黄色
+          borderColor: "#195956", // 描边颜色黄色
+        },
+        // 设置字体
+        label: {
+          fontSize: 12,
+          color: "#000000",
+        },
+      }
     },
     series: [
       {
-        name: '唐',
-        type: 'effectScatter',
-        coordinateSystem: 'geo',
-        data: convertData(tangData),
-        symbolSize: (val: any) => val[2] / 5,
-        itemStyle: {
-          color: 'red'
-        },
-        rippleEffect: {
-          scale: 2.5,
-          brushType: 'stroke'
-        }
+        type: 'map',
+        map: 'china',
+        geoIndex: 0
       },
       {
-        name: '宋',
         type: 'effectScatter',
+        data: d,
+        avoidLabelOverlap: true,
         coordinateSystem: 'geo',
-        data: convertData(songData),
-        symbolSize: (val: any) => val[2] / 5,
-        itemStyle: {
-          color: 'blue'
+        symbolSize: (data: any) => {
+          return Math.sqrt(data[2]) * props.ratio;
         },
+        showEffectOn: 'render',
         rippleEffect: {
-          scale: 2.5,
-          brushType: 'stroke'
-        }
-      },
-      {
-        name: '元',
-        type: 'effectScatter',
-        coordinateSystem: 'geo',
-        data: convertData(yuanData),
-        symbolSize: (val: any) => val[2] / 5,
-        itemStyle: {
-          color: 'green'
+          brushType: 'fill',
+          color: '#d5cf6d',
+          scale: 5,
         },
-        rippleEffect: {
-          scale: 2.5,
-          brushType: 'stroke'
-        }
+        label: {
+          show: false,
+          formatter: '{b}',
+          position: 'top',
+          fontSize: 13,
+          color: '#000000',
+          fontWeight: 300,
+        },
+        labelLayout: {
+          hideOverlap: true
+        },
+        itemStyle: {
+          color: '#e8738e',
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip: {
+          show: true,
+          formatter: (param: any) => {
+            return param.value[2]
+          }
+        },
+        zlevel: 1,
       }
-    ],
-    legend: {
-      data: ['唐', '宋', '元'],
-      bottom: '5%',
-      right: '5%',
-      textStyle: {
-        fontSize: 16,
-        color: '#333'
-      },
-      selected: {
-        '唐': true,
-        '宋': true,
-        '元': true
-      }
-    },
+    ]
   }
-
-  chart.setOption(option)
-
-  // 响应式调整
-  const resizeHandler = () => chart?.resize()
-  window.addEventListener('resize', resizeHandler)
-
-  // 清理事件监听
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', resizeHandler)
-    chart?.dispose()
-  })
+  graph.value.setOption(option);
 }
 
+watch(() => props.data, () => {
+  initChart();
+})
+
 onMounted(() => {
-  initChart()
+  initChart();
+})
+
+onUnmounted(() => {
+  if (graph.value) {
+    graph.value.dispose();
+  }
 })
 </script>
 
-<style scoped>
-.chart-container {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style scoped lang="scss"></style>

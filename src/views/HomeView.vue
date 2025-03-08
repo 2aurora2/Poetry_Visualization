@@ -15,7 +15,7 @@
         <BarChartComp :selected-dynasty="selectedDynasty"/>
       </div>
       <div class="middle-column">
-        <ChinaMapComp />
+        <ChinaMapComp :data="regionData[selectedDynasty]" :ratio="ratios[selectedDynasty]"/>
       </div>
       <div class="right-column">
         <ScatterComp :selected-dynasty="selectedDynasty"/>
@@ -30,8 +30,14 @@ import BarChartComp from '../components/BarChartComp.vue';
 import ScatterComp from '../components/ScatterComp.vue';
 import ChinaMapComp from '../components/ChinaMapComp.vue';
 
+import tangRegionData from '@/assets/data/tang/region.json';
+import songRegionData from '@/assets/data/song/region.json';
+import yuanRegionData from '@/assets/data/yuan/region.json';
+
 const dynasties = ['唐', '宋', '元'];
 const selectedDynasty = ref(0);
+const regionData = [tangRegionData, songRegionData, yuanRegionData];
+const ratios = [1.1, 1.2, 2.5]
 const selectDynasty = (index: number) => {
   selectedDynasty.value = index;
 };
@@ -43,7 +49,7 @@ const selectDynasty = (index: number) => {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 10px;
 }
 
