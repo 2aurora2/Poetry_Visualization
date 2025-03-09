@@ -78,16 +78,16 @@ const initChart = () => {
       roam: true,
       zoom: 1.25,
       itemStyle: {
-        areaColor: '#9ba99599',
-        borderColor: '#19595699',
+        areaColor: '#9ba99555',
+        borderColor: '#19595655',
         borderWidth: 1,
       },
       // 设置高亮状态下的多边形和标签样式
       emphasis: {
         // 设置区域样式
         itemStyle: {
-          areaColor: "#9ba995", // 黄色
-          borderColor: "#195956", // 描边颜色黄色
+          areaColor: "#9ba995",
+          borderColor: "#195956", 
         },
         // 设置字体
         label: {
@@ -114,7 +114,7 @@ const initChart = () => {
         rippleEffect: {
           brushType: 'fill',
           color: '#d5cf6d',
-          scale: 5,
+          scale: 2,
         },
         label: {
           show: false,

@@ -1,24 +1,20 @@
 <template>
   <div class="container">
     <div class="button-container">
-      <button
-        v-for="(dynasty, index) in dynasties"
-        :key="index"
-        :class="['dynasty-button', { active: selectedDynasty === index }]"
-        @click="selectDynasty(index)"
-      >
+      <button v-for="(dynasty, index) in dynasties" :key="index"
+        :class="['dynasty-button', { active: selectedDynasty === index }]" @click="selectDynasty(index)">
         {{ dynasty }}
       </button>
     </div>
     <div class="chart-container">
       <div class="left-column">
-        <BarChartComp :selected-dynasty="selectedDynasty"/>
+        <BarChartComp :selected-dynasty="selectedDynasty" />
       </div>
       <div class="middle-column">
-        <ChinaMapComp :data="regionData[selectedDynasty]" :ratio="ratios[selectedDynasty]"/>
+        <ChinaMapComp :data="regionData[selectedDynasty]" :ratio="ratios[selectedDynasty]" />
       </div>
       <div class="right-column">
-        <ScatterComp :selected-dynasty="selectedDynasty"/>
+        <ScatterComp :selected-dynasty="selectedDynasty" />
       </div>
     </div>
   </div>
@@ -92,11 +88,13 @@ const selectDynasty = (index: number) => {
   height: 100%;
   display: flex;
   flex-direction: row;
-  margin-top: 5px;
+  justify-content: center;
+
 }
 
 .left-column {
   flex: 1;
+  margin-left: 64px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -114,6 +112,6 @@ const selectDynasty = (index: number) => {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  margin-right: 64px;
 }
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div ref="barChart" style="width: 60%; height: 60%;"></div>
+  <div ref="barChart" style="width: 100%; height: 60%;"></div>
 </template>
 
 <script setup>
@@ -28,7 +28,7 @@ let chart = null;
 
 onMounted(() => {
   if (!barChart.value) return;
-  chart = echarts.init(barChart.value); 
+  chart = echarts.init(barChart.value);
   renderChart();
 });
 
@@ -47,19 +47,25 @@ const renderChart = () => {
       data: totalPoems.map((value, index) => ({
         value,
         itemStyle: {
-          color: props.selectedDynasty === index ? highlightColor : defaultColor, 
+          color: props.selectedDynasty === index ? highlightColor : defaultColor,
         },
       })),
     },
   ];
 
   chart.setOption({
+    grid: { // 新增 grid 配置
+      left: '10%',   // 增加左边距
+      right: '20%',
+      containLabel: true
+    },
     title: {
       text: '诗词总量柱状图',
       textStyle: {
         fontFamily: 'TitleFont',
         fontSize: 25,
       },
+      left: 'center',
     },
     textStyle: {
       fontFamily: 'ContentFont',
@@ -100,5 +106,4 @@ const renderChart = () => {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
