@@ -33,7 +33,7 @@ import yuanRegionData from '@/assets/data/yuan/region.json';
 const dynasties = ['唐', '宋', '元'];
 const selectedDynasty = ref(0);
 const regionData = [tangRegionData, songRegionData, yuanRegionData];
-const ratios = [1.1, 1.2, 2.5]
+const ratios = [1.5, 2.1, 3.1]
 const selectDynasty = (index: number) => {
   selectedDynasty.value = index;
 };
@@ -98,6 +98,7 @@ const selectDynasty = (index: number) => {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  margin-bottom: 32px;
 }
 
 .middle-column {
@@ -113,5 +114,6 @@ const selectDynasty = (index: number) => {
   justify-content: center;
   align-items: flex-end;
   margin-right: 64px;
+  margin-bottom: 64px;
 }
 </style>

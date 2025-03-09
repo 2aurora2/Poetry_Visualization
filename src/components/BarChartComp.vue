@@ -1,5 +1,5 @@
 <template>
-  <div ref="barChart" style="width: 100%; height: 60%;"></div>
+  <div ref="barChart" style="width: 100%; height: 70%;"></div>
 </template>
 
 <script setup>
@@ -22,7 +22,7 @@ const props = defineProps({
   selectedDynasty: {
     type: Number,
     default: null,
-  },
+  }
 });
 let chart = null;
 
@@ -56,7 +56,7 @@ const renderChart = () => {
   chart.setOption({
     grid: { // 新增 grid 配置
       left: '10%',   // 增加左边距
-      right: '20%',
+      right: '10%',
       containLabel: true
     },
     title: {

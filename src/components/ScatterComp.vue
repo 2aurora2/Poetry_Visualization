@@ -1,5 +1,5 @@
 <template>
-    <div ref="scatterChart" style="width: 100%; height: 60%;"></div>
+    <div ref="scatterChart" style="width: 100%; height: 70%;"></div>
 </template>
 
 <script setup lang="ts">
