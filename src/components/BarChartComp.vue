@@ -1,5 +1,5 @@
 <template>
-  <div ref="barChart" style="width: 100%; height: 70%;"></div>
+  <div ref="barChart" style="width: 100%; height: 40%;"></div>
 </template>
 
 <script setup>
@@ -55,8 +55,8 @@ const renderChart = () => {
 
   chart.setOption({
     grid: { // 新增 grid 配置
-      left: '10%',   // 增加左边距
-      right: '10%',
+      left: '2%',   // 增加左边距
+      right: '12%',
       containLabel: true
     },
     title: {
@@ -100,7 +100,15 @@ const renderChart = () => {
         },
       },
     },
-    yAxis: { type: 'value' },
+    yAxis: {
+      type: 'value',
+      axisLabel: {
+        formatter: (value) => `${(value / 10000).toFixed(1)}w`, // 转换为万单位
+        fontFamily: 'ContentFont',
+        fontSize: 16,
+        fontWeight: 'bold'
+      }
+    },
     series,
   });
 };

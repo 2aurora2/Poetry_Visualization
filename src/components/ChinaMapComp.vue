@@ -65,10 +65,10 @@ const initChart = () => {
   }
 
   const option = {
-    title:{
+    title: {
       text: '诗人地域分布图',
       left: 'center',
-      textStyle:{
+      textStyle: {
         fontFamily: 'TitleFont',
         fontSize: 26,
       }
@@ -87,12 +87,13 @@ const initChart = () => {
         // 设置区域样式
         itemStyle: {
           areaColor: "#9ba995",
-          borderColor: "#195956", 
+          borderColor: "#195956",
         },
         // 设置字体
         label: {
-          fontSize: 12,
+          fontSize: 14,
           color: "#000000",
+          fontFamily: 'ContentFont'
         },
       }
     },

@@ -31,6 +31,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     ScatterComp: typeof import('./src/components/ScatterComp.vue')['default']
     SpecificCateTreemap: typeof import('./src/components/SpecificCateTreemap.vue')['default']
+    SubMapComp: typeof import('./src/components/SubMapComp.vue')['default']
     SunBurstComp: typeof import('./src/components/SunBurstComp.vue')['default']
     TimelineScatterComp: typeof import('./src/components/TimelineScatterComp.vue')['default']
     WordCloudComp: typeof import('./src/components/WordCloudComp.vue')['default']

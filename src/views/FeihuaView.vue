@@ -165,6 +165,7 @@ $color-text: #491f1f; // 文字颜色
 
 .feihua-container {
     width: 100%;
+    height: 100%;
     flex-grow: 1;
     display: flex;
     flex-direction: row;

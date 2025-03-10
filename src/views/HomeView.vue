@@ -7,13 +7,23 @@
       </button>
     </div>
     <div class="chart-container">
-      <div class="left-column">
+      <div class="left-column aside-container">
+        <SubMapComp :mType="subMapType[selectedDynasty][0]" :data="subMapData[selectedDynasty][0]"
+          :ratio="ratios[selectedDynasty]" />
+        <div class="intro-txt">
+          {{ subMapIntro[dynasties[selectedDynasty]][0] }}
+        </div>
         <BarChartComp :selected-dynasty="selectedDynasty" />
       </div>
       <div class="middle-column">
         <ChinaMapComp :data="regionData[selectedDynasty]" :ratio="ratios[selectedDynasty]" />
       </div>
-      <div class="right-column">
+      <div class="right-column aside-container">
+        <SubMapComp :mType="subMapType[selectedDynasty][1]" :data="subMapData[selectedDynasty][1]"
+          :ratio="ratios[selectedDynasty]" />
+        <div class="intro-txt">
+          {{ subMapIntro[dynasties[selectedDynasty]][1] }}
+        </div>
         <ScatterComp :selected-dynasty="selectedDynasty" />
       </div>
     </div>
@@ -30,10 +40,26 @@ import tangRegionData from '@/assets/data/tang/region.json';
 import songRegionData from '@/assets/data/song/region.json';
 import yuanRegionData from '@/assets/data/yuan/region.json';
 
+import tangSubRegionLeftData from '@/assets/data/tang/sub_region_left.json';
+import songSubRegionLeftData from '@/assets/data/song/sub_region_left.json';
+import yuanSubRegionLeftData from '@/assets/data/yuan/sub_region_left.json';
+import tangSubRegionRightData from '@/assets/data/tang/sub_region_right.json';
+import songSubRegionRightData from '@/assets/data/song/sub_region_right.json';
+import yuanSubRegionRightData from '@/assets/data/yuan/sub_region_right.json';
+
+import subMapIntro from '@/assets/data/sub_map_intro.json'
+
+// tang: left-0, right-1
+// song: left-1, right-2
+// yuan: left-3, right-1
+const subMapData = [[tangSubRegionLeftData, tangSubRegionRightData], [songSubRegionLeftData, songSubRegionRightData], [yuanSubRegionLeftData, yuanSubRegionRightData]];
+const subMapType = [[0, 1], [2, 3], [4, 5]];
+
 const dynasties = ['唐', '宋', '元'];
 const selectedDynasty = ref(0);
 const regionData = [tangRegionData, songRegionData, yuanRegionData];
-const ratios = [1.5, 2.1, 3.1]
+const ratios = [1.5, 2.1, 3.1];
+
 const selectDynasty = (index: number) => {
   selectedDynasty.value = index;
 };
@@ -57,14 +83,16 @@ const selectDynasty = (index: number) => {
   margin-bottom: 10px;
 }
 
-.button-container button:nth-child(1){
+.button-container button:nth-child(1) {
   background-image: url('../assets/images/dynasty/tang.png');
 }
-.button-container button:nth-child(2){
-  background-image: url('../assets/images/dynasty/song.png'); 
+
+.button-container button:nth-child(2) {
+  background-image: url('../assets/images/dynasty/song.png');
 }
-.button-container button:nth-child(3){
-  background-image: url('../assets/images/dynasty/yuan.png'); 
+
+.button-container button:nth-child(3) {
+  background-image: url('../assets/images/dynasty/yuan.png');
 }
 
 .dynasty-button {
@@ -72,13 +100,14 @@ const selectDynasty = (index: number) => {
   height: 32px;
   font-family: 'TitleFont';
   border-radius: 50%;
-  background-size: cover;       /* 覆盖整个容器 */
-  background-position: center;  /* 图片居中显示 */
-  background-repeat: no-repeat; /* 禁止重复平铺 */
-  border:none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
@@ -124,5 +153,21 @@ const selectDynasty = (index: number) => {
   align-items: flex-end;
   margin-right: 64px;
   margin-bottom: 64px;
+}
+
+.aside-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .intro-txt {
+    font-family: 'ContentFont';
+    font-size: 20px;
+    margin-top: 8px;
+    width: 90%;
+    margin-bottom: 8%;
+  }
 }
 </style>

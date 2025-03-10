@@ -15,7 +15,7 @@ const navItems = [
     { title: '江山诗脉', link: '/home' },
     { title: '诗海词云', link: '/poetry-summary' },
     { title: '诗络万象', link: '/poet-summary' },
-    { title: '诗人生平录', link: '/poet-details' },
+    { title: '诗人行状', link: '/poet-details' },
     { title: '飞花擂台', link: '/feihua' },
 ];
 
@@ -39,7 +39,9 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 .nav-bar {
     width: 100%;
     margin: 0 auto;
-    height: 75px;
+    height: 70px;
+    min-height: 70px;
+    max-height: 70px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -47,7 +49,8 @@ watch(() => router.currentRoute.value.path, (newPath) => {
     position: relative;
     z-index: 1;
     background-color: rgba(185, 184, 182, 0.735);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    flex-shrink: 0; /* 防止flex容器压缩高度 */
 }
 
 .nav-item {

@@ -200,8 +200,8 @@ onMounted(() => {
     height: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
+    margin-top: 8px;
 
     .left {
         width: 55%;
