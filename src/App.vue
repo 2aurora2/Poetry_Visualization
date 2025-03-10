@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <div class="global-bg"></div>
+    <MusicPlayComp/>
     <NavbarComp v-if="!isEntry" />
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">
@@ -14,7 +15,7 @@
 .app-container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

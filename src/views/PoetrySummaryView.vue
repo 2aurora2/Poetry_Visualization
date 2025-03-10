@@ -48,7 +48,7 @@ const selectDynasty = (index: number) => {
 <style scoped lang="scss">
 .analysis-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,34 +70,34 @@ const selectDynasty = (index: number) => {
 
       .button-container {
         display: flex;
+        width: 45px;
         flex-direction: column;
+        align-items: center;
         gap: 10px;
 
         .dynasty-button {
-          width: 35px;
-          height: 35px;
-          font-family: 'TitleFont';
-          border-radius: 50%;
-          background-color: rgba(60, 60, 60, 0.1);
-          border: 2px solid #ccc;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          font-size: 25px;
-          font-weight: bold;
-          color: #333;
-          transition: all 0.3s ease;
-
-          &:hover {
-            background-color: rgba(60, 60, 60, 0.2);
-          }
+            width: 32px;
+            height: 32px;
+            font-family: 'TitleFont';
+            border-radius: 50%;
+            background-size: cover;       /* 覆盖整个容器 */
+            background-position: center;  /* 图片居中显示 */
+            background-repeat: no-repeat; /* 禁止重复平铺 */
+            border:none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            color: #000000;
+            transition: all 0.3s ease;
         }
 
         .active {
-          background-color: #4CAF50;
-          color: white;
-          border-color: #4CAF50;
+            width: 40px;
+            height: 40px;
+            font-size: 25px;
         }
       }
     }
@@ -124,5 +124,15 @@ const selectDynasty = (index: number) => {
       font-weight: bolder;
     }
   }
+}
+
+.button-container button:nth-child(1){
+  background-image: url('../assets/images/dynasty/tang.png');
+}
+.button-container button:nth-child(2){
+  background-image: url('../assets/images/dynasty/song.png'); 
+}
+.button-container button:nth-child(3){
+  background-image: url('../assets/images/dynasty/yuan.png'); 
 }
 </style>

@@ -46,41 +46,50 @@ const selectDynasty = (index: number) => {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 10px;
 }
 
 .button-container {
+  height: 45px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.button-container button:nth-child(1){
+  background-image: url('../assets/images/dynasty/tang.png');
+}
+.button-container button:nth-child(2){
+  background-image: url('../assets/images/dynasty/song.png'); 
+}
+.button-container button:nth-child(3){
+  background-image: url('../assets/images/dynasty/yuan.png'); 
 }
 
 .dynasty-button {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   font-family: 'TitleFont';
   border-radius: 50%;
-  background-color: rgba(60, 60, 60, 0.1);
-  border: 2px solid #ccc;
+  background-size: cover;       /* 覆盖整个容器 */
+  background-position: center;  /* 图片居中显示 */
+  background-repeat: no-repeat; /* 禁止重复平铺 */
+  border:none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: #000000;
   transition: all 0.3s ease;
 }
 
-.dynasty-button:hover {
-  background-color: rgba(60, 60, 60, 0.2);
-}
-
 .active {
-  background-color: #4CAF50;
-  color: white;
-  border-color: #4CAF50;
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
 }
 
 .chart-container {

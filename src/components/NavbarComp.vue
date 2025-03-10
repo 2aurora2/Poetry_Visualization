@@ -39,7 +39,7 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 .nav-bar {
     width: 100%;
     margin: 0 auto;
-    height: 70px;
+    height: 75px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;

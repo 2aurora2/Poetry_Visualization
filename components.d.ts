@@ -17,6 +17,7 @@ declare module 'vue' {
     ElSpace: typeof import('element-plus/es')['ElSpace']
     ElTour: typeof import('element-plus/es')['ElTour']
     ElTourStep: typeof import('element-plus/es')['ElTourStep']
+    MusicPlayComp: typeof import('./src/components/MusicPlayComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
     PersonalNetworkComp: typeof import('./src/components/PersonalNetworkComp.vue')['default']
     PieComp: typeof import('./src/components/PieComp.vue')['default']
