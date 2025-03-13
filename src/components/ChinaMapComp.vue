@@ -65,6 +65,16 @@ const initChart = () => {
   }
 
   const option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: (params: any) => {
+        return `<strong>${params.name}</strong></br>诗人数量：${params.value[2]}`;
+      },
+      textStyle: {
+        fontFamily: 'ContentFont',
+        fontSize: 18,
+      }
+    },
     title: {
       text: '诗人地域分布图',
       left: 'center',
@@ -99,11 +109,6 @@ const initChart = () => {
     },
     series: [
       {
-        type: 'map',
-        map: 'china',
-        geoIndex: 0
-      },
-      {
         type: 'effectScatter',
         data: d,
         avoidLabelOverlap: true,
@@ -124,6 +129,7 @@ const initChart = () => {
           fontSize: 13,
           color: '#000000',
           fontWeight: 300,
+          fontFamily: 'ContentFont'
         },
         labelLayout: {
           hideOverlap: true
@@ -137,10 +143,7 @@ const initChart = () => {
           }
         },
         tooltip: {
-          show: true,
-          formatter: (param: any) => {
-            return param.value[2]
-          }
+          show: true
         },
         zlevel: 1,
       }

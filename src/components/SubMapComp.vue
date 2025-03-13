@@ -27,6 +27,16 @@ import { onMounted, onUnmounted, shallowRef, watch, nextTick } from "vue";
 import vintage from '@/assets/theme/vintage.json'
 import siteJson from '@/assets/map/site.json'
 
+echarts.use([
+    TitleComponent,
+    ToolboxComponent,
+    TooltipComponent,
+    VisualMapComponent,
+    GeoComponent,
+    MapChart,
+    CanvasRenderer
+]);
+
 const mapType = [AreaOne, AreaTwo, AreaTwo, AreaThree, AreaFour, AreaTwo]
 
 const mapTitle = [
@@ -82,6 +92,16 @@ const initChart = async () => {
     }
 
     const option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: (params: any) => {
+                return `<strong>${params.name}</strong></br>诗人数量：${params.value[2]}`;
+            },
+            textStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 16,
+            }
+        },
         title: {
             text: mapTitle[props.mType],
             left: 'center',
@@ -117,11 +137,6 @@ const initChart = async () => {
         },
         series: [
             {
-                type: 'map',
-                map: `submap_${props.mType}`,
-                geoIndex: 0
-            },
-            {
                 type: 'effectScatter',
                 data: d,
                 avoidLabelOverlap: true,
@@ -142,6 +157,7 @@ const initChart = async () => {
                     fontSize: 13,
                     color: '#000000',
                     fontWeight: 300,
+                    fontFamily: 'ContentFont'
                 },
                 labelLayout: {
                     hideOverlap: true
@@ -155,10 +171,7 @@ const initChart = async () => {
                     }
                 },
                 tooltip: {
-                    show: true,
-                    formatter: (param: any) => {
-                        return param.value[2]
-                    }
+                    show: true
                 },
                 zlevel: 1,
             }
