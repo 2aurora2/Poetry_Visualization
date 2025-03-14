@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <RelationGraphComp :nodes="selectedNodes" :links="selectedLinks" :infos="selectedInfos"
-                    :id="selectedDynasty" />
+                    :id="selectedDynasty" :group="groups[selectedDynasty]"/>
             </div>
         </div>
     </div>
@@ -72,6 +72,11 @@ const selectedSankey = ref({
 const selectedNodes = ref([]);
 const selectedLinks = ref([]);
 const selectedInfos = ref({});
+const groups = ref([
+    ['浪漫主义诗派', '现实主义诗派', '山水田园诗派', '边塞诗派'],
+    ['豪放派', '婉约派'],
+    ['豪放派', '清丽派']
+])
 const legend = ref([
     [
         {
@@ -175,10 +180,13 @@ onMounted(async () => {
         height: 32px;
         font-family: 'TitleFont';
         border-radius: 50%;
-        background-size: cover;       /* 覆盖整个容器 */
-        background-position: center;  /* 图片居中显示 */
-        background-repeat: no-repeat; /* 禁止重复平铺 */
-        border:none;
+        background-size: cover;
+        /* 覆盖整个容器 */
+        background-position: center;
+        /* 图片居中显示 */
+        background-repeat: no-repeat;
+        /* 禁止重复平铺 */
+        border: none;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -196,14 +204,16 @@ onMounted(async () => {
     }
 }
 
-.dynasty-choose button:nth-child(1){
+.dynasty-choose button:nth-child(1) {
     background-image: url('../assets/images/dynasty/tang.png');
 }
-.dynasty-choose button:nth-child(2){
-    background-image: url('../assets/images/dynasty/song.png'); 
+
+.dynasty-choose button:nth-child(2) {
+    background-image: url('../assets/images/dynasty/song.png');
 }
-.dynasty-choose button:nth-child(3){
-    background-image: url('../assets/images/dynasty/yuan.png'); 
+
+.dynasty-choose button:nth-child(3) {
+    background-image: url('../assets/images/dynasty/yuan.png');
 }
 
 .poet-summary-view {

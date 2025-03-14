@@ -54,6 +54,11 @@ const props = defineProps({
     id: {
         type: Number,
         required: true,
+    },
+    group: {
+        type: Array,
+        required: true,
+        default: () => []
     }
 });
 const graph = shallowRef();
@@ -269,6 +274,7 @@ const initEcharts = () => {
                                         <strong>出生年份：</strong>${params.data.birth}<br/>
                                         <strong>死亡年份：</strong>${params.data.death}<br/>
                                         <strong>常驻地：</strong>${params.data.address}<br/>
+                                        <strong>所属派系：</strong>${props.group[params.data.category - 1]}<br/>
                                     `;
                         } else if (params.dataType === 'edge') {
                             return `${params.data.source} ↔︎ ${params.data.target}`;
