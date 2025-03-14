@@ -14,14 +14,18 @@
                     <div class="chart-title">诗词意象占比图</div>
                     <PieComp :data="poetImagery" />
                 </div>
+                <div class="word">
+                    <div class="chart-title">诗词频次词云图</div>
+                    <WordCloudComp :words="selectedWordCloudWords" :title="false" />
+                </div>
                 <div class="emotion">
-                    <div class="chart-title">诗词情感分布雷达图</div>
+                    <div class="chart-title">诗词情感分布图</div>
                     <RadarComp :indicator="poetEmotionIndicator" :value="poetEmotionValue" />
                 </div>
             </div>
         </div>
         <div class="right">
-            <div class="chart-title">{{ poetName }}的“社交圈”</div>
+            <div class="chart-title">{{ selectedName }}的“社交圈”</div>
             <PersonalNetworkComp :nodes="poetNodes" :links="poetLinks" />
         </div>
     </div>
@@ -48,6 +52,8 @@ import tangImagery from '@/assets/data/tang/imagery.json'
 import songImagery from '@/assets/data/song/imagery.json'
 import yuanImagery from '@/assets/data/yuan/imagery.json'
 
+import wordCountDetails from '@/assets/data/word_cloud_details.json'
+
 import { Search } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
 import type { ILink, INode, IPoet } from '../interface/poet'
@@ -56,6 +62,7 @@ import CONST from '../const'
 let tangPoets = Object.keys(tangPoetInfo);
 let songPoets = Object.keys(songPoetInfo);
 let yuanPoets = Object.keys(yuanPoetInfo);
+let wordPoets = Object.keys(wordCountDetails);
 
 const poetName = ref('孟浩然');
 const poetInfo = ref<IPoet>(CONST.DEFAULT_POET);
@@ -64,6 +71,8 @@ const poetEmotionValue = ref<Array<any>>([]);
 const poetImagery = ref<Array<any>>([]);
 const poetNodes = ref<Array<INode>>([]);
 const poetLinks = ref<Array<ILink>>([]);
+const selectedWordCloudWords = ref<Array<any>>([]);
+const selectedName = ref('');
 
 const preprocessNetworkData = (info: Array) => {
     let tempNodes = new Set();
@@ -131,6 +140,10 @@ const queryPoet = () => {
         // @ts-ignore
         ElMessage.warning('请输入诗人姓名');
         return;
+    }
+    selectedName.value = poetName.value;
+    if (wordPoets.includes(poetName.value)) {
+        selectedWordCloudWords.value = wordCountDetails[poetName.value];
     }
     if (tangPoets.includes(poetName.value)) {
         poetInfo.value = tangPoetInfo[poetName.value];  // 诗人基本信息
@@ -204,7 +217,7 @@ onMounted(() => {
     margin-top: 8px;
 
     .left {
-        width: 55%;
+        width: 60%;
         height: 95%;
         display: flex;
         flex-direction: column;
@@ -249,19 +262,24 @@ onMounted(() => {
             justify-content: center;
 
             .imagery {
-                flex: 1.2;
+                flex: 1.35;
                 height: 100%;
             }
 
             .emotion {
-                flex: 1;
+                flex: 1.25;
+                height: 100%;
+            }
+
+            .word {
+                flex: 1.35;
                 height: 100%;
             }
         }
     }
 
     .right {
-        width: 45%;
+        width: 40%;
         height: 95%;
         display: flex;
         flex-direction: column;

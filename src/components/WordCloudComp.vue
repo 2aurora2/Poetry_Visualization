@@ -17,6 +17,10 @@ const props = defineProps({
   words: {
     type: Array,
     required: true
+  },
+  title: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -41,7 +45,7 @@ const normalizeData = (data: any[]) => {
   const maxValue = Math.max(...values);
   return data.map(item => ({
     ...item,
-    originalValue: item.value, 
+    originalValue: item.value,
     normalizedValue: (item.value - minValue) / (maxValue - minValue)
   }));
 };
@@ -69,6 +73,7 @@ const updateChart = (words: any[]) => {
       }
     },
     title: {
+      show: props.title,
       text: '诗词双字词云图',
       left: 'center',
       textStyle: {

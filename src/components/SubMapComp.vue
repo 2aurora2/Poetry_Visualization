@@ -120,6 +120,9 @@ const initChart = async () => {
                 borderColor: '#19595655',
                 borderWidth: 1,
             },
+            tooltip:{
+                show: false
+            },
             // 设置高亮状态下的多边形和标签样式
             emphasis: {
                 // 设置区域样式

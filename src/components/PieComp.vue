@@ -30,7 +30,7 @@ const initPie = () => {
         graph.value.dispose();
     }
     var chartDom = document.getElementById('pie')!;
-    if(!chartDom)
+    if (!chartDom)
         return;
     chartDom.style.width = '100%';
     chartDom.style.height = '100%';
@@ -57,12 +57,13 @@ const initPie = () => {
             trigger: 'item'
         },
         legend: {
+            show: false,
             left: 'center',
-            top: '80%',
+            top: '70%',
             orient: 'horizontal',
             textStyle: {
                 fontFamily: 'ContentFont',
-                fontSize: 20,
+                fontSize: 15,
             }
         },
         label: {
@@ -72,8 +73,8 @@ const initPie = () => {
             {
                 name: '',
                 type: 'pie',
-                top: '-15%',
-                radius: ['20%', '60%'],
+                // top: '-30%',
+                radius: ['20%', '65%'],
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
@@ -81,18 +82,22 @@ const initPie = () => {
                     borderWidth: 2,
                 },
                 label: {
-                    show: false,
-                    position: 'center'
+                    show: true,
+                    position: 'outside',
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    textBorderWidth: -100,
                 },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: 40,
-                        fontWeight: 'bold'
-                    }
-                },
+                // emphasis: {
+                //     label: {
+                //         show: true,
+                //         fontSize: 40,
+                //         fontWeight: 'bold'
+                //     }
+                // },
                 labelLine: {
-                    show: false
+                    show: true,
+                    smooth: 0.8,
                 },
                 data: props.data,
                 tooltip: {

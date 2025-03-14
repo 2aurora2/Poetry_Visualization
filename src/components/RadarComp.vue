@@ -12,7 +12,6 @@ echarts.use([TitleComponent, LegendComponent, RadarChart, CanvasRenderer]);
 
 import { onMounted, watch, shallowRef } from 'vue';
 import vintage from '@/assets/theme/vintage.json';
-import { TextStyle } from 'pixi.js';
 
 const graph = shallowRef();
 
@@ -58,7 +57,8 @@ const initRadar = () => {
             axisName: {
                 color: '#000000',
                 fontFamily: 'ContentFont',
-                fontSize: 20
+                fontSize: 20,
+                fontWeight: 'bold',
             },
 
             splitArea: {
