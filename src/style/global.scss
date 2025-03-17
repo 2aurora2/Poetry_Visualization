@@ -45,6 +45,30 @@ body {
     z-index: -1;
 }
 
+
+:global(.el-tour__footer) {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+:global(.el-tour__header) {
+    display: none;
+}
+
+:global(.el-tour__content) {
+    border-color: transparent;
+}
+
+:global(.el-tour__content::before) {
+    content: none;
+    border: none;
+}
+
+:global(.el-tour__content::after) {
+    content: none;
+    border: none;
+}
+
 @font-face {
     font-family: 'TitleFont';
     src: url('../assets/fonts/FZZJ-YLWBJW.TTF');

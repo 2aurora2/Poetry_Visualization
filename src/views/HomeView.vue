@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <button class="tour-button" circle @click="startTour"></button>
     <div class="button-container">
       <button v-for="(dynasty, index) in dynasties" :key="index"
         :class="['dynasty-button', { active: selectedDynasty === index }]" @click="selectDynasty(index)">
@@ -27,14 +28,31 @@
         <ScatterComp :selected-dynasty="selectedDynasty" />
       </div>
     </div>
+
+    <el-tour id="el-tour" v-model="tourVisible" :z-index="3000">
+      <el-tour-step v-for="(step, index) in tourSteps" :key="index" :target="step.target" :placement="step.placement"
+        :content-style="contentStyle" :next-button-props="{ children: '下一步' }" :prev-button-props="{ children: '上一步' }"
+        :show-arrow="false" :show-close="false">
+        <template #header style="display: none;"></template>
+        <template #default>
+          <TourComp :content="step.content" />
+        </template>
+      </el-tour-step>
+      <template #indicators="{ }">
+        <span></span>
+      </template>
+    </el-tour>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onBeforeUnmount } from 'vue';
+import { ElTour, ElTourStep } from 'element-plus';
+import 'element-plus/dist/index.css';
 import BarChartComp from '../components/BarChartComp.vue';
 import ScatterComp from '../components/ScatterComp.vue';
 import ChinaMapComp from '../components/ChinaMapComp.vue';
+import SubMapComp from '../components/SubMapComp.vue';
 
 import tangRegionData from '@/assets/data/tang/region.json';
 import songRegionData from '@/assets/data/song/region.json';
@@ -63,6 +81,41 @@ const ratios = [1.5, 2.1, 3.1];
 const selectDynasty = (index: number) => {
   selectedDynasty.value = index;
 };
+
+const tourVisible = ref(false);
+
+const startTour = () => {
+  tourVisible.value = true;
+};
+
+const tourSteps = ref([
+  {
+    target: '#map',
+    placement: 'left' as const,
+    content: '此地图聚焦各朝代诗人地域祖籍分析，轻点地图，随线条流转，探寻诗人诞生地，解锁朝代文化版图背后的诗意脉络 。',
+  },
+  {
+    target: '#barChart',
+    placement: 'left' as const,
+    content: '这个柱状图展示了不同朝代诗人的创作数量，您可以从中了解每个朝代诗人的创作热度和趋势。',
+  },
+  {
+    target: '#scatterChart',
+    placement: 'left' as const,
+    content: '这个散点图展示了不同诗人的创作特征，您可以从中了解每个朝代诗人的创作风格和特点。',
+  }
+])
+
+// 引导窗口样式
+const contentStyle = {
+  padding: '10px',
+  background: 'transparent',
+  border: 'none !important',
+}
+
+onBeforeUnmount(() => {
+  tourVisible.value = false;
+});
 </script>
 
 <style scoped>
@@ -72,6 +125,31 @@ const selectDynasty = (index: number) => {
   align-items: center;
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.tour-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: 100;
+  cursor: pointer;
+  border: none;
+  background-image: url('../assets/images/guide.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  padding: 0;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.tour-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 .button-container {
@@ -127,7 +205,6 @@ const selectDynasty = (index: number) => {
   display: flex;
   flex-direction: row;
   justify-content: center;
-
 }
 
 .left-column {
@@ -169,5 +246,21 @@ const selectDynasty = (index: number) => {
     width: 90%;
     margin-bottom: 8%;
   }
+}
+
+:global(.el-tour__content) {
+  width: 350px;
+}
+
+:global(.el-button) {
+  background-color: #db9963;
+  border: none;
+  font-family: 'ContentFont';
+  font-size: 16px;
+}
+
+:global(.el-button:hover) {
+  background-color: #c1793f;
+  color: #000000;
 }
 </style>

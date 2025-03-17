@@ -49,7 +49,7 @@ const initChart = () => {
   var chartDom = document.getElementById('map')!;
   if (!chartDom) return;
   chartDom.style.width = '100%';
-  chartDom.style.height = '100%';
+  chartDom.style.height = '90%';
   let themeObj = JSON.parse(JSON.stringify(vintage))
   echarts.registerTheme('vintage', themeObj)
   graph.value = echarts.init(chartDom, 'vintage');
@@ -85,8 +85,8 @@ const initChart = () => {
     },
     geo: {
       map: 'china',
-      roam: true,
-      zoom: 1.25,
+      roam: false,
+      zoom: 1.2,
       itemStyle: {
         areaColor: '#9ba99555',
         borderColor: '#19595655',
