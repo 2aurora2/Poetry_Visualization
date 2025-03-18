@@ -72,7 +72,6 @@ const initChart = async () => {
     }
     await nextTick();
     var chartDom = document.getElementById(`submap_${props.mType}`)!;
-    console.log(chartDom);
 
     if (!chartDom) return;
     chartDom.style.width = '100%';
@@ -112,7 +111,7 @@ const initChart = async () => {
         },
         geo: {
             map: `submap_${props.mType}`,
-            roam: true,
+            roam: false,
             zoom: 1,
             top: '20%',
             itemStyle: {

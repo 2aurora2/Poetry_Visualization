@@ -12,6 +12,11 @@ declare module 'vue' {
     ChatComp: typeof import('./src/components/ChatComp.vue')['default']
     ChinaMapComp: typeof import('./src/components/ChinaMapComp.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
+    ElSpace: typeof import('element-plus/es')['ElSpace']
+    ElTour: typeof import('element-plus/es')['ElTour']
+    ElTourStep: typeof import('element-plus/es')['ElTourStep']
+    Live2dComponent: typeof import('./src/components/Live2dComponent.vue')['default']
     MusicPlayComp: typeof import('./src/components/MusicPlayComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
     PersonalNetworkComp: typeof import('./src/components/PersonalNetworkComp.vue')['default']
@@ -28,6 +33,7 @@ declare module 'vue' {
     SubMapComp: typeof import('./src/components/SubMapComp.vue')['default']
     SunBurstComp: typeof import('./src/components/SunBurstComp.vue')['default']
     TimelineScatterComp: typeof import('./src/components/TimelineScatterComp.vue')['default']
+    TourComp: typeof import('./src/components/TourComp.vue')['default']
     WordCloudComp: typeof import('./src/components/WordCloudComp.vue')['default']
   }
 }

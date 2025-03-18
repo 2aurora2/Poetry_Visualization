@@ -32,9 +32,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import 'element-plus/dist/index.css';
 import BarChartComp from '../components/BarChartComp.vue';
 import ScatterComp from '../components/ScatterComp.vue';
 import ChinaMapComp from '../components/ChinaMapComp.vue';
+import SubMapComp from '../components/SubMapComp.vue';
 
 import tangRegionData from '@/assets/data/tang/region.json';
 import songRegionData from '@/assets/data/song/region.json';
@@ -72,6 +74,31 @@ const selectDynasty = (index: number) => {
   align-items: center;
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.tour-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: 100;
+  cursor: pointer;
+  border: none;
+  background-image: url('../assets/images/guide.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  padding: 0;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.tour-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 .button-container {
@@ -127,7 +154,6 @@ const selectDynasty = (index: number) => {
   display: flex;
   flex-direction: row;
   justify-content: center;
-
 }
 
 .left-column {
