@@ -25,8 +25,8 @@ echarts.use([
 
 import { onMounted } from 'vue';
 import vintage from '@/assets/theme/vintage.json'
-
 import timeline from '@/assets/data/timeline.json'
+import keypoint from '@/assets/data/keypoint.json'
 
 onMounted(() => {
     var chartDom = document.getElementById('timeline-scatter');
@@ -61,9 +61,9 @@ onMounted(() => {
 
     // 关键时间节点
     const keyPoints = Array.from([
-        Array.from([650, 718, 756, 793, 818]),
+        Array.from([650, 718, 756, 793, 836]),
         Array.from([1126, 1185]),
-        Array.from([1296, 1321])
+        Array.from([1296, 1307])
     ]);
     const keyPointsSize = [1000, 200, 50]
     keyPoints.forEach((points, index) => {
@@ -121,7 +121,16 @@ onMounted(() => {
             tooltip: {
                 formatter: function (params) {
                     if (keyPoints[index].includes(params.data[0])) {
-                        return `【KeyPoint：${params.data[0]}年】`
+                        const dynasty = dynasties[index].substring(0, 1);
+                        const keypointInfo = keypoint[dynasty].find(item => item.keypoint === params.data[0]);
+                        return `
+                            <div style="max-width: 300px">
+                                <h3 style="margin: 0; font-size: 18px">${keypointInfo.title}</h3>
+                                <p style="margin: 5px 0">【${params.data[0]}年】</p>
+                                <img src="${keypointInfo.image}" style="width: 100%; margin: 5px 0"/>
+                                <p style="margin: 5px 0; line-height: 1.3">${keypointInfo.text}</p>
+                            </div>
+                        `;
                     }
                     return `年份：${params.data[0]}<br/>创作数量：${params.data[1]}`
                 },
@@ -138,7 +147,8 @@ onMounted(() => {
                 fontFamily: 'ContentFont',
                 fontSize: 16,
                 fontWeight: 'bold'
-            }
+            },
+            extraCssText: 'max-width: 400px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.2); white-space: normal;'
         },
         title: title,
         singleAxis: singleAxis,
