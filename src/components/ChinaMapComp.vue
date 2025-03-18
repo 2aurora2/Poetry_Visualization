@@ -31,7 +31,7 @@ echarts.use([
 
 const props = defineProps({
   data: {
-    type: Array,
+    type: Object,
     required: true,
   },
   ratio: {
@@ -80,7 +80,7 @@ const initChart = () => {
       left: 'center',
       textStyle: {
         fontFamily: 'TitleFont',
-        fontSize: 26,
+        fontSize: 28,
       }
     },
     geo: {

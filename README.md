@@ -35,4 +35,3 @@ npm run dev
 
 (1) `main`：主分支，存放的是项目的最新版本
 (2) `gh-pages`：Github Pages部署的分支，存放的是项目最新的打包代码
-(3) `el-tour`：使用了Element Plus的漫游式引导组件的项目版本，由于live2d的渲染卡顿问题未解决的暂时弃用版本

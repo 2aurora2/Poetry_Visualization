@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <button class="tour-button" v-show="selectedDynasty === 0" @click="startTour">界面导引</button>
     <div class="button-container">
       <button v-for="(dynasty, index) in dynasties" :key="index"
         :class="['dynasty-button', { active: selectedDynasty === index }]" @click="selectDynasty(index)">
@@ -10,7 +11,7 @@
       <div class="left-column aside-container">
         <SubMapComp :mType="subMapType[selectedDynasty][0]" :data="subMapData[selectedDynasty][0]"
           :ratio="ratios[selectedDynasty]" />
-        <div class="intro-txt">
+        <div class="intro-txt" id="intro-txt">
           {{ subMapIntro[dynasties[selectedDynasty]][0] }}
         </div>
         <BarChartComp :selected-dynasty="selectedDynasty" />
@@ -27,11 +28,31 @@
         <ScatterComp :selected-dynasty="selectedDynasty" />
       </div>
     </div>
+
+    <div class="tour-comp" v-if="tourVisible">
+      <TourComp 
+        :content="currentIntro" 
+        :stepCount="tourSteps.length" 
+        v-model="currentIndex" 
+        :left="tourSteps[currentIndex].left"
+        :bottom="tourSteps[currentIndex].bottom"
+      />
+    </div>
+
+    <el-tour id="el-tour" v-model="tourVisible" :z-index="3000" v-model:current="currentIndex">
+      <el-tour-step v-for="(step, index) in tourSteps" :key="index" :target="step.target" :placement="step.placement">
+        <template #header style="display: none;"></template>
+      </el-tour-step>
+      <template #indicators="{ }">
+        <span></span>
+      </template>
+    </el-tour>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onBeforeUnmount, watch } from 'vue';
+import { ElTour, ElTourStep } from 'element-plus';
 import 'element-plus/dist/index.css';
 import BarChartComp from '../components/BarChartComp.vue';
 import ScatterComp from '../components/ScatterComp.vue';
@@ -65,6 +86,78 @@ const ratios = [1.5, 2.1, 3.1];
 const selectDynasty = (index: number) => {
   selectedDynasty.value = index;
 };
+
+// 引导相关
+const tourVisible = ref(false);
+const currentIndex = ref(0);
+const currentIntro = ref('');
+
+// 引导步骤
+const tourSteps = ref([
+  {
+    target: '#total',
+    placement: 'left' as const,
+    content: '本页面展示了中国古代唐、宋、元三个朝代诗人的地域分布与文化特征分析。通过交互式地图和数据可视化，您可以探索诗人祖籍分布格局、区域文化差异以及时空演变。点击朝代按钮切换不同时期的数据，深入了解中国古代文学地理的独特魅力和历史变迁。',
+    left: 5,
+    bottom: 2
+  },
+  {
+    target: '#map',
+    placement: 'left' as const,
+    content: '唐朝诗人地域分布图展现了盛唐时期诗人祖籍的地理分布格局。从图中可见，长安（今西安）、洛阳等地区诗人密集，呈现出"北强南弱"的特点。通过地图可视化，我们能清晰感受唐代文化重心偏于中原和关中地区的历史特征，反映了当时社会政治格局对文学发展的深远影响。',
+    left: 5,
+    bottom: 2
+  },
+  {
+    target: '#submap_0',
+    placement: 'left' as const,
+    content: '关中地区诗人分布图细致呈现了唐朝政治文化中心的诗人聚集情况。作为唐朝首都所在，长安及周边地区培养和吸引了大量文人雅士，形成了浓厚的文化氛围。这一区域的诗人创作风格多样，既有边塞雄浑之作，也有山水田园之风，构成了唐诗多元化的重要来源。',
+    left: 5,
+    bottom: 2
+  },
+  {
+    target: '#submap_1',
+    placement: 'left' as const,
+    content: '江南地区诗人分布图展示了唐朝南方文化中心的诗人分布状况。虽然数量不及北方，但江南地区以其秀美山水孕育了一批风格独特的诗人，李白、杜牧等人在此留下了不朽篇章。江南诗人作品多带有婉约清丽的特色，丰富了唐诗的艺术表现形式。',
+    left: 5,
+    bottom: 2
+  },
+  {
+    target: '#scatter_chart',
+    placement: 'left' as const,
+    content: '唐朝诗人时空分布散点图将诗人的生卒年代与地域结合展示，横轴代表时间，纵轴展示地域分类。通过这一图表，我们能够观察到唐朝不同时期诗人地域分布的变化趋势，如初唐、盛唐、中唐和晚唐时期的诗人地域差异，反映了唐朝文化重心的历时性变迁。',
+    left: 5,
+    bottom: 2
+  },
+  {
+    target: '#bar_chart',
+    placement: 'left' as const,
+    content: '唐朝诗人数量地区分布柱状图直观展示了各主要地区诗人的数量对比。图表清晰反映出关中、河南、江浙等地区的诗人数量优势，帮助我们理解唐代文学创作的地域集中度和分散度，揭示了政治中心与文化中心的紧密关联。',
+    left: 75,
+    bottom: 2
+  }
+])
+
+// 监听引导步骤修改引导话语
+watch(currentIndex, () => {
+  if (currentIndex.value === tourSteps.value.length) {
+    tourVisible.value = false;
+    currentIndex.value = 0;
+    return;
+  }
+  currentIntro.value = tourSteps.value[currentIndex.value]["content"];
+}, {
+  immediate: true
+})
+
+// 开始引导
+const startTour = () => {
+  tourVisible.value = true;
+};
+
+onBeforeUnmount(() => {
+  tourVisible.value = false;
+});
 </script>
 
 <style scoped>
@@ -79,26 +172,30 @@ const selectDynasty = (index: number) => {
 
 .tour-button {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  top: -0.1rem;
+  left: 1rem;
+  width: auto;
+  height: 2.5rem;
+  border-radius: 1.25rem;
   z-index: 100;
   cursor: pointer;
   border: none;
-  background-image: url('../assets/images/guide.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  padding: 0;
+  background-color: #70756f2c;
+  padding: 0 1rem 0 2.8rem;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
+  display: flex;
+  align-items: center;
+  font-family: 'ContentFont';
+  font-size: 18px;
+  color: #333;
+  background-image: url('../assets/images/guide.png');
+  background-size: 2rem 2rem;
+  background-position: 0.4rem center;
+  background-repeat: no-repeat;
 
-.tour-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
+  &:hover {
+    background-color: #70756f4c;
+  }
 }
 
 .button-container {
@@ -195,5 +292,17 @@ const selectDynasty = (index: number) => {
     width: 90%;
     margin-bottom: 8%;
   }
+}
+
+.tour-comp {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 350px;
+  z-index: 4000;
+}
+
+:global(.el-tour__content) {
+  display: none;
 }
 </style>

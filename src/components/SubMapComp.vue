@@ -1,5 +1,5 @@
 <template>
-    <div :id="`submap_${props.mType}`"></div>
+    <div class="submap" :id="`submap_${props.mType}`"></div>
 </template>
 
 <script setup lang='ts'>
@@ -55,9 +55,9 @@ const props = defineProps({
         required: true
     },
     data: {
-        type: Array,
+        type: Object,
         required: true,
-        default: () => []
+        default: () => {}
     },
     ratio: {
         type: Number,

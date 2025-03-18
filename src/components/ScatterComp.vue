@@ -1,5 +1,5 @@
 <template>
-    <div id="scatterChart" ref="scatterChart" style="width: 100%; height: 40%;"></div>
+    <div id="scatter_chart" ref="scatterChart" style="width: 100%; height: 45%;"></div>
 </template>
 
 <script setup lang="ts">
@@ -44,7 +44,7 @@ const initChart = async () => {
             text: `${dynasties[props.selectedDynasty]}诗人享年数据分布`,
             textStyle: {
                 fontFamily: 'TitleFont',
-                fontSize: 25,
+                fontSize: 20,
             },
             left: 'center'
         },

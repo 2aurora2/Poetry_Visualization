@@ -1,5 +1,5 @@
 <template>
-  <div ref="barChart" style="width: 100%; height: 40%;"></div>
+  <div id="bar_chart" ref="barChart" style="width: 100%; height: 45%;"></div>
 </template>
 
 <script setup>
@@ -63,7 +63,7 @@ const renderChart = () => {
       text: '诗词总量柱状图',
       textStyle: {
         fontFamily: 'TitleFont',
-        fontSize: 25,
+        fontSize: 20,
       },
       left: 'center',
     },
@@ -95,7 +95,6 @@ const renderChart = () => {
           show: true,
           backgroundColor: '#a6917e',
           color: '#FFFFFF',
-          padding: [3, 5],
           borderRadius: 3,
         },
       },

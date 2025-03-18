@@ -37,8 +37,8 @@ watch(() => router.currentRoute.value.path, (newPath) => {
 
 <style scoped lang="scss">
 .nav-bar {
-    width: 100%;
-    margin: 0 auto;
+    width: 100vw !important;
+    margin: 0;
     height: 70px;
     min-height: 70px;
     max-height: 70px;
@@ -48,7 +48,7 @@ watch(() => router.currentRoute.value.path, (newPath) => {
     box-sizing: border-box;
     position: relative;
     z-index: 1;
-    background-color: rgba(185, 184, 182, 0.735);
+    background-color: rgba(185, 184, 182, 0.735) !important;
     margin-bottom: 4px;
     flex-shrink: 0; /* 防止flex容器压缩高度 */
 }
