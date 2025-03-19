@@ -128,7 +128,7 @@ onMounted(() => {
                                 <h3 style="margin: 0; font-size: 18px">${keypointInfo.title}</h3>
                                 <p style="margin: 5px 0">【${params.data[0]}年】</p>
                                 <img src="${keypointInfo.image}" style="width: 100%; margin: 5px 0"/>
-                                <p style="margin: 5px 0; line-height: 1.3">${keypointInfo.text}</p>
+                                <p style="margin: 5px 0; line-height: 1.3;text-indent: 2em;">${keypointInfo.text}</p>
                             </div>
                         `;
                     }
