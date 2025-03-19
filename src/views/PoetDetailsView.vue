@@ -19,13 +19,13 @@
                     <WordCloudComp :words="selectedWordCloudWords" :title="false" />
                 </div>
                 <div class="emotion">
-                    <div class="chart-title">诗词情感分布图</div>
+                    <div class="chart-title">诗词情感雷达图</div>
                     <RadarComp :indicator="poetEmotionIndicator" :value="poetEmotionValue" />
                 </div>
             </div>
         </div>
         <div class="right">
-            <div class="chart-title">{{ selectedName }}的“社交圈”</div>
+            <div class="chart-title">{{ selectedName }}的“朋友圈”</div>
             <PersonalNetworkComp :nodes="poetNodes" :links="poetLinks" />
         </div>
     </div>

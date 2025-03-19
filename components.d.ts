@@ -16,6 +16,7 @@ declare module 'vue' {
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
     PersonalNetworkComp: typeof import('./src/components/PersonalNetworkComp.vue')['default']
     PieComp: typeof import('./src/components/PieComp.vue')['default']
+    PiePlaceComp: typeof import('./src/components/PiePlaceComp.vue')['default']
     PoetCardComp: typeof import('./src/components/PoetCardComp.vue')['default']
     PoetryCateBarComp: typeof import('./src/components/PoetryCateBarComp.vue')['default']
     PoetSanKeyComp: typeof import('./src/components/PoetSanKeyComp.vue')['default']

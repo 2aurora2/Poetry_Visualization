@@ -60,7 +60,7 @@ const renderChart = () => {
       containLabel: true
     },
     title: {
-      text: '诗词总量柱状图',
+      text: '诗词总量图',
       textStyle: {
         fontFamily: 'TitleFont',
         fontSize: 20,

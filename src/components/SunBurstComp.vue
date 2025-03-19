@@ -113,26 +113,26 @@ const data = [
         name: '豪放派',
         itemStyle: { color: '#e0b890' }, // 浅黄
         children: [
-            { name: '喜', value: 894, itemStyle: { color: '#f0d8a8' } }, // 浅黄
-            { name: '怒', value: 391, itemStyle: { color: '#b8860b' } }, // 深黄
-            { name: '悲', value: 832, itemStyle: { color: '#8b7355' } }, // 深黄
-            { name: '乐', value: 831, itemStyle: { color: '#e0b890' } }, // 浅黄
-            { name: '思', value: 736, itemStyle: { color: '#d2b48c' } }, // 中黄
-            { name: '惧', value: 118, itemStyle: { color: '#8b4513' } }, // 深黄
-            { name: '忧', value: 380, itemStyle: { color: '#a0522d' } } // 棕黄
+          { name: '喜', value: 894, itemStyle: { color: '#f0d8a8' } }, // 浅黄
+          { name: '怒', value: 391, itemStyle: { color: '#b8860b' } }, // 深黄
+          { name: '悲', value: 832, itemStyle: { color: '#8b7355' } }, // 深黄
+          { name: '乐', value: 831, itemStyle: { color: '#e0b890' } }, // 浅黄
+          { name: '思', value: 736, itemStyle: { color: '#d2b48c' } }, // 中黄
+          { name: '惧', value: 118, itemStyle: { color: '#8b4513' } }, // 深黄
+          { name: '忧', value: 380, itemStyle: { color: '#a0522d' } } // 棕黄
         ]
       },
       {
         name: '清丽派',
         itemStyle: { color: '#d2b48c' }, // 中黄
         children: [
-            { name: '喜', value: 770, itemStyle: { color: '#f0d8a8' } }, // 浅黄
-            { name: '怒', value: 107, itemStyle: { color: '#b8860b' } }, // 深黄
-            { name: '悲', value: 902, itemStyle: { color: '#8b7355' } }, // 深黄
-            { name: '乐', value: 820, itemStyle: { color: '#e0b890' } }, // 浅黄
-            { name: '思', value: 924, itemStyle: { color: '#d2b48c' } }, // 中黄
-            { name: '惧', value: 401, itemStyle: { color: '#8b4513' } }, // 深黄
-            { name: '忧', value: 665, itemStyle: { color: '#a0522d' } } // 棕黄
+          { name: '喜', value: 770, itemStyle: { color: '#f0d8a8' } }, // 浅黄
+          { name: '怒', value: 107, itemStyle: { color: '#b8860b' } }, // 深黄
+          { name: '悲', value: 902, itemStyle: { color: '#8b7355' } }, // 深黄
+          { name: '乐', value: 820, itemStyle: { color: '#e0b890' } }, // 浅黄
+          { name: '思', value: 924, itemStyle: { color: '#d2b48c' } }, // 中黄
+          { name: '惧', value: 401, itemStyle: { color: '#8b4513' } }, // 深黄
+          { name: '忧', value: 665, itemStyle: { color: '#a0522d' } } // 棕黄
         ]
       }
     ]
@@ -141,35 +141,35 @@ const data = [
 
 const option = {
   title: {
-        text: '朝代-派系-情感旭日图', 
-        left: 'center',
-        textStyle: {
-            fontFamily: 'TitleFont',
-            fontSize: 25,
-        }
+    text: '朝代-派系-情感旭日图',
+    left: 'center',
+    textStyle: {
+      fontFamily: 'TitleFont',
+      fontSize: 25,
+    }
+  },
+  series: {
+    type: 'sunburst',
+    data: data,
+    label: {
+      fontFamily: 'ContentFont',
+      fontSize: 12,
+      fontWeight: 'bold',
     },
-    series: {
-      type: 'sunburst',
-      data: data,
+    emphasis: {
+      focus: 'ancestor',
       label: {
-        fontFamily: 'ContentFont', 
-        fontSize: 12,      
+        show: true,
+        rotate: 0,
+        fontSize: 24,
         fontWeight: 'bold',
-      },
-      emphasis: {
-          focus: 'ancestor',
-          label: {
-            show: true,
-            rotate: 0,
-            fontSize: 24,
-            fontWeight: 'bold',
-        }
-      },
-      radius: [30, '90%'],
-      itemStyle: {
-          borderRadius: 7,
-          borderWidth: 2
-      },
+      }
+    },
+    radius: [30, '90%'],
+    itemStyle: {
+      borderRadius: 7,
+      borderWidth: 2
+    },
     levels: [
       {
         label: { show: true }
@@ -181,21 +181,21 @@ const option = {
         label: { show: true, rotate: 'tangential' }
       },
       {
-          r0: '70%',
-          r: '75%',
-          label: {
-              show: true,
-              position: 'outside',
-              distance:10,
-              minAngle:3.5
-          },
-          labelLine: {
-            show: true,
-            showAbove: true,
-            smooth: true,
-            minTurnAngle: 45
-          }
+        r0: '70%',
+        r: '75%',
+        label: {
+          show: true,
+          position: 'outside',
+          distance: 10,
+          minAngle: 3.5
+        },
+        labelLine: {
+          show: true,
+          showAbove: true,
+          smooth: true,
+          minTurnAngle: 45
         }
+      }
     ]
   }
 };
@@ -224,5 +224,4 @@ const handleResize = () => {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -45,7 +45,7 @@ const initEcharts = () => {
 
     option = {
         title: {
-            text: '诗词自然科学学科分布柱状图',
+            text: '诗词-自然科学内容关联图',
             left: 'center',
             textStyle: {
                 fontFamily: 'TitleFont',

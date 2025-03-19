@@ -76,7 +76,7 @@ const initChart = () => {
       }
     },
     title: {
-      text: '诗人地域分布图',
+      text: '诗人籍贯分布图',
       left: 'center',
       textStyle: {
         fontFamily: 'TitleFont',

@@ -29,14 +29,9 @@
       </div>
     </div>
 
-    <div class="tour-comp" v-if="tourVisible">
-      <TourComp 
-        :content="currentIntro" 
-        :stepCount="tourSteps.length" 
-        v-model="currentIndex" 
-        :left="tourSteps[currentIndex].left"
-        :bottom="tourSteps[currentIndex].bottom"
-      />
+    <div class="tour-comp" v-if="tourVisible" :style="{ bottom: `${tourSteps[currentIndex]['tour_bottom']}%` }">
+      <TourComp :content="currentIntro" :stepCount="tourSteps.length" v-model="currentIndex"
+        :left="tourSteps[currentIndex].left" :bottom="tourSteps[currentIndex].bottom" />
     </div>
 
     <el-tour id="el-tour" v-model="tourVisible" :z-index="3000" v-model:current="currentIndex">
@@ -51,6 +46,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
 import { ref, onBeforeUnmount, watch } from 'vue';
 import { ElTour, ElTourStep } from 'element-plus';
 import 'element-plus/dist/index.css';

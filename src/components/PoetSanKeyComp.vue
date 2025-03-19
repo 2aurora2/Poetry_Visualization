@@ -44,7 +44,7 @@ const initEcharts = () => {
 
     option = {
         title: {
-            text: '诗人情感派系桑基图',
+            text: '情感-诗人-派系桑基图',
             left: 'center',
             textStyle: {
                 fontFamily: 'TitleFont',

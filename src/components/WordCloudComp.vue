@@ -32,7 +32,7 @@ const initChart = () => {
   const chartDom = document.getElementById('word-cloud'); // 获取 DOM 容器
   if (!chartDom) return;
   chartDom.style.width = '100%';
-  chartDom.style.height = '90%';
+  chartDom.style.height = '100%';
   echarts.registerTheme('vintage', vintage); // 注册主题
   myChart.value = echarts.init(chartDom, 'vintage'); // 初始化 ECharts 实例
   updateChart(props.words);
@@ -74,7 +74,7 @@ const updateChart = (words: any[]) => {
     },
     title: {
       show: props.title,
-      text: '诗词双字词云图',
+      text: '双字词云图',
       left: 'center',
       textStyle: {
         fontFamily: 'TitleFont',
