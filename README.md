@@ -34,4 +34,5 @@ npm run dev
 ## 分支说明
 
 (1) `main`：主分支，存放的是项目的最新版本
+
 (2) `gh-pages`：Github Pages部署的分支，存放的是项目最新的打包代码
