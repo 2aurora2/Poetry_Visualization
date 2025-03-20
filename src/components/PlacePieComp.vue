@@ -1,7 +1,5 @@
 <template>
-    <div id="place-pie">
-        三层饼图
-    </div>
+    <div id="place-pie"></div>
 </template>
 
 <script setup lang='ts'>
@@ -60,7 +58,7 @@ const initPie = () => {
 
     option = {
         title: {
-            text: '诗词景点分布占比图',
+            text: '朝代-景点-诗词数量玫瑰图',
             left: 'center',
             top: 0,
             textStyle: {
@@ -80,7 +78,9 @@ const initPie = () => {
                 radius: ['5%', '25%'],
                 roseType: 'radius',
                 itemStyle: {
-                    borderRadius: 5
+                    borderRadius: 5,
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
                 },
                 label: {
                     show: false
@@ -106,7 +106,9 @@ const initPie = () => {
                     show: false
                 },
                 itemStyle: {
-                    borderRadius: 5
+                    borderRadius: 5,
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
                 },
                 labelLine: {
                     show: false
@@ -126,7 +128,9 @@ const initPie = () => {
                 radius: ['55%', '75%'],
                 roseType: 'radius',
                 itemStyle: {
-                    borderRadius: 5
+                    borderRadius: 5,
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
                 },
                 labelLine: {
                     show: true,

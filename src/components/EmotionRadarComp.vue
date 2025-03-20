@@ -40,7 +40,7 @@ const initRadar = () => {
     }
     var chartDom = document.getElementById('radar')!;
     chartDom.style.width = '100%';
-    chartDom.style.height = '98%';
+    chartDom.style.height = '100%';
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
     graph.value = echarts.init(chartDom, 'vintage');    // 初始化图表，传入主题名称

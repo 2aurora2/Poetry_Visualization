@@ -12,7 +12,7 @@
             <div class="imagery-emotion">
                 <div class="imagery">
                     <div class="chart-title">诗词意象占比图</div>
-                    <PieComp :data="poetImagery" />
+                    <ImageryPieComp :data="poetImagery" />
                 </div>
                 <div class="word">
                     <div class="chart-title">诗词频次词云图</div>
@@ -20,7 +20,7 @@
                 </div>
                 <div class="emotion">
                     <div class="chart-title">诗词情感雷达图</div>
-                    <RadarComp :indicator="poetEmotionIndicator" :value="poetEmotionValue" />
+                    <EmotionRadarComp :indicator="poetEmotionIndicator" :value="poetEmotionValue" />
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
 <script setup lang='ts'>
 // @ts-nocheck
 import PoetCardComp from '@/components/PoetCardComp.vue'
-import RadarComp from '@/components/RadarComp.vue'
+import EmotionRadarComp from '@/components/EmotionRadarComp.vue'
 
 import tangLink from '@/assets/data/tang/links_with_name.json'
 import songLink from '@/assets/data/song/links_with_name.json'
@@ -255,24 +255,24 @@ onMounted(() => {
 
         .imagery-emotion {
             width: 95%;
-            height: 45vh;
+            height: 40vh;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
 
             .imagery {
-                flex: 1.35;
+                flex: 1.3;
                 height: 100%;
             }
 
             .emotion {
-                flex: 1.25;
+                flex: 1.3;
                 height: 100%;
             }
 
             .word {
-                flex: 1.35;
+                flex: 1.3;
                 height: 100%;
             }
         }
@@ -285,6 +285,7 @@ onMounted(() => {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 3rem;
     }
 }
 

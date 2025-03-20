@@ -1,5 +1,5 @@
 <template>
-    <nav class="nav-bar">
+    <nav class="nav-bar" style="height: 70px;">
         <div class="nav-item" v-for="(item, index) in navItems" :key="index" :class="{ active: currentIndex === index }"
             @click="handleClick(index)">
             <div>{{ item.title }}</div>

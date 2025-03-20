@@ -1,5 +1,5 @@
 <template>
-    <div id="timeline-scatter" style="width: 85%;height: 160px;"></div>
+    <div id="timeline-scatter" style="width: 85%;height: 200px;"></div>
 </template>
 
 <script setup lang='ts'>
@@ -75,10 +75,22 @@ onMounted(() => {
     const title = [];
     const singleAxis = [];
     const series = [];
+    
+    // 添加主标题
+    title.push({
+        text: '创作数量分布时间轴',
+        left: 'center',
+        top: '0%',
+        textStyle: {
+            fontFamily: 'TitleFont',
+            fontSize: 25,
+        }
+    });
+    
     dynasties.forEach((dynasty, index) => {
         title.push({
             textBaseline: 'middle',
-            top: ((index + 0.5) * 100) / 3 + '%',
+            top: ((index + 0.5) * 100) / 4 + 15 + '%',
             text: dynasty,
             textStyle: {
                 fontFamily: 'TitleFont',
@@ -91,12 +103,12 @@ onMounted(() => {
             boundaryGap: false,
             min: axisData[index][0],
             max: axisData[index][axisData[index].length - 1],
-            top: (index * 100) / 3 + '%',
-            height: 100 / 3 - 15 + '%',
+            top: (index * 100) / 4 + 17 + '%',
+            height: 100 / 3 - 20 + '%',
             axisTick: {
                 interval: 20,
             },
-            axisLabel:{
+            axisLabel: {
                 fontFamily: 'ContentFont',
                 fontWeight: 'bold',
             }

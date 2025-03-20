@@ -12,7 +12,6 @@ echarts.use([TitleComponent, TooltipComponent, SankeyChart, CanvasRenderer]);
 
 import { onMounted, watch, shallowRef, nextTick } from "vue";
 import vintage from '@/assets/theme/vintage.json'
-import infographic from '@/assets/theme/infographic.json'
 
 const props = defineProps({
     nodes: {
@@ -59,17 +58,6 @@ const initEcharts = () => {
                 fontSize: 18,
             }
         },
-        // toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
-        //     show: true,
-        //     feature: {
-        //         restore: {
-        //             title: '重置'
-        //         }
-        //     },
-        //     orient: 'horizontal',
-        //     left: 'right',
-        //     top: 'top',
-        // },
         label: {
             textBorderWidth: -100,
             fontFamily: 'ContentFont',
@@ -85,7 +73,7 @@ const initEcharts = () => {
                 right: '10%',
                 lineStyle: {
                     curveness: 0.5,
-                    opacity: 0.07
+                    opacity: 0.09
                 },
                 label: {
                     fontSize: 16,
@@ -97,6 +85,17 @@ const initEcharts = () => {
                         opacity: 0.15
                     }
                 },
+                tooltip: {
+                    show: true,
+                    formatter: function (params: any) {
+                        if (params.dataType === 'node') {
+                            return params.name;
+                        }
+                        else {
+                            return `${params.data.source} -- ${params.data.target}`;
+                        }
+                    }
+                }
             }
         ]
     };

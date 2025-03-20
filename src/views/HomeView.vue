@@ -14,7 +14,7 @@
         <div class="intro-txt" id="intro-txt">
           {{ subMapIntro[dynasties[selectedDynasty]][0] }}
         </div>
-        <BarChartComp :selected-dynasty="selectedDynasty" />
+        <PoetCountBarComp :selected-dynasty="selectedDynasty" />
       </div>
       <div class="middle-column">
         <ChinaMapComp :data="regionData[selectedDynasty]" :ratio="ratios[selectedDynasty]" />
@@ -25,7 +25,7 @@
         <div class="intro-txt">
           {{ subMapIntro[dynasties[selectedDynasty]][1] }}
         </div>
-        <ScatterComp :selected-dynasty="selectedDynasty" />
+        <AgeScatterComp :selected-dynasty="selectedDynasty" />
       </div>
     </div>
 
@@ -50,8 +50,8 @@
 import { ref, onBeforeUnmount, watch } from 'vue';
 import { ElTour, ElTourStep } from 'element-plus';
 import 'element-plus/dist/index.css';
-import BarChartComp from '../components/BarChartComp.vue';
-import ScatterComp from '../components/ScatterComp.vue';
+import PoetCountBarComp from '../components/PoetryCountBarComp.vue';
+import AgeScatterComp from '../components/AgeScatterComp.vue';
 import ChinaMapComp from '../components/ChinaMapComp.vue';
 import SubMapComp from '../components/SubMapComp.vue';
 
@@ -123,34 +123,6 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   position: relative;
-}
-
-.tour-button {
-  position: absolute;
-  top: -0.1rem;
-  left: 1rem;
-  width: auto;
-  height: 2.5rem;
-  border-radius: 1.25rem;
-  z-index: 100;
-  cursor: pointer;
-  border: none;
-  background-color: #70756f2c;
-  padding: 0 1rem 0 2.8rem;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  font-family: 'ContentFont';
-  font-size: 18px;
-  color: #333;
-  background-image: url('../assets/images/guide.png');
-  background-size: 2rem 2rem;
-  background-position: 0.4rem center;
-  background-repeat: no-repeat;
-
-  &:hover {
-    background-color: #70756f4c;
-  }
 }
 
 .button-container {
@@ -253,7 +225,7 @@ onBeforeUnmount(() => {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 350px;
+  height: 380px;
   z-index: 4000;
 }
 

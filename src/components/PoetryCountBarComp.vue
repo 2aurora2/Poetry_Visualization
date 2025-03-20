@@ -60,7 +60,7 @@ const renderChart = () => {
       containLabel: true
     },
     title: {
-      text: '诗词总量图',
+      text: '朝代诗词总量图',
       textStyle: {
         fontFamily: 'TitleFont',
         fontSize: 20,
@@ -104,7 +104,7 @@ const renderChart = () => {
       axisLabel: {
         formatter: (value) => `${(value / 10000).toFixed(1)}w`, // 转换为万单位
         fontFamily: 'ContentFont',
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 'bold'
       }
     },

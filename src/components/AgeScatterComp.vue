@@ -16,7 +16,6 @@ const props = defineProps({
 
 const scatterChart = ref<HTMLElement | null>(null);
 let chart: echarts.ECharts | null = null;
-const dynasties = ['唐代', '宋代', '元代'];
 echarts.registerTheme('vintage', vintage);
 
 const loadDynastyData = async (dynasty: string) => {
@@ -41,7 +40,7 @@ const initChart = async () => {
             fontSize: 16
         },
         title: {
-            text: `${dynasties[props.selectedDynasty]}诗人享年数据分布`,
+            text: `诗人享年数据分布图`,
             textStyle: {
                 fontFamily: 'TitleFont',
                 fontSize: 20,
@@ -61,10 +60,14 @@ const initChart = async () => {
         },
         yAxis: {
             type: 'value',
-            name: '人数',
+            name: '',
             nameLocation: 'middle',
             nameGap: 40,
-            axisLabel: { show: true } 
+            axisLabel: { 
+                show: true,
+                formatter: '{value}位',
+                fontSize: 14
+            } 
         },
         series: [{
             type: 'scatter',

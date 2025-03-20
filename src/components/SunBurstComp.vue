@@ -1,5 +1,5 @@
 <template>
-  <div ref="sunBurst" style="width: 100%; height: 380px;"></div>
+  <div id="sun-burst" ref="sunBurst" style="width: 100%; height: 380px;"></div>
 </template>
 
 <script setup>

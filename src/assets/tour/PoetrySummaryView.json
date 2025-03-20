@@ -1,0 +1,42 @@
+[
+    {
+        "target": "#total",
+        "placement": "left",
+        "content": "xxx",
+        "left": 5,
+        "bottom": 2,
+        "tour_bottom": 0
+    },
+    {
+        "target": "#word-cloud",
+        "placement": "left",
+        "content": "xxx",
+        "left": 5,
+        "bottom": 2,
+        "tour_bottom": 0
+    },
+    {
+        "target": "#sun-burst",
+        "placement": "left",
+        "content": "xxx",
+        "left": 5,
+        "bottom": 2,
+        "tour_bottom": 0
+    },
+    {
+        "target": "#place-pie",
+        "placement": "left",
+        "content": "xxx",
+        "left": 5,
+        "bottom": 2,
+        "tour_bottom": 0
+    },
+    {
+        "target": "#timeline-scatter",
+        "placement": "left",
+        "content": "xxx",
+        "left": 75,
+        "bottom": 2,
+        "tour_bottom": 30
+    }
+]

@@ -4,7 +4,7 @@
             :style="{left: `${props.left}%`, bottom: `${props.bottom}%`}"></canvas>
         <div class="tour-content">
             <div class="txt-btn">
-                <p>{{ props.content }}</p>
+                <div v-html="props.content" style="text-align:justify;"></div>
                 <el-button class="next-btn" type="warning" size="default" @click="nextStep">
                     {{ props.stepCount === currentIndex + 1 ? '结束' : '下一步' }}
                 </el-button>
@@ -83,8 +83,8 @@ onUnmounted(() => {
 .live-canvas {
     position: absolute;
     z-index: 3000;
-    width: 630px;
-    height: 330px;
+    width: 680px;
+    height: 320px;
 }
 
 .tour-content {
@@ -96,11 +96,11 @@ onUnmounted(() => {
     justify-content: center;
 
     .txt-btn {
-        width: 50%;
+        width: 48%;
         font-family: 'ContentFont';
         border-radius: 16px;
         background-color: #eee9dedf;
-        padding: 8px 16px 16px 16px;
+        padding: 16px;
         z-index: 4500;
         font-size: 22px;
 
@@ -109,8 +109,14 @@ onUnmounted(() => {
         align-items: flex-end;
         justify-content: space-between;
 
-        p {
+        div {
             width: 100%;
+
+            p{
+                margin-bottom: 8px;
+                margin-top: 8px;
+                text-indent: 2em;
+            }
         }
 
         .next-btn {
@@ -118,6 +124,7 @@ onUnmounted(() => {
             z-index: 10000;
             font-family: 'ContentFont';
             font-size: 18px;
+            border-radius: 8px;
             background-color: #d7ab82;
 
             &:hover {

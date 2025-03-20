@@ -7,18 +7,26 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AgeScatterComp: typeof import('./src/components/AgeScatterComp.vue')['default']
     BarChartComp: typeof import('./src/components/BarChartComp.vue')['default']
     BubbleChartComp: typeof import('./src/components/BubbleChartComp.vue')['default']
     ChatComp: typeof import('./src/components/ChatComp.vue')['default']
     ChinaMapComp: typeof import('./src/components/ChinaMapComp.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElTour: typeof import('element-plus/es')['ElTour']
+    ElTourStep: typeof import('element-plus/es')['ElTourStep']
+    EmotionRadarComp: typeof import('./src/components/EmotionRadarComp.vue')['default']
+    ImageryPieComp: typeof import('./src/components/ImageryPieComp.vue')['default']
     MusicPlayComp: typeof import('./src/components/MusicPlayComp.vue')['default']
     NavbarComp: typeof import('./src/components/NavbarComp.vue')['default']
     PersonalNetworkComp: typeof import('./src/components/PersonalNetworkComp.vue')['default']
     PieComp: typeof import('./src/components/PieComp.vue')['default']
     PiePlaceComp: typeof import('./src/components/PiePlaceComp.vue')['default']
+    PlacePieComp: typeof import('./src/components/PlacePieComp.vue')['default']
     PoetCardComp: typeof import('./src/components/PoetCardComp.vue')['default']
+    PoetCountBarComp: typeof import('./src/components/PoetCountBarComp.vue')['default']
     PoetryCateBarComp: typeof import('./src/components/PoetryCateBarComp.vue')['default']
+    PoetryCountBarComp: typeof import('./src/components/PoetryCountBarComp.vue')['default']
     PoetSanKeyComp: typeof import('./src/components/PoetSanKeyComp.vue')['default']
     RadarComp: typeof import('./src/components/RadarComp.vue')['default']
     RelationGraphComp: typeof import('./src/components/RelationGraphComp.vue')['default']
@@ -31,5 +39,6 @@ declare module 'vue' {
     TimelineScatterComp: typeof import('./src/components/TimelineScatterComp.vue')['default']
     TourComp: typeof import('./src/components/TourComp.vue')['default']
     WordCloudComp: typeof import('./src/components/WordCloudComp.vue')['default']
+    WordPieComp: typeof import('./src/components/WordPieComp.vue')['default']
   }
 }

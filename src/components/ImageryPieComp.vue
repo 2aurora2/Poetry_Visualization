@@ -40,19 +40,6 @@ const initPie = () => {
     var option;
 
     option = {
-        // toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
-        //     show: true,
-        //     feature: {
-        //         saveAsImage: {
-        //             show: true,
-        //             title: '保存为png',
-        //             type: 'png'
-        //         }
-        //     },
-        //     orient: 'horizontal',
-        //     left: 'right',
-        //     top: 'top',
-        // },
         tooltip: {
             trigger: 'item'
         },
@@ -88,16 +75,13 @@ const initPie = () => {
                     fontWeight: 'bold',
                     textBorderWidth: -100,
                 },
-                // emphasis: {
-                //     label: {
-                //         show: true,
-                //         fontSize: 40,
-                //         fontWeight: 'bold'
-                //     }
-                // },
                 labelLine: {
                     show: true,
-                    smooth: 0.8,
+                    smooth: 0.5,
+                    lineStyle: {
+                        width: 1,
+                        opacity: 1
+                    }
                 },
                 data: props.data,
                 tooltip: {
