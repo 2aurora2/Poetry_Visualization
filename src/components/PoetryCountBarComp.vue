@@ -101,8 +101,15 @@ const renderChart = () => {
     },
     yAxis: {
       type: 'value',
+      name: '数量/万首',
+      nameLocation: 'end',
+      nameTextStyle: {
+        fontFamily: 'ContentFont',
+        fontSize: 16
+      },
+      nameGap: 10,
       axisLabel: {
-        formatter: (value) => `${(value / 10000).toFixed(1)}w`, // 转换为万单位
+        formatter: (value) => `${(value / 10000).toFixed(1)}`, // 转换为万单位
         fontFamily: 'ContentFont',
         fontSize: 14,
         fontWeight: 'bold'

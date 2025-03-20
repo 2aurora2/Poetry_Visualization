@@ -96,7 +96,7 @@ onUnmounted(() => {
     justify-content: center;
 
     .txt-btn {
-        width: 48%;
+        width: 46%;
         font-family: 'ContentFont';
         border-radius: 16px;
         background-color: #eee9dedf;

@@ -81,6 +81,13 @@ const initEcharts = () => {
         },
         yAxis: {
             type: 'value',
+            name: '数量/首',
+            nameLocation: 'end',
+            nameTextStyle:{
+                fontFamily: 'ContentFont',
+                fontSize: 16
+            },
+            nameGap: 10,
             axisLabel: {
                 show: true,
                 fontFamily: 'ContentFont',

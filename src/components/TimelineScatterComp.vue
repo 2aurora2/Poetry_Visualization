@@ -75,7 +75,7 @@ onMounted(() => {
     const title = [];
     const singleAxis = [];
     const series = [];
-    
+
     // 添加主标题
     title.push({
         text: '创作数量分布时间轴',
@@ -86,7 +86,7 @@ onMounted(() => {
             fontSize: 25,
         }
     });
-    
+
     dynasties.forEach((dynasty, index) => {
         title.push({
             textBaseline: 'middle',
@@ -103,7 +103,7 @@ onMounted(() => {
             boundaryGap: false,
             min: axisData[index][0],
             max: axisData[index][axisData[index].length - 1],
-            top: (index * 100) / 4 + 17 + '%',
+            top: (index * 100) / 4 + 20 + '%',
             height: 100 / 3 - 20 + '%',
             axisTick: {
                 interval: 20,
@@ -111,7 +111,22 @@ onMounted(() => {
             axisLabel: {
                 fontFamily: 'ContentFont',
                 fontWeight: 'bold',
-            }
+                interval: 20,
+                showMaxLabel: true,
+                formatter: function (value) {
+                    if (value === 907 || value === 1279 || value === 1368) {
+                        return value + '(年)';
+                    }
+                    return value;
+                }
+            },
+            // name: '年',
+            // nameLocation: 'end',
+            // nameGap: 8,
+            // nameTextStyle: {
+            //     fontFamily: 'ContentFont',
+            //     fontSize: 16
+            // },
         });
 
         series.push({

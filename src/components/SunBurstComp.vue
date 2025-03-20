@@ -114,11 +114,11 @@ const data = [
         itemStyle: { color: '#e0b890' }, // 浅黄
         children: [
           { name: '喜', value: 894, itemStyle: { color: '#f0d8a8' } }, // 浅黄
-          { name: '怒', value: 391, itemStyle: { color: '#b8860b' } }, // 深黄
+          { name: '怒', value: 491, itemStyle: { color: '#b8860b' } }, // 深黄
           { name: '悲', value: 832, itemStyle: { color: '#8b7355' } }, // 深黄
           { name: '乐', value: 831, itemStyle: { color: '#e0b890' } }, // 浅黄
           { name: '思', value: 736, itemStyle: { color: '#d2b48c' } }, // 中黄
-          { name: '惧', value: 118, itemStyle: { color: '#8b4513' } }, // 深黄
+          { name: '惧', value: 218, itemStyle: { color: '#8b4513' } }, // 深黄
           { name: '忧', value: 380, itemStyle: { color: '#a0522d' } } // 棕黄
         ]
       },
@@ -128,8 +128,8 @@ const data = [
         children: [
           { name: '喜', value: 770, itemStyle: { color: '#f0d8a8' } }, // 浅黄
           { name: '怒', value: 107, itemStyle: { color: '#b8860b' } }, // 深黄
-          { name: '悲', value: 902, itemStyle: { color: '#8b7355' } }, // 深黄
-          { name: '乐', value: 820, itemStyle: { color: '#e0b890' } }, // 浅黄
+          { name: '悲', value: 820, itemStyle: { color: '#8b7355' } }, // 深黄
+          { name: '乐', value: 902, itemStyle: { color: '#e0b890' } }, // 浅黄
           { name: '思', value: 924, itemStyle: { color: '#d2b48c' } }, // 中黄
           { name: '惧', value: 401, itemStyle: { color: '#8b4513' } }, // 深黄
           { name: '忧', value: 665, itemStyle: { color: '#a0522d' } } // 棕黄
@@ -143,6 +143,7 @@ const option = {
   title: {
     text: '朝代-派系-情感旭日图',
     left: 'center',
+    top: '-2%',
     textStyle: {
       fontFamily: 'TitleFont',
       fontSize: 25,
@@ -153,8 +154,9 @@ const option = {
     data: data,
     label: {
       fontFamily: 'ContentFont',
-      fontSize: 12,
+      fontSize: 14,
       fontWeight: 'bold',
+      textBorderWidth: -100,
     },
     emphasis: {
       focus: 'ancestor',
@@ -175,10 +177,10 @@ const option = {
         label: { show: true }
       },
       {
-        label: { show: true, rotate: 0, fontSize: 20 }
+        label: { show: true, rotate: 0, fontSize: 15 }
       },
       {
-        label: { show: true, rotate: 'tangential' }
+        label: { show: true, rotate: 'tangential', fontSize: 10 }
       },
       {
         r0: '70%',
@@ -186,8 +188,8 @@ const option = {
         label: {
           show: true,
           position: 'outside',
-          distance: 10,
-          minAngle: 3.5
+          distance: 4,
+          minAngle: 3.55
         },
         labelLine: {
           show: true,

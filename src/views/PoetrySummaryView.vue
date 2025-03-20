@@ -111,7 +111,7 @@ onBeforeUnmount(() => {
 
   .top-row {
     width: 99%;
-    height: 58%;
+    height: 55%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -160,7 +160,7 @@ onBeforeUnmount(() => {
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      margin-top: 2%;
+      margin-top: 1.5%;
 
 
       .left {

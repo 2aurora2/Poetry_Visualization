@@ -60,12 +60,12 @@ const initChart = async () => {
         },
         yAxis: {
             type: 'value',
-            name: '',
-            nameLocation: 'middle',
-            nameGap: 40,
+            name: '人数/位',
+            nameLocation: 'end',
+            nameGap: 10,
             axisLabel: { 
                 show: true,
-                formatter: '{value}位',
+                formatter: '{value}',
                 fontSize: 14
             } 
         },
