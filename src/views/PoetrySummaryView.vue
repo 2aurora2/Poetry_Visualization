@@ -94,6 +94,13 @@ onBeforeUnmount(() => {
 });
 </script>
 
+<style lang="scss">
+/* 不使用 scoped */
+.el-tour__content {
+  display: none !important;
+}
+</style>
+
 <style scoped lang="scss">
 .analysis-container {
   width: 100%;
@@ -198,6 +205,20 @@ onBeforeUnmount(() => {
       font-weight: bolder;
     }
   }
+
+  .tour-comp {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 380px;
+    z-index: 4000;
+  }
+
+  .tour-button {
+    position: absolute;
+    left: 1rem;
+    top: 4.5rem;
+  }
 }
 
 .button-container button:nth-child(1) {
@@ -210,23 +231,5 @@ onBeforeUnmount(() => {
 
 .button-container button:nth-child(3) {
   background-image: url('../assets/images/dynasty/yuan.png');
-}
-
-.tour-comp {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 380px;
-  z-index: 4000;
-}
-
-:global(.el-tour__content) {
-  display: none;
-}
-
-.tour-button {
-    position: absolute;
-    left: 1rem;
-    top: 4.5rem;
 }
 </style>

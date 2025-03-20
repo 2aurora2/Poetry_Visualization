@@ -8,7 +8,7 @@
         "tour_bottom": 0
     },
     {
-        "target": "#word-cloud",
+        "target": "#relation-graph",
         "placement": "left",
         "content": "xxx",
         "left": 5,
@@ -16,7 +16,7 @@
         "tour_bottom": 0
     },
     {
-        "target": "#sun-burst",
+        "target": "#sankey",
         "placement": "left",
         "content": "xxx",
         "left": 5,
@@ -24,19 +24,11 @@
         "tour_bottom": 0
     },
     {
-        "target": "#place-pie",
-        "placement": "left",
-        "content": "xxx",
-        "left": 5,
-        "bottom": 0,
-        "tour_bottom": 0
-    },
-    {
-        "target": "#timeline-scatter",
+        "target": "#region-bar",
         "placement": "left",
         "content": "xxx",
         "left": 75,
-        "bottom": 1,
+        "bottom": 0,
         "tour_bottom": 30
     }
 ]

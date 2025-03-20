@@ -1,6 +1,7 @@
 <template>
     <div class="poet-details">
-        <div class="left">
+        <div class="left" id="poet-details-left">
+            <button class="tour-button" @click="startTour">界面导引</button>
             <div class="search-box">
                 <input type="text" class="poet-search" placeholder="请输入诗人姓名" v-model="poetName"
                     @keypress.enter="queryPoet">
@@ -24,10 +25,24 @@
                 </div>
             </div>
         </div>
-        <div class="right">
+        <div class="right" id="poet-details-right">
             <div class="chart-title">{{ selectedName }}的“朋友圈”</div>
             <PersonalNetworkComp :nodes="poetNodes" :links="poetLinks" />
         </div>
+        <div class="tour-comp" v-if="tourVisible" :style="{ bottom: `${tourSteps[currentIndex]['tour_bottom']}%` }">
+            <TourComp :content="currentIntro" :stepCount="tourSteps.length" v-model="currentIndex"
+                :left="tourSteps[currentIndex].left" :bottom="tourSteps[currentIndex].bottom" />
+        </div>
+
+        <el-tour id="el-tour" v-model="tourVisible" :z-index="3000" v-model:current="currentIndex">
+            <el-tour-step v-for="(step, index) in tourSteps" :key="index" :target="step.target"
+                :placement="step.placement">
+                <template #header style="display: none;"></template>
+            </el-tour-step>
+            <template #indicators="{ }">
+                <span></span>
+            </template>
+        </el-tour>
     </div>
 </template>
 
@@ -55,7 +70,7 @@ import yuanImagery from '@/assets/data/yuan/imagery.json'
 import wordCountDetails from '@/assets/data/word_cloud_details.json'
 
 import { Search } from '@element-plus/icons-vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch, onBeforeUnmount } from 'vue'
 import type { ILink, INode, IPoet } from '../interface/poet'
 import CONST from '../const'
 
@@ -205,26 +220,59 @@ const queryPoet = () => {
 onMounted(() => {
     queryPoet();
 })
+
+// 引导相关
+const tourVisible = ref(false);
+const currentIndex = ref(0);
+const currentIntro = ref('');
+
+import PoetDetailsJson from "@/assets/tour/PoetDetailsView.json"
+// 引导步骤
+const tourSteps = ref(Array.from(PoetDetailsJson));
+
+// 监听引导步骤修改引导话语
+watch(currentIndex, () => {
+    if (currentIndex.value === tourSteps.value.length) {
+        tourVisible.value = false;
+        currentIndex.value = 0;
+        return;
+    }
+    // @ts-ignore
+    currentIntro.value = tourSteps.value[currentIndex.value]["content"];
+}, {
+    immediate: true
+})
+
+// 开始引导
+const startTour = () => {
+    tourVisible.value = true;
+};
+
+onBeforeUnmount(() => {
+    tourVisible.value = false;
+});
 </script>
 
 <style scope lang="scss">
 .poet-details {
     width: 100%;
-    height: 100%;
+    height: 98%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 8px;
+    position: relative;
 
     .left {
         width: 60%;
         height: 95%;
         display: flex;
+        position: relative;
         flex-direction: column;
         align-items: center;
 
         .search-box {
-            width: 95%;
+            width: 65%;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -280,12 +328,13 @@ onMounted(() => {
 
     .right {
         width: 40%;
-        height: 95%;
+        height: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin-top: 3rem;
+        margin-right: 1rem;
     }
 }
 
@@ -294,5 +343,23 @@ onMounted(() => {
     font-size: 25px;
     text-align: center;
     font-weight: 600;
+}
+
+.tour-comp {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 380px;
+    z-index: 4000;
+}
+
+:global(.el-tour__content) {
+    display: none;
+}
+
+.tour-button {
+    position: absolute;
+    left: 1rem;
+    top: 0;
 }
 </style>

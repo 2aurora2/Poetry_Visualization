@@ -1,0 +1,26 @@
+[
+    {
+        "target": "#total",
+        "placement": "left",
+        "content": "xxx",
+        "left": 75,
+        "bottom": 0,
+        "tour_bottom": 0
+    },
+    {
+        "target": "#poet-details-left",
+        "placement": "left",
+        "content": "xxx",
+        "left": 75,
+        "bottom": 0,
+        "tour_bottom": 0
+    },
+    {
+        "target": "#poet-details-right",
+        "placement": "left",
+        "content": "xxx",
+        "left": 5,
+        "bottom": 0,
+        "tour_bottom": 0
+    }
+]

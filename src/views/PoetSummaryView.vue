@@ -1,5 +1,6 @@
 <template>
     <div class="poet-summary-view" style="height: 100%;">
+        <button class="tour-button" v-show="selectedDynasty === 0" @click="startTour">界面导引</button>
         <div class="dynasty-choose">
             <button v-for="(dynasty, index) in dynasties" :key="index"
                 :class="['dynasty-button', { active: selectedDynasty === index }]" @click="selectDynasty(index)">
@@ -20,9 +21,24 @@
                     </div>
                 </div>
                 <RelationGraphComp :nodes="selectedNodes" :links="selectedLinks" :infos="selectedInfos"
-                    :id="selectedDynasty" :group="groups[selectedDynasty]"/>
+                    :id="selectedDynasty" :group="groups[selectedDynasty]" />
             </div>
         </div>
+
+        <div class="tour-comp" v-if="tourVisible" :style="{ bottom: `${tourSteps[currentIndex]['tour_bottom']}%` }">
+            <TourComp :content="currentIntro" :stepCount="tourSteps.length" v-model="currentIndex"
+                :left="tourSteps[currentIndex].left" :bottom="tourSteps[currentIndex].bottom" />
+        </div>
+
+        <el-tour id="el-tour" v-model="tourVisible" :z-index="3000" v-model:current="currentIndex">
+            <el-tour-step v-for="(step, index) in tourSteps" :key="index" :target="step.target"
+                :placement="step.placement">
+                <template #header style="display: none;"></template>
+            </el-tour-step>
+            <template #indicators="{ }">
+                <span></span>
+            </template>
+        </el-tour>
     </div>
 </template>
 
@@ -52,7 +68,7 @@ import yuanNodes from '@/assets/data/yuan/network/nodes.json'
 import yuanLinks from '@/assets/data/yuan/network/links.json'
 import yuanInfos from '@/assets/data/yuan/network/infos.json'
 
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch, onBeforeUnmount } from 'vue'
 
 const modules = import.meta.glob('/src/assets/images/network/*');
 const avatar = async (name) => {
@@ -161,9 +177,40 @@ const selectDynasty = async (index: number) => {
 onMounted(async () => {
     selectDynasty(0);
 })
+
+// 引导相关
+const tourVisible = ref(false);
+const currentIndex = ref(0);
+const currentIntro = ref('');
+
+import PoetSummaryViewJson from "@/assets/tour/PoetSummaryView.json"
+// 引导步骤
+const tourSteps = ref(Array.from(PoetSummaryViewJson));
+
+// 监听引导步骤修改引导话语
+watch(currentIndex, () => {
+    if (currentIndex.value === tourSteps.value.length) {
+        tourVisible.value = false;
+        currentIndex.value = 0;
+        return;
+    }
+    // @ts-ignore
+    currentIntro.value = tourSteps.value[currentIndex.value]["content"];
+}, {
+    immediate: true
+})
+
+// 开始引导
+const startTour = () => {
+    tourVisible.value = true;
+};
+
+onBeforeUnmount(() => {
+    tourVisible.value = false;
+});
 </script>
 
-<style scope lang="scss">
+<style scoped lang="scss">
 .dynasty-choose {
     width: 100%;
     height: 45px;
@@ -240,7 +287,7 @@ onMounted(async () => {
 
         .right {
             flex: 1;
-            height: 100%;
+            height: 95%;
             position: relative;
 
             .legends {
@@ -272,5 +319,23 @@ onMounted(async () => {
             }
         }
     }
+}
+
+.tour-comp {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 380px;
+    z-index: 4000;
+}
+
+:global(.el-tour__content) {
+    display: none;
+}
+
+.tour-button {
+    position: absolute;
+    left: 1rem;
+    top: 4.5rem;
 }
 </style>
