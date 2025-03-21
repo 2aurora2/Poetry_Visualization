@@ -61,9 +61,9 @@ onMounted(() => {
 
     // 关键时间节点
     const keyPoints = Array.from([
-        Array.from([627, 713, 756, 799, 835]),
-        Array.from([1127, 1206]),
-        Array.from([1281, 1307])
+        Array.from([650, 718, 756, 793, 836]),
+        Array.from([1126, 1185]),
+        Array.from([1296, 1321])
     ]);
     const keyPointsSize = [1000, 200, 50]
     keyPoints.forEach((points, index) => {
