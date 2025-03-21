@@ -93,6 +93,7 @@ const initPie = () => {
                     textStyle: {
                         fontFamily: 'ContentFont',
                         fontSize: 18,
+                        fontWeight: 'bold'
                     }
                 }
             },
@@ -118,6 +119,7 @@ const initPie = () => {
                     textStyle: {
                         fontFamily: 'ContentFont',
                         fontSize: 18,
+                        fontWeight: 'bold'
                     }
                 }
             },
