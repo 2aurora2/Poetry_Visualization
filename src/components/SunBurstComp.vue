@@ -149,6 +149,53 @@ const option = {
       fontSize: 25,
     }
   },
+  tooltip: {
+    show:true,
+    trigger: 'item',
+    formatter: function (params) {
+      if (!params || !params.treePathInfo) {
+        return '';
+      }
+      const { treePathInfo, data } = params;
+      const value = data?.value ?? 0;
+      const dynasty = treePathInfo[1]?.name || '未知';
+      const school = treePathInfo[2]?.name || '未知';
+      const emotion = treePathInfo[3]?.name || '未知';
+      const level = treePathInfo.length;
+      
+      if (level === 2) {
+        return `
+          <div>
+            <b>朝代：${dynasty}</b><br/>
+          </div>
+        `;
+      } else if (level === 3) {
+        return `
+          <div>
+            <b>朝代：${dynasty}</b><br/>
+            <b>派别：${school}</b><br/>
+          </div>
+        `;
+      } else if (level === 4) {
+        const parentValue = treePathInfo[2]?.value ?? 0;
+        const percent = parentValue > 0 ? ((value / parentValue) * 100).toFixed(1) : '0.0';
+        return `
+          <div>
+            <b>朝代：${dynasty}</b><br/>
+            <b>派别：${school}</b><br/>
+            <b>情感：${emotion}</b><br/>
+            <b>占比：${value}(${percent}%)</b>
+          </div>
+        `;
+      } else {
+        return '';
+      }
+    },
+    textStyle: {
+      fontFamily: 'ContentFont',
+      fontSize: 18
+    }
+  },
   series: {
     type: 'sunburst',
     data: data,
@@ -156,7 +203,7 @@ const option = {
       fontFamily: 'ContentFont',
       fontSize: 14,
       fontWeight: 'bold',
-      textBorderWidth: -100,
+      //textBorderWidth: -100,
     },
     emphasis: {
       focus: 'ancestor',
@@ -165,6 +212,7 @@ const option = {
         rotate: 0,
         fontSize: 24,
         fontWeight: 'bold',
+        color:'#333'
       }
     },
     radius: [30, '90%'],
@@ -177,10 +225,10 @@ const option = {
         label: { show: true }
       },
       {
-        label: { show: true, rotate: 0, fontSize: 15 }
+        label: { show: true, rotate: 0, fontSize: 20 }
       },
       {
-        label: { show: true, rotate: 'tangential', fontSize: 10 }
+        label: { show: true, rotate: 'tangential', fontSize: 12 }
       },
       {
         r0: '70%',

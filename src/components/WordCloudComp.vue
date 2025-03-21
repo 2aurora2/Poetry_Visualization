@@ -66,7 +66,8 @@ const updateChart = (words: any[]) => {
   option = {
     tooltip: {
       show: true,
-      formatter: (params: any) => `<b>${params.data.name}</b>: ${params.data.originalValue}`,
+      formatter: (params: any) =>
+        `<b>词语：${params.data.name}</b><br><b>频次：${params.data.originalValue} 次</b>`,
       textStyle: {
         fontFamily: 'ContentFont',
         fontSize: 18,
