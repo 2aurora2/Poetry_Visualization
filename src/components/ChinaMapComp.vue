@@ -73,6 +73,7 @@ const initChart = () => {
       textStyle: {
         fontFamily: 'ContentFont',
         fontSize: 18,
+        fontWeight: 'bold'
       }
     },
     title: {

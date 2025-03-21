@@ -56,6 +56,7 @@ const initEcharts = () => {
             textStyle: {
                 fontFamily: 'ContentFont',
                 fontSize: 18,
+                fontWeight: 'bold'
             }
         },
         label: {

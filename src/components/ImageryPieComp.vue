@@ -72,8 +72,9 @@ const initPie = () => {
                     show: true,
                     position: 'outside',
                     fontSize: 20,
-                    fontWeight: 'bold',
-                    textBorderWidth: -100,
+                    fontWeight: 1000,
+                    fontFamily: 'ContentFont',
+                    // textBorderWidth: -100,
                 },
                 labelLine: {
                     show: true,
@@ -88,6 +89,7 @@ const initPie = () => {
                     textStyle: {
                         fontFamily: 'ContentFont',
                         fontSize: 20,
+                        fontWeight: 'bold'
                     }
                 }
             }

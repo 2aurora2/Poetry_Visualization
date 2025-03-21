@@ -180,6 +180,7 @@ const initEcharts = () => {
             textStyle: {
                 fontFamily: 'ContentFont',
                 fontSize: 18,
+                fontWeight: 'bold'
             }
         },
         itemStyle: {
@@ -239,7 +240,7 @@ const initEcharts = () => {
                 })),
                 categories: categories,
                 roam: true,
-                edgeSymbol: ['arrow', 'arrow'],
+                edgeSymbol: ['none', 'arrow'],
                 edgeSymbolSize: 6,
                 label: {
                     show: true,
@@ -277,7 +278,7 @@ const initEcharts = () => {
                                         <strong>所属派系：</strong>${props.group[params.data.category - 1]}<br/>
                                     `;
                         } else if (params.dataType === 'edge') {
-                            return `${params.data.source} ↔︎ ${params.data.target}`;
+                            return `${params.data.name}`;
                         }
                         return '';
                     }

@@ -57,7 +57,7 @@ const props = defineProps({
     data: {
         type: Object,
         required: true,
-        default: () => {}
+        default: () => { }
     },
     ratio: {
         type: Number,
@@ -99,6 +99,7 @@ const initChart = async () => {
             textStyle: {
                 fontFamily: 'ContentFont',
                 fontSize: 16,
+                fontWeight: 'bold'
             }
         },
         title: {
@@ -119,7 +120,7 @@ const initChart = async () => {
                 borderColor: '#19595655',
                 borderWidth: 1,
             },
-            tooltip:{
+            tooltip: {
                 show: false
             },
             // 设置高亮状态下的多边形和标签样式

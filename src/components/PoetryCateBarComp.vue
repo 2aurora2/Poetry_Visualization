@@ -60,6 +60,7 @@ const initEcharts = () => {
             textStyle: {
                 fontFamily: 'ContentFont',
                 fontSize: 16,
+                fontWeight: 'bold'
             }
         },
         xAxis: {
@@ -83,7 +84,7 @@ const initEcharts = () => {
             type: 'value',
             name: '数量/首',
             nameLocation: 'end',
-            nameTextStyle:{
+            nameTextStyle: {
                 fontFamily: 'ContentFont',
                 fontSize: 16
             },

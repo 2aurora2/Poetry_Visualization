@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="right" id="poet-details-right">
-            <div class="chart-title">{{ selectedName }}的“朋友圈”</div>
+            <div class="friend-chart-title">{{ selectedName }}的“朋友圈”</div>
             <PersonalNetworkComp :nodes="poetNodes" :links="poetLinks" />
         </div>
         <div class="tour-comp" v-if="tourVisible" :style="{ bottom: `${tourSteps[currentIndex]['tour_bottom']}%` }">
@@ -267,6 +267,7 @@ onBeforeUnmount(() => {
         width: 60%;
         height: 95%;
         display: flex;
+        margin-top: 8px;
         position: relative;
         flex-direction: column;
         align-items: center;
@@ -307,21 +308,23 @@ onBeforeUnmount(() => {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
 
             .imagery {
                 flex: 1.3;
                 height: 100%;
+                position: relative;
             }
 
             .emotion {
                 flex: 1.3;
                 height: 100%;
+                position: relative;
             }
 
             .word {
                 flex: 1.3;
                 height: 100%;
+                position: relative;
             }
         }
     }
@@ -339,6 +342,15 @@ onBeforeUnmount(() => {
 }
 
 .chart-title {
+    font-family: 'TitleFont';
+    font-size: 25px;
+    text-align: center;
+    font-weight: 600;
+    position: relative;
+    top: 6%;
+}
+
+.friend-chart-title {
     font-family: 'TitleFont';
     font-size: 25px;
     text-align: center;

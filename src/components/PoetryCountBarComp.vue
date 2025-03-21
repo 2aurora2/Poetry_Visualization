@@ -25,6 +25,11 @@ const props = defineProps({
   }
 });
 let chart = null;
+const poets = {
+  "唐代": "李白、杜甫、王维等人",
+  "宋代": "苏轼、李清照、陆游等人",
+  "元代": "关汉卿、马致远等人"
+}
 
 onMounted(() => {
   if (!barChart.value) return;
@@ -44,6 +49,7 @@ const renderChart = () => {
     {
       name: '诗词总量',
       type: 'bar',
+      barWidth: 48,
       data: totalPoems.map((value, index) => ({
         value,
         itemStyle: {
@@ -54,10 +60,10 @@ const renderChart = () => {
   ];
 
   chart.setOption({
-    grid: { // 新增 grid 配置
-      left: '2%',   // 增加左边距
-      right: '12%',
-      bottom: '20%',
+    grid: {
+      left: '8%',   
+      right: '10%',
+      bottom: '18.5%',
       containLabel: true
     },
     title: {
@@ -81,6 +87,10 @@ const renderChart = () => {
         fontSize: 18,
         fontWeight: 'bold',
       },
+      formatter: (params) => {
+        return `${params[0].axisValue}共有诗词${params[0].value}首</br>代表诗人有${poets[params[0].axisValue]}`;
+      },
+      confine: true  // 将 tooltip 限制在图表区域内
     },
     xAxis: {
       type: 'category',

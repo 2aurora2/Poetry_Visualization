@@ -51,33 +51,33 @@ const initRelationGraph = () => {
     const containerWidth = chartDom.clientWidth;
     const containerHeight = chartDom.clientHeight;
 
-        const nodes = props.nodes.map(node => {
-            if (node.isCenter) {
-                return {
-                    ...node,
-                    symbolSize: 65,
-                    symbol: 'roundRect',
-                    itemStyle: {
-                        color: '#D2B48Cee',
-                        borderWidth: 0
-                    },
-                    label:{
-                        fontSize: 22,
-                    }
-                };
-            }
-            else {
-                return {
-                    ...node,
-                    symbol: 'circle',
-                    symbolSize: 50,
-                    itemStyle: {
-                        color: '#D2B48C88', 
-                        borderWidth: 0
-                    }
+    const nodes = props.nodes.map(node => {
+        if (node.isCenter) {
+            return {
+                ...node,
+                symbolSize: 65,
+                symbol: 'roundRect',
+                itemStyle: {
+                    color: '#e6c3c9',
+                    borderWidth: 0
+                },
+                label: {
+                    fontSize: 22,
+                }
+            };
+        }
+        else {
+            return {
+                ...node,
+                symbol: 'circle',
+                symbolSize: 50,
+                itemStyle: {
+                    color: '#c5c9c1cc',
+                    borderWidth: 0
                 }
             }
-        });
+        }
+    });
 
     let themeObj = JSON.parse(JSON.stringify(vintage))  // 获取主题对象
     echarts.registerTheme('vintage', themeObj)   // 注册主题
@@ -87,17 +87,6 @@ const initRelationGraph = () => {
 
     option = {
         tooltip: {},
-        // toolbox: {  // 工具栏，具体配置项参考：https://echarts.apache.org/zh/option.html#toolbox.feature
-        //     show: true,
-        //     feature: {
-        //         restore: {
-        //             title: '重置'
-        //         }
-        //     },
-        //     orient: 'horizontal',
-        //     left: 'right',
-        //     top: 'top',
-        // },
         label: {
             fontFamily: 'ContentFont',
             fontSize: 25,
@@ -115,7 +104,7 @@ const initRelationGraph = () => {
                     edgeLength: [80, 350],     // 调整边的理想长度范围
                     friction: 0.1,      // 摩擦系数（控制动画速度）
                     layoutAnimation: true,
-                    gravity: 0.1        // 添加重力参数，防止节点分散太开
+                    // gravity: 0.1        // 添加重力参数，防止节点分散太开
                 },
                 autoCurveness: true,
                 data: nodes,
@@ -147,9 +136,10 @@ const initRelationGraph = () => {
                         }
                         return '';
                     },
-                    textStyle:{
+                    textStyle: {
                         fontFamily: 'ContentFont',
-                        fontSize: 15,
+                        fontSize: 18,
+                        fontWeight: 'bold'
                     }
                 }
             }

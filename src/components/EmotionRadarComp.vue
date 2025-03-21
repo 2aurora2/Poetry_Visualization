@@ -60,7 +60,7 @@ const initRadar = () => {
                 fontSize: 20,
                 fontWeight: 'bold',
             },
-
+            nameGap: 5,
             splitArea: {
                 areaStyle: {
                     color: ['transparent', '#e6a23c55']
@@ -76,7 +76,8 @@ const initRadar = () => {
                     trigger: 'item',
                     textStyle: {
                         fontFamily: 'ContentFont',
-                        fontSize: 18
+                        fontSize: 18,
+                        fontWeight: 'bold'
                     }
                 },
                 emphasis: {
