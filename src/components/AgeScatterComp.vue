@@ -51,11 +51,17 @@ const initChart = async () => {
             trigger: 'item',
             formatter: (params: any) => `年龄: ${params.name}岁<br/>人数: ${params.value}人`
         },
+        grid: {
+            left: '2%',
+            right: '12%',
+            bottom: '20%',
+            containLabel: true
+        },
         xAxis: {
             type: 'category',
             name: '年龄',
             nameLocation: 'middle',
-            nameGap: 30,
+            nameGap: 20,
             data: dynastyData.map((item: any) => item.name)
         },
         yAxis: {

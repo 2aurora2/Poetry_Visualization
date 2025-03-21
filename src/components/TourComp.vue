@@ -6,7 +6,7 @@
             <div class="txt-btn">
                 <div v-html="props.content" style="text-align:justify;"></div>
                 <el-button class="next-btn" type="warning" size="default" @click="nextStep">
-                    {{ props.stepCount === currentIndex + 1 ? '结束' : '下一步' }}
+                    {{ props.stepCount === currentIndex + 1 ? '完成' : '下一步' }}
                 </el-button>
             </div>
         </div>

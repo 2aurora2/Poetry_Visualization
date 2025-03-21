@@ -57,6 +57,7 @@ const renderChart = () => {
     grid: { // 新增 grid 配置
       left: '2%',   // 增加左边距
       right: '12%',
+      bottom: '20%',
       containLabel: true
     },
     title: {
