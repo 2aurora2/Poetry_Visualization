@@ -79,8 +79,8 @@ let songPoets = Object.keys(songPoetInfo);
 let yuanPoets = Object.keys(yuanPoetInfo);
 let wordPoets = Object.keys(wordCountDetails);
 
-const poetName = ref('孟浩然');
-const dynasty = ref('唐代');
+const poetName = ref('李白');
+const dynasty = ref('唐朝');
 const poetInfo = ref<IPoet>(CONST.DEFAULT_POET);
 const poetEmotionIndicator = ref<Array<any>>([]);
 const poetEmotionValue = ref<Array<any>>([]);
@@ -120,31 +120,31 @@ const preprocessNetworkData = (info: Array) => {
         })
     }
     // 对于非poetName的节点，看看是否有边的两个节点是位于tempNodes的节点，有则将边加入poetLinks
-    for (let i = 0; i < info.length; i++) {
-        if (info[i]['source'] !== poetName.value && info[i]['target'] !== poetName.value) {
-            if (tempNodes.has(info[i]['source']) && tempNodes.has(info[i]['target'])) {
-                let flag = false;
-                for (let j = 0; j < poetLinks.value.length; j++) {
-                    if (poetLinks.value[j]['source'] === info[i]['source'] && poetLinks.value[j]['target'] === info[i]['target']) {
-                        flag = true;
-                        poetLinks.value[j]['name'].push(info[i]['name']);
-                        break;
-                    }
-                }
-                if (!flag) {
-                    poetLinks.value.push({
-                        source: info[i]['source'],
-                        target: info[i]['target'],
-                        name: [info[i]['name']],
-                        lineStyle: {
-                            width: Math.random() * 2 + 0.1,
-                            opacity: Math.random() * 0.5 + 0.01
-                        }
-                    })
-                }
-            }
-        }
-    }
+    // for (let i = 0; i < info.length; i++) {
+    //     if (info[i]['source'] !== poetName.value && info[i]['target'] !== poetName.value) {
+    //         if (tempNodes.has(info[i]['source']) && tempNodes.has(info[i]['target'])) {
+    //             let flag = false;
+    //             for (let j = 0; j < poetLinks.value.length; j++) {
+    //                 if (poetLinks.value[j]['source'] === info[i]['source'] && poetLinks.value[j]['target'] === info[i]['target']) {
+    //                     flag = true;
+    //                     poetLinks.value[j]['name'].push(info[i]['name']);
+    //                     break;
+    //                 }
+    //             }
+    //             if (!flag) {
+    //                 poetLinks.value.push({
+    //                     source: info[i]['source'],
+    //                     target: info[i]['target'],
+    //                     name: [info[i]['name']],
+    //                     lineStyle: {
+    //                         width: Math.random() * 2 + 0.1,
+    //                         opacity: Math.random() * 0.5 + 0.01
+    //                     }
+    //                 })
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 const queryPoet = () => {

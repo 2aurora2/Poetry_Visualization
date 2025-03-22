@@ -55,14 +55,14 @@ const initRelationGraph = () => {
         if (node.isCenter) {
             return {
                 ...node,
-                symbolSize: 65,
+                symbolSize: 55,
                 symbol: 'roundRect',
                 itemStyle: {
                     color: '#e6c3c9',
                     borderWidth: 0
                 },
                 label: {
-                    fontSize: 22,
+                    fontSize: 18,
                 }
             };
         }
@@ -70,7 +70,10 @@ const initRelationGraph = () => {
             return {
                 ...node,
                 symbol: 'circle',
-                symbolSize: 50,
+                label: {
+                    position: 'bottom'
+                },
+                symbolSize: 20,
                 itemStyle: {
                     color: '#c5c9c1cc',
                     borderWidth: 0
@@ -101,14 +104,19 @@ const initRelationGraph = () => {
                 edgeSymbolSize: 4,
                 force: {
                     repulsion: 150,     // 增加节点间斥力
-                    edgeLength: [80, 350],     // 调整边的理想长度范围
+                    edgeLength: [90, 200],     // 调整边的理想长度范围
                     friction: 0.1,      // 摩擦系数（控制动画速度）
                     layoutAnimation: true,
                     // gravity: 0.1        // 添加重力参数，防止节点分散太开
                 },
                 autoCurveness: true,
                 data: nodes,
-                links: props.links,
+                links: props.links.map(link => ({
+                    ...link,
+                    lineStyle: {
+                        curveness: 0.4,
+                    }
+                })),
                 focusNodeAdjacency: true,
                 itemStyle: {
                     color: '#D2B48C',
