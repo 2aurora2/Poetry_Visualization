@@ -4,6 +4,7 @@
         <div class="info">
             <div class="name"><strong>姓名：</strong>{{ props.name }}</div>
             <div class="gender"><strong>性别：</strong>{{ props.gender }}</div>
+            <div class="dynasty"><strong>朝代：</strong>{{ props.dynasty }}</div>
             <div class="address"><strong>籍贯：</strong>{{ props.address }}</div>
             <div class="year"><strong>生卒年：</strong>{{ props.YearBirth + "年 - " + props.YearDeath + "年" }}</div>
             <div class="desc"><strong>简介：</strong>{{ props.desc }}</div>
@@ -50,6 +51,11 @@ const props = defineProps({
         type: String,
         required: true,
         default: ""
+    },
+    dynasty: {
+        type: String,
+        required: true,
+        default: "" 
     }
 })
 

@@ -9,7 +9,7 @@
             </div>
             <PoetCardComp :avatar="poetInfo?.avatar" :name="poetInfo?.ChineseName" :gender="poetInfo?.Gender"
                 :address="poetInfo?.Address" :YearBirth="poetInfo?.YearBirth" :YearDeath="poetInfo?.YearDeath"
-                :desc="poetInfo?.desc" />
+                :desc="poetInfo?.desc" :dynasty="dynasty"/>
             <div class="imagery-emotion">
                 <div class="imagery">
                     <div class="chart-title">诗词意象占比图</div>
@@ -80,6 +80,7 @@ let yuanPoets = Object.keys(yuanPoetInfo);
 let wordPoets = Object.keys(wordCountDetails);
 
 const poetName = ref('孟浩然');
+const dynasty = ref('唐代');
 const poetInfo = ref<IPoet>(CONST.DEFAULT_POET);
 const poetEmotionIndicator = ref<Array<any>>([]);
 const poetEmotionValue = ref<Array<any>>([]);
@@ -161,6 +162,7 @@ const queryPoet = () => {
         selectedWordCloudWords.value = wordCountDetails[poetName.value];
     }
     if (tangPoets.includes(poetName.value)) {
+        dynasty.value = '唐朝';
         poetInfo.value = tangPoetInfo[poetName.value];  // 诗人基本信息
         if (Object.keys(tangPoetEmotion).includes(poetName.value)) {   // 诗人诗词情感信息
             let emotion = tangPoetEmotion[poetName.value]['emotion'];
@@ -179,6 +181,7 @@ const queryPoet = () => {
         preprocessNetworkData(tangLink);
     }
     else if (songPoets.includes(poetName.value)) {
+        dynasty.value = '宋朝';
         poetInfo.value = songPoetInfo[poetName.value];
         if (Object.keys(songPoetEmotion).includes(poetName.value)) {   // 诗人诗词情感信息
             let emotion = songPoetEmotion[poetName.value]['emotion'];
@@ -197,6 +200,7 @@ const queryPoet = () => {
         preprocessNetworkData(songLink);
     }
     else if (yuanPoets.includes(poetName.value)) {
+        dynasty.value = '元朝';
         poetInfo.value = yuanPoetInfo[poetName.value];
         if (Object.keys(yuanPoetEmotion).includes(poetName.value)) {   // 诗人诗词情感信息
             let emotion = yuanPoetEmotion[poetName.value]['emotion'];
