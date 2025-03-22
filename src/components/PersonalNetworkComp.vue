@@ -75,7 +75,7 @@ const initRelationGraph = () => {
                 },
                 symbolSize: 20,
                 itemStyle: {
-                    color: '#c5c9c1cc',
+                    color: '#c5c9c1',
                     borderWidth: 0
                 }
             }
@@ -101,10 +101,10 @@ const initRelationGraph = () => {
                 type: 'graph',
                 layout: 'force',
                 edgeSymbol: ['none', 'arrow'],
-                edgeSymbolSize: 4,
+                edgeSymbolSize: 8,
                 force: {
-                    repulsion: 150,     // 增加节点间斥力
-                    edgeLength: [90, 200],     // 调整边的理想长度范围
+                    repulsion: 180,     // 增加节点间斥力
+                    edgeLength: [100, 200],     // 调整边的理想长度范围
                     friction: 0.1,      // 摩擦系数（控制动画速度）
                     layoutAnimation: true,
                     // gravity: 0.1        // 添加重力参数，防止节点分散太开
@@ -115,6 +115,7 @@ const initRelationGraph = () => {
                     ...link,
                     lineStyle: {
                         curveness: 0.4,
+                        color: '#928e82'
                     }
                 })),
                 focusNodeAdjacency: true,
@@ -141,6 +142,11 @@ const initRelationGraph = () => {
                             if (params.data.name.length === 1)
                                 return `${params.data.name[0]}`;
                             let labelList = [];
+                            let re = ''
+                            for (let i = 0; i <params.data.name.length; i++) {
+                                re += '(' + (i + 1) + ')' + params.data.name[i] + '</br>';
+                            }
+                            return `<strong>${re}</strong>`;
                         }
                         return '';
                     },

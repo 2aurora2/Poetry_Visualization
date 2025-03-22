@@ -21,7 +21,7 @@
     "source": "苏轼",
     "target": "黄庭坚",
     "color": "#cd9957",
-    "name": "友"
+    "name": "友人"
   },
   {
     "source": "苏轼",
@@ -69,13 +69,13 @@
     "source": "辛弃疾",
     "target": "陆游",
     "color": "#cd9957",
-    "name": "友"
+    "name": "友人"
   },
   {
     "source": "辛弃疾",
     "target": "姜夔",
     "color": "#cd9957",
-    "name": "友"
+    "name": "友人"
   },
   {
     "source": "陆游",
@@ -99,7 +99,7 @@
     "source": "杨万里",
     "target": "陆游",
     "color": "#cd9957",
-    "name": "友"
+    "name": "友人"
   },
   {
     "source": "陆游",
@@ -123,7 +123,7 @@
     "source": "杨万里",
     "target": "姜夔",
     "color": "#cd9957",
-    "name": "友"
+    "name": "友人"
   },
   {
     "source": "朱熹",
@@ -141,7 +141,7 @@
     "source": "苏轼",
     "target": "岳飞",
     "color": "#cd9957",
-    "name": "友"
+    "name": "友人"
   },
   {
     "source": "秦观",

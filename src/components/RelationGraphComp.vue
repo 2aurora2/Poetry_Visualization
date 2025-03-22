@@ -241,7 +241,7 @@ const initEcharts = () => {
                 categories: categories,
                 roam: true,
                 edgeSymbol: ['none', 'arrow'],
-                edgeSymbolSize: 6,
+                edgeSymbolSize: 8,
                 label: {
                     show: true,
                     position: 'bottom',
