@@ -53,7 +53,7 @@ const initEcharts = () => {
             }
         },
         tooltip: {
-            trigger: 'axis',
+            trigger: 'item',
             axisPointer: {
                 type: 'shadow'
             },
@@ -61,7 +61,14 @@ const initEcharts = () => {
                 fontFamily: 'ContentFont',
                 fontSize: 16,
                 fontWeight: 'bold'
-            }
+            },
+            formatter: (params) => {
+                let sum = 0;
+                for (let i = 0; i < props.regionValue.length; ++i) {
+                    sum += props.regionValue[i];
+                }
+                return `<strong>${params.name}</strong></br>频次：${params.data}（${(params.data / sum * 100).toFixed(2)}%）`;
+            },
         },
         xAxis: {
             type: 'category',
@@ -71,6 +78,8 @@ const initEcharts = () => {
                 fontFamily: 'ContentFont',
                 fontSize: 16,
                 interval: 0,
+                fontWeight: 'bold',
+                color: '#333333',
                 formatter: function (value: string) {
                     if (value.length > 3) {
                         // 每两个字插入换行符
@@ -84,15 +93,19 @@ const initEcharts = () => {
             type: 'value',
             name: '数量/首',
             nameLocation: 'end',
+            nameGap: 10,
             nameTextStyle: {
                 fontFamily: 'ContentFont',
-                fontSize: 16
+                fontSize: 16,
+                color: '#333333',
+                fontWeight: 'bold'
             },
-            nameGap: 10,
             axisLabel: {
                 show: true,
                 fontFamily: 'ContentFont',
-                fontSize: 16,
+                fontSize: 14,
+                fontWeight: 'bold',
+                color: '#333333'
             }
         },
         dataZoom: [{ type: 'inside', disabled: true }],

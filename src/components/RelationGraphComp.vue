@@ -190,22 +190,22 @@ const initEcharts = () => {
             shadowOffsetX: 2,
             shadowOffsetY: 2
         },
-        toolbox: {
-            show: true,
-            feature: {
-                saveAsImage: {
-                    show: true,
-                    title: '保存为png',
-                    type: 'png'
-                },
-                restore: {
-                    title: '重置'
-                }
-            },
-            orient: 'horizontal',
-            left: 'right',
-            top: 'top',
-        },
+        // toolbox: {
+        //     show: true,
+        //     feature: {
+        //         saveAsImage: {
+        //             show: true,
+        //             title: '保存为png',
+        //             type: 'png'
+        //         },
+        //         restore: {
+        //             title: '重置'
+        //         }
+        //     },
+        //     orient: 'horizontal',
+        //     left: 'right',
+        //     top: 'top',
+        // },
         title: {
             text: '诗人关系网络图',
             left: 'center',

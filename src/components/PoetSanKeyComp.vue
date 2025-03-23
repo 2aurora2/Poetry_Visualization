@@ -80,10 +80,16 @@ const initEcharts = () => {
                     fontSize: 16,
                     position: 'left'
                 },
+                // emphasis: {
+                //     disabled: false,
+                //     lineStyle: {
+                //         opacity: 0.15
+                //     }
+                // },
                 emphasis: {
-                    disabled: false,
+                    focus: 'adjacency',
                     lineStyle: {
-                        opacity: 0.15
+                        color: 'gradient'
                     }
                 },
                 tooltip: {

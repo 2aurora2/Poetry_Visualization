@@ -26,7 +26,7 @@ const props = defineProps({
 });
 let chart = null;
 const poets = {
-  "唐代": "李白、杜甫、王维等人",
+  "唐代": "李白、杜甫等人",
   "宋代": "苏轼、李清照、陆游等人",
   "元代": "关汉卿、马致远等人"
 }
@@ -81,6 +81,7 @@ const renderChart = () => {
     },
     tooltip: {
       trigger: 'axis',
+      position: (point) => [point[0] + 20, point[1]],
       axisPointer: { type: 'shadow' },
       textStyle: {
         fontFamily: 'ContentFont',
@@ -90,15 +91,16 @@ const renderChart = () => {
       formatter: (params) => {
         return `${params[0].axisValue}共有诗词${params[0].value}首</br>代表诗人有${poets[params[0].axisValue]}`;
       },
-      confine: true  // 将 tooltip 限制在图表区域内
+      // confine: true  // 将 tooltip 限制在图表区域内
     },
     xAxis: {
       type: 'category',
       data: categories,
       axisLabel: {
         fontFamily: 'ContentFont',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
+        color: '#333333'
       },
       axisPointer: {
         type: 'shadow',
@@ -114,16 +116,18 @@ const renderChart = () => {
       type: 'value',
       name: '数量/万首',
       nameLocation: 'end',
+      nameGap: 10,
       nameTextStyle: {
         fontFamily: 'ContentFont',
-        fontSize: 16
+        fontSize: 16,
+        color: '#333333'
       },
-      nameGap: 10,
       axisLabel: {
         formatter: (value) => `${(value / 10000).toFixed(1)}`, // 转换为万单位
         fontFamily: 'ContentFont',
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: '#333333'
       }
     },
     series,

@@ -70,7 +70,7 @@ const initRadar = () => {
 
         series: [
             {
-                name: '情感雷达图',
+                name: '',
                 type: 'radar',
                 tooltip: {
                     trigger: 'item',
@@ -78,6 +78,16 @@ const initRadar = () => {
                         fontFamily: 'ContentFont',
                         fontSize: 18,
                         fontWeight: 'bold'
+                    },
+                    formatter: function (params) {
+                        return params.data.value.map((val, index) => {
+                            const dimensionName = props.indicator[index]['name'] || `维度${index + 1}`;
+
+                            return `<div style="display: flex; align-items: center; gap: 6px;">
+                                    <div style="width:8px; height:8px; border-radius:50%; background-color: #d7ab82;padding: 0;"></div>
+                                    <span>${dimensionName}: ${val}</span>
+                                    </div>`;
+                        }).join('');
                     }
                 },
                 emphasis: {

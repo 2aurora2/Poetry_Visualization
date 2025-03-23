@@ -1,6 +1,6 @@
 <template>
     <div class="avatar-info">
-        <img :src="props.avatar" alt="avatar">
+        <img :src="props.avatar.length === 0 ? 'https://pic.rmb.bdstatic.com/bjh/240509/7f39f3e985978e480382b1f80f438e149853.jpeg' : props.avatar" alt="avatar">
         <div class="info">
             <div class="name"><strong>姓名：</strong>{{ props.name }}</div>
             <div class="gender"><strong>性别：</strong>{{ props.gender }}</div>
@@ -59,11 +59,11 @@ const props = defineProps({
     }
 })
 
-watch(() => props.avatar, () => {
+watch(() => props.name, () => {
     nextTick(() => {
         const img = document.querySelector('.avatar-info img') as HTMLImageElement;
-        img.src = props.avatar;
-    }) 
+        img.src = props.avatar.length === 0 ? 'https://pic.rmb.bdstatic.com/bjh/240509/7f39f3e985978e480382b1f80f438e149853.jpeg' : props.avatar;
+    })
 })
 </script>
 

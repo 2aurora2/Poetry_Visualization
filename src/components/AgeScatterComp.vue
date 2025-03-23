@@ -31,7 +31,7 @@ const loadDynastyData = async (dynasty: string) => {
 const initChart = async () => {
     if (!scatterChart.value) return;
     const dynastyData = await loadDynastyData(['tang', 'song', 'yuan'][props.selectedDynasty]);
-    chart = echarts.init(scatterChart.value, 'vintage'); 
+    chart = echarts.init(scatterChart.value, 'vintage');
 
     const option = {
         textStyle: {
@@ -69,11 +69,16 @@ const initChart = async () => {
             name: '人数/位',
             nameLocation: 'end',
             nameGap: 10,
-            axisLabel: { 
-                show: true,
+            nameTextStyle: {
+                fontFamily: 'ContentFont',
+                fontSize: 16
+            },
+            axisLabel: {
                 formatter: '{value}',
-                fontSize: 14
-            } 
+                fontFamily: 'ContentFont',
+                fontSize: 14,
+                fontWeight: 'bold'
+            }
         },
         series: [{
             type: 'scatter',
@@ -100,5 +105,4 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
