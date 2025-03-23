@@ -314,6 +314,7 @@ onBeforeUnmount(() => {
                     .name {
                         font-family: 'ContentFont';
                         font-size: 20px;
+                        font-weight: bold;
                     }
                 }
             }

@@ -247,7 +247,8 @@ const initEcharts = () => {
                     position: 'bottom',
                     formatter: '{b}',
                     fontFamily: 'ContentFont',
-                    fontSize: 16
+                    fontSize: 16,
+                    fontWeight: 'bold'
                 },
                 draggable: true,
                 focusNodeAdjacency: true,

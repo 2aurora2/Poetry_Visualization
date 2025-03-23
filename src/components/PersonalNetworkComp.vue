@@ -63,6 +63,7 @@ const initRelationGraph = () => {
                 },
                 label: {
                     fontSize: 18,
+                    fontWeight: 'bold'
                 }
             };
         }
@@ -71,7 +72,8 @@ const initRelationGraph = () => {
                 ...node,
                 symbol: 'circle',
                 label: {
-                    position: 'bottom'
+                    position: 'bottom',
+                    fontWeight: 'bold'
                 },
                 symbolSize: 20,
                 itemStyle: {
