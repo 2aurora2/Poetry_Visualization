@@ -40,7 +40,7 @@ echarts.use([
 const mapType = [AreaOne, AreaTwo, AreaTwo, AreaThree, AreaFour, AreaTwo]
 
 const mapTitle = [
-    '黄河中游流域（现陕西、河南）',
+    '关中地区（现陕西、河南）',
     '江南北部（现江苏、浙江、安徽）',
     '江南北部（现江苏、浙江、安徽）',
     '江南南部（现福建、江西）',
