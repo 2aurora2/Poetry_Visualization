@@ -18,6 +18,10 @@
       </div>
       <div class="middle-column">
         <ChinaMapComp :data="regionData[selectedDynasty]" :ratio="ratios[selectedDynasty]" />
+        <div>
+          <span>审图号：GS京(2022)1061号</span>
+          <span>地图来源：高德地图</span>
+        </div>
       </div>
       <div class="right-column aside-container">
         <SubMapComp :mType="subMapType[selectedDynasty][1]" :data="subMapData[selectedDynasty][1]"
@@ -192,8 +196,24 @@ onBeforeUnmount(() => {
 .middle-column {
   flex: 2;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  div {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -32px;
+
+    span {
+      font-family: 'ContentFont';
+      font-size: 10px;
+      font-weight: bold;
+    }
+  }
 }
 
 .right-column {
