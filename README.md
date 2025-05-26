@@ -22,6 +22,8 @@ node index.js
 
 具体部署方式可参考[快速开始 / 自定义部署 / Nodejs](https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloudrun/src/quickstart/custom/node.html)，通过这种方式就可以在前端项目中直接请求云托管得到的公网域名，得到大模型的返回结果，并将得到的公网域名`https://xxxxxxxx`+`/chat`填入根目录下的`.env`文件（将`.env.example`更名而来）中的`VITE_CHAT_URL`参数即可，这样项目也无需其他成本来部署代理服务。
 
+**(3) 阿里云服务器白嫖部署代理服务**
+
 ## 本地前端项目运行
 
 前文说明了代理服务的运行方式，有了代理服务之后，就可以正常运行该前端项目了（记得先把`.env`文件中的参数给填了），运行的终端命令如下（在根目录下运行）：
