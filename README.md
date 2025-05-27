@@ -1,6 +1,8 @@
 <h1 align="center">Poetry Visualization</h1>
 
-## 飞花令大模型
+> 在线体验链接：https://2aurora2.github.io/Poetry_Visualization/#/
+
+## 飞花令大模型代理服务运行方式
 
 本项目使用的大模型是Doubao-1.5-pro-32k，具体调用方式可参考[官方文档](https://www.volcengine.com/docs/82379/1298454)，但是使用发现在前端项目中直接请求该大模型API接口会出现跨域问题，同时考虑到后续使用Github Pages部署当前纯前端项目，我们采用下述方案解决：
 
@@ -22,9 +24,9 @@ node index.js
 
 具体部署方式可参考[快速开始 / 自定义部署 / Nodejs](https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloudrun/src/quickstart/custom/node.html)，通过这种方式就可以在前端项目中直接请求云托管得到的公网域名，得到大模型的返回结果，并将得到的公网域名`https://xxxxxxxx`+`/chat`填入根目录下的`.env`文件（将`.env.example`更名而来）中的`VITE_CHAT_URL`参数即可，这样项目也无需其他成本来部署代理服务。
 
-**(3) 阿里云服务器白嫖部署代理服务**
+**(3) 白嫖免费阿里云服务器部署代理服务**
 
-好吧，微信云托管不太稳定()，还是用阿里云服务器吧
+好吧，微信云托管不太稳定()，还是用阿里云服务器吧，配置文档在aliyun.docs中，本地部署后记得修改`.env`文件中的`VITE_CHAT_URL`参数。
 
 ## 本地前端项目运行
 
