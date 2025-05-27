@@ -20,7 +20,7 @@ jobs:
           npm install
           NODE_OPTIONS=--max-old-space-size=4096 npm run build
         env:
-          VITE_CHAT_URL: ${{ secrets.ALIYUN_CHAT_URL }}
+          VITE_CHAT_URL: ${{ secrets.ALIYUN_HTTPS_CHAT_URL }}
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
